@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,11 +21,10 @@ public class Photo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private String source;
-    
+    private String source;   
     private int points;
     
+    @ManyToOne protected Utilisateur utilisateur;
     
 
     public Long getId() {
@@ -51,6 +51,14 @@ public class Photo implements Serializable {
         this.points = points;
     }
 
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
