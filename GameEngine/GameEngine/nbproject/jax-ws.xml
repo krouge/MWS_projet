@@ -4,6 +4,12 @@
     <service name="BadgesManager">
       <implementation-class>ch.heigvd.comem.gameengine.services.BadgesManager</implementation-class>
     </service>
+    <service name="EventsManager">
+      <implementation-class>ch.heigvd.comem.gameengine.services.EventsManager</implementation-class>
+    </service>
+    <service name="RulesManager">
+      <implementation-class>ch.heigvd.comem.gameengine.services.RulesManager</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>
