@@ -18,11 +18,11 @@ public class BadgesManager implements BadgesManagerLocal {
     EntityManager em;
 
     @Override
-    public Long create(String name, String descrition, String source) {
+    public Long create(String name, String description, String source) {
         
         Badge badge = new Badge();
         badge.setName(name);
-        badge.setDescription(descrition);
+        badge.setDescription(description);
         em.persist(badge); em.flush();
         
         return badge.getBadgeId();
@@ -33,6 +33,18 @@ public class BadgesManager implements BadgesManagerLocal {
     public Badge find(Long badgeId) {
         
         Badge badge = em.find(Badge.class, badgeId);
+        
+        return badge;
+        
+    }
+    
+    @Override
+    public Badge update(Long badgeId, String nom, String description, String source) {
+        
+        Badge badge = em.find(Badge.class, badgeId);
+        badge.setName(nom);
+        badge.setDescription(description);
+        badge.setSource(source);
         
         return badge;
         

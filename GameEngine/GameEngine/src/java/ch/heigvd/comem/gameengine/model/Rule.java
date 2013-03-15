@@ -27,6 +27,17 @@ public class Rule implements Serializable {
     @NotNull 
     private int numberOfPoints;
 
+    @ManyToOne
+    private Long application;
+
+    public Long getApplication() {
+        return application;
+    }
+
+    public void setApplication(Long application) {
+        this.application = application;
+    }
+    
     public String getEventType() {
         return eventType;
     }
@@ -43,22 +54,22 @@ public class Rule implements Serializable {
         this.numberOfPoints = numberOfPoints;
     }
 
-    public Badge getBadge() {
+    public Long getBadge() {
         return badge;
     }
 
-    public void setBadge(Badge badge) {
-        this.badge = badge;
+    public void setBadge(Long badgeId) {
+        this.badge = badgeId;
     }
     
     @ManyToOne
-    private Badge badge;
+    private Long badge;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ruleId;
 
-    public Long getId() {
+    public Long getRuleId() {
         return ruleId;
     }
 
