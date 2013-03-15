@@ -11,8 +11,8 @@ import javax.ejb.Local;
  * @author julien
  */
 @Local
-public interface BadgesManagerLocal {
+public interface PlayersManagerLocal {
 
-    Long createBadge(String name, String descrition, String source);
+    Long createPlayer(String firstName, String lastName, String email, int points);
     
 }
