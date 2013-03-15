@@ -17,7 +17,7 @@ public class Application implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long ApplicationId;
     
     private String name;
     
@@ -27,29 +27,61 @@ public class Application implements Serializable {
     
     private String apiSecret;
 
-    public Long getId() {
-        return id;
+    public Long getApplicationId() {
+        return ApplicationId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setApplicationId(Long ApplicationId) {
+        this.ApplicationId = ApplicationId;
+    }
+    
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public String getApiSecret() {
+        return apiSecret;
+    }
+
+    public void setApiSecret(String apiSecret) {
+        this.apiSecret = apiSecret;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (ApplicationId != null ? ApplicationId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the ApplicationId fields are not set
         if (!(object instanceof Application)) {
             return false;
         }
         Application other = (Application) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.ApplicationId == null && other.ApplicationId != null) || (this.ApplicationId != null && !this.ApplicationId.equals(other.ApplicationId))) {
             return false;
         }
         return true;
@@ -57,7 +89,7 @@ public class Application implements Serializable {
 
     @Override
     public String toString() {
-        return "ch.heigvd.comem.gameengine.model.Application[ id=" + id + " ]";
+        return "ch.heigvd.comem.gameengine.model.Application[ id=" + ApplicationId + " ]";
     }
 
 }
