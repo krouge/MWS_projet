@@ -26,7 +26,8 @@ public class PhotosManager implements PhotosManagerLocal {
     @PersistenceContext
     EntityManager em; 
     
-    public void createPhoto(int points, String source, Utilisateur ustilisateur){
+    @Override
+    public Long createPhoto(int points, String source, Utilisateur ustilisateur){
         Photo photo = new Photo();
         
         photo.setPoints(points);
@@ -34,12 +35,14 @@ public class PhotosManager implements PhotosManagerLocal {
         photo.setUtilisateur(ustilisateur);
         em.persist(photo);
         em.flush();
+        return photo.getId();
     }  
     
     public void persist(Object object) {
         em.persist(object);
     }
     
+    @Override
     public void remove(Object object){
         em.remove(object);
     }
