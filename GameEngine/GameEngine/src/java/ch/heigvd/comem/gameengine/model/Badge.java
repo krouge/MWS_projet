@@ -1,6 +1,7 @@
 package ch.heigvd.comem.gameengine.model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Badge implements Serializable {
     private String source;
     
     @ManyToMany(mappedBy="badges")
-    private List <Player> players;
+    private List <Player> players = new LinkedList <Player> ();
 
     public Long getBadgeId() {
         return badgeId;

@@ -13,6 +13,10 @@ import javax.ejb.Local;
 @Local
 public interface BadgesManagerLocal {
 
-    Long createBadge(String name, String descrition, String source);
+    Long create(String name, String descrition, String source);
+
+    void remove(Long id);
+
+    Badge find(Long badgeId);
     
 }
