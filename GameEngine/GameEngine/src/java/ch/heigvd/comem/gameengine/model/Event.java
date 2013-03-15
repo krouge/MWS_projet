@@ -5,6 +5,7 @@
 package ch.heigvd.comem.gameengine.model;
 
 import java.io.Serializable;
+import java.security.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,34 +22,45 @@ public class Event implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long eventId;
     
     @ManyToOne
-    private Application application;
+    private Long application;
     
     @ManyToOne
-    private Player player;
+    private Long player;
 
     @NotNull
     private String eventType;
     
-    public Long getId() {
-        return id;
+    @NotNull
+    private Timestamp time;
+
+    public Timestamp getTime() {
+        return time;
     }
 
-    public Application getApplication() {
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+    
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public Long getApplication() {
         return application;
     }
 
-    public void setApplication(Application application) {
+    public void setApplication(Long application) {
         this.application = application;
     }
 
-    public Player getPlayer() {
+    public Long getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(Long player) {
         this.player = player;
     }
 
@@ -60,14 +72,14 @@ public class Event implements Serializable {
         this.eventType = eventType;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEventId(Long id) {
+        this.eventId = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (eventId != null ? eventId.hashCode() : 0);
         return hash;
     }
 
@@ -78,7 +90,7 @@ public class Event implements Serializable {
             return false;
         }
         Event other = (Event) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.eventId == null && other.eventId != null) || (this.eventId != null && !this.eventId.equals(other.eventId))) {
             return false;
         }
         return true;
@@ -86,7 +98,7 @@ public class Event implements Serializable {
 
     @Override
     public String toString() {
-        return "ch.heigvd.comem.gameengine.model.Event[ id=" + id + " ]";
+        return "ch.heigvd.comem.gameengine.model.Event[ id=" + eventId + " ]";
     }
     
 }

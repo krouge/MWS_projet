@@ -21,7 +21,7 @@ public class Application implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ApplicationId;
+    private Application ApplicationId;
     
     @NotNull
     private String name;
@@ -37,11 +37,11 @@ public class Application implements Serializable {
     @OneToMany
     private List <Event> events = new LinkedList <Event>();
 
-    public Long getApplicationId() {
+    public Application getApplicationId() {
         return ApplicationId;
     }
 
-    public void setApplicationId(Long ApplicationId) {
+    public void setApplicationId(Application ApplicationId) {
         this.ApplicationId = ApplicationId;
     }
     

@@ -4,13 +4,14 @@
  */
 package ch.heigvd.comem.gameengine.services;
 
-import javax.ejb.Stateless;
+import java.security.Timestamp;
+import javax.ejb.Local;
 
 /**
  *
  * @author Renouille
  */
-@Stateless
-public class EventsManagerLocal implements EventsManagerLocalLocal {
-
+@Local
+public interface EventsManagerLocal {
+     Long create(Long playerId, Long applicationId, String eventType, Timestamp time);
 }

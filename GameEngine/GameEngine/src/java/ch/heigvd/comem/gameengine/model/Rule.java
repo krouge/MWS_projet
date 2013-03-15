@@ -27,6 +27,17 @@ public class Rule implements Serializable {
     @NotNull 
     private int numberOfPoints;
 
+    @ManyToOne
+    private Long application;
+
+    public Long getApplication() {
+        return application;
+    }
+
+    public void setApplication(Long application) {
+        this.application = application;
+    }
+    
     public String getEventType() {
         return eventType;
     }
@@ -58,7 +69,7 @@ public class Rule implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ruleId;
 
-    public Long getId() {
+    public Long getRuleId() {
         return ruleId;
     }
 
