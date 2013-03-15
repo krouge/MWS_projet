@@ -24,7 +24,19 @@ public class Photo implements Serializable {
     private String source;   
     private int points;
     
-    @ManyToOne protected Utilisateur utilisateur;
+    @ManyToOne
+    protected Utilisateur utilisateur;
+    
+    @ManyToOne
+    private Theme theme;
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
     
 
     public Long getId() {
