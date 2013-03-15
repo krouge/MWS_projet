@@ -54,16 +54,16 @@ public class Rule implements Serializable {
         this.numberOfPoints = numberOfPoints;
     }
 
-    public Badge getBadge() {
+    public Long getBadge() {
         return badge;
     }
 
-    public void setBadge(Badge badge) {
-        this.badge = badge;
+    public void setBadge(Long badgeId) {
+        this.badge = badgeId;
     }
     
     @ManyToOne
-    private Badge badge;
+    private Long badge;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

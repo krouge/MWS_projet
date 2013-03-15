@@ -23,14 +23,14 @@ public class RulesManager implements RulesManagerLocal {
     private EntityManager em;
     
     @Override
-    public Long create(String eventType, int numberOfPoints, Long applicationId, Badge badge) {
+    public Long create(String eventType, int numberOfPoints, Long applicationId, Long badgeId) {
         
         Rule rule = new Rule();
         
        rule.setEventType(eventType);
        rule.setNumberOfPoints(numberOfPoints);
        rule.setApplication(applicationId);
-       rule.setBadge(badge);
+       rule.setBadge(badgeId);
        em.persist(rule); em.flush();
         
         return rule.getRuleId();
@@ -64,5 +64,30 @@ public class RulesManager implements RulesManagerLocal {
         Rule rule = em.find(Rule.class, ruleId);
         em.remove(rule);
         
+    }
+
+    @Override
+    public Rule update(Long ruleId, String eventType, int numberOfPoints, Long applicationId, Long badgeId) {
+        
+        Rule rule = em.find(Rule.class, ruleId);
+        
+        rule.setEventType(eventType);
+        rule.setNumberOfPoints(numberOfPoints);
+        rule.setApplication(applicationId);
+        rule.setBadge(badgeId);
+        
+        return rule;
+    }
+
+    @Override
+    public Rule updage(Long ruleId, String eventType, int numberOfPoints, Long applicationId) {
+        
+        Rule rule = em.find(Rule.class, ruleId);
+        
+        rule.setEventType(eventType);
+        rule.setNumberOfPoints(numberOfPoints);
+        rule.setApplication(applicationId);
+        
+        return rule;
     }
 }

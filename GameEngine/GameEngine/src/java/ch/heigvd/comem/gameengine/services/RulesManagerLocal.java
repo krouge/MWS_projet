@@ -15,11 +15,15 @@ import javax.ejb.Local;
 @Local
 public interface RulesManagerLocal {
 
-    Long create(String eventType, int numberOfPoints, Long application, Badge badge);
+    Long create(String eventType, int numberOfPoints, Long applicationId, Long badgeId);
     
-    Long create(String eventType, int numberOfPoints, Long application);
+    Long create(String eventType, int numberOfPoints, Long applicationId);
     
     Rule find(Long ruleId);
+    
+    Rule update(Long ruleId, String eventType, int numberOfPoints, Long applicationId, Long badgeId);
+    
+    Rule updage(Long ruleId, String eventType, int numberOfPoints, Long applicationId);
     
     void remove(Long ruleId);
     

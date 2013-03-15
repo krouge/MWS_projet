@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.gameengine.services;
 
+import ch.heigvd.comem.gameengine.model.Event;
 import java.security.Timestamp;
 import javax.ejb.Local;
 
@@ -14,4 +15,10 @@ import javax.ejb.Local;
 @Local
 public interface EventsManagerLocal {
      Long create(Long playerId, Long applicationId, String eventType, Timestamp time);
+     
+     Event find(Long eventId);
+     
+     Event update(Long eventId, Long playerId, Long applicationId, String eventType, Timestamp time);
+     
+     void remove(Long eventId);
 }
