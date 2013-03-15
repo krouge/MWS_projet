@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.services;
 
+import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import javax.ejb.Local;
 
 /**
@@ -13,6 +14,8 @@ import javax.ejb.Local;
 @Local
 public interface UtilisateursManagerLocal {
     
-    public Long createUtilisateur(String pseudo, String email, String mdp);
+    public Long create(String pseudo, String email, String mdp);
+    
+    public void delete(Long id) throws ExceptionIdUtilisateur;
     
 }

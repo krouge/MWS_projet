@@ -6,6 +6,7 @@ package ch.heigvd.comem.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,13 +33,13 @@ public class Utilisateur implements Serializable {
     private String mdp;
     
     @ManyToMany(mappedBy="utilisateurs")
-    private List<Photo> photos_like;
+    private List<Photo> photos_like = new LinkedList<Photo>();
     
     @OneToMany(mappedBy="utilisateur")
-    private List<Photo> photos;
+    private List<Photo> photos = new LinkedList<Photo>();
     
     @OneToMany(mappedBy="utilisateurs")
-    private List<Theme> themes = new ArrayList<Theme>();
+    private List<Theme> themes = new LinkedList<Theme>();
 
     public List<Theme> getThemes() {
         return themes;

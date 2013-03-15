@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.services;
 
+import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Utilisateur;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,7 +21,7 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
     private EntityManager em;
 
     
-    public Long createUtilisateur(String pseudo, String email, String mdp){
+    public Long create(String pseudo, String email, String mdp){
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setPseudo(pseudo);
         utilisateur.setEmail(email);
@@ -31,8 +32,14 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         
     }
 
-    public void persist(Object object) {
-        em.persist(object);
+    public void delete(Long id) throws ExceptionIdUtilisateur {
+        Utilisateur utilisateur = em.find(Utilisateur.class, id);
+        
+        if(utilisateur != null){
+            em.remove(utilisateur);
+        }else{
+            throw new ExceptionIdUtilisateur();
+        }
     }
 
 }

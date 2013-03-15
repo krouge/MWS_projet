@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.services;
 
+import ch.heigvd.comem.exceptions.ExceptionIdTheme;
 import javax.ejb.Local;
 
 /**
@@ -13,6 +14,7 @@ import javax.ejb.Local;
 @Local
 public interface ThemesManagerLocal {
     
-    public Long createTheme(String titre);
+    public Long create(String titre);
+    public void delete(Long id) throws ExceptionIdTheme;
     
 }
