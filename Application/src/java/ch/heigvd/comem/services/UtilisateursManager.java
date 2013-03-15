@@ -7,6 +7,7 @@ package ch.heigvd.comem.services;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Utilisateur;
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,6 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Jonas
  */
 @Stateless
+@WebService
 public class UtilisateursManager implements UtilisateursManagerLocal {
 
     @PersistenceContext
@@ -40,6 +42,15 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         }else{
             throw new ExceptionIdUtilisateur();
         }
+    }
+    
+    public Utilisateur find(Long id) throws ExceptionIdUtilisateur{
+        Utilisateur utilisateur = em.find(Utilisateur.class, id);
+        
+        if(utilisateur == null){
+            throw new ExceptionIdUtilisateur();
+        }
+        return utilisateur;
     }
 
 }

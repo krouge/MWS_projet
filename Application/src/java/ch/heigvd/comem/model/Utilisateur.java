@@ -38,7 +38,7 @@ public class Utilisateur implements Serializable {
     @OneToMany(mappedBy="utilisateur")
     private List<Photo> photos = new LinkedList<Photo>();
     
-    @OneToMany(mappedBy="utilisateurs")
+    @OneToMany(mappedBy="utilisateur")
     private List<Theme> themes = new LinkedList<Theme>();
 
     public List<Theme> getThemes() {
