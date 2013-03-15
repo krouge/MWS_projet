@@ -35,5 +35,32 @@ public class EventsManager implements EventsManagerLocal{
         
         return event.getEventId();
     }
+    
+    @Override
+    public Event find(Long eventId) {
+        
+        Event event = em.find(Event.class, eventId);
+        
+        return event;
+    }
+    
+    @Override
+    public void remove(Long eventId) {
+        Event event = em.find(Event.class, eventId);
+        em.remove(event);
+    }
+
+    @Override
+    public Event update(Long eventId, Long playerId, Long applicationId, String eventType, Timestamp time) {
+        
+        Event event = em.find(Event.class, eventId);
+        
+        event.setPlayer(playerId);
+        event.setApplication(applicationId);
+        event.setEventType(eventType);
+        event.setTime(time);
+        
+        return event;
+    }
 
 }
