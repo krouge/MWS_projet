@@ -26,6 +26,30 @@ public class Rule implements Serializable {
     
     @NotNull 
     private int numberOfPoints;
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public int getNumberOfPoints() {
+        return numberOfPoints;
+    }
+
+    public void setNumberOfPoints(int numberOfPoints) {
+        this.numberOfPoints = numberOfPoints;
+    }
+
+    public Badge getBadge() {
+        return badge;
+    }
+
+    public void setBadge(Badge badge) {
+        this.badge = badge;
+    }
     
     @ManyToOne
     private Badge badge;
