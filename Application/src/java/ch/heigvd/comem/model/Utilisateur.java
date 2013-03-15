@@ -34,6 +34,22 @@ public class Utilisateur implements Serializable {
     @ManyToMany(mappedBy="utilisateurs")
     private List<Photo> photos;
 
+    public List<Theme> getThemes() {
+        return themes;
+    }
+
+    public void setThemes(List<Theme> themes) {
+        this.themes = themes;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+    
     public String getPseudo() {
         return pseudo;
     }
@@ -41,8 +57,6 @@ public class Utilisateur implements Serializable {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
-    
-    
 
     public String getEmail() {
         return email;

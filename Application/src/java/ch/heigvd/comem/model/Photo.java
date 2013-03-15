@@ -29,6 +29,17 @@ public class Photo implements Serializable {
     @ManyToOne
     protected Utilisateur utilisateur;
     
+    @ManyToOne
+    private Theme theme;
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+    
     @ManyToMany(mappedBy="photos")
     private List<Tag> tags;
     

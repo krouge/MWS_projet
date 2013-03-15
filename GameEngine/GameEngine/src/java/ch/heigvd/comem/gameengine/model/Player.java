@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Player implements Serializable {
     
     private String email;
     
+    @NotNull
     private int points;
     
     @ManyToMany
@@ -40,6 +42,46 @@ public class Player implements Serializable {
         this.playerId = playerId;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public List<Badge> getBadges() {
+        return badges;
+    }
+
+    public void setBadges(List<Badge> badges) {
+        this.badges = badges;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
