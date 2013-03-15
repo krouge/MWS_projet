@@ -1,10 +1,13 @@
 package ch.heigvd.comem.gameengine.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -19,11 +22,16 @@ public class Badge implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long badgeId;
     
+    @NotNull
     private String name;
     
     private String description;
     
+    @NotNull
     private String source;
+    
+    @ManyToMany(mappedBy="badges")
+    private List <Player> players;
 
     public Long getBadgeId() {
         return badgeId;
