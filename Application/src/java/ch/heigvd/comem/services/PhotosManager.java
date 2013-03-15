@@ -40,6 +40,10 @@ public class PhotosManager implements PhotosManagerLocal {
         em.persist(object);
     }
     
+    public void remove(Object object){
+        em.remove(object);
+    }
+    
 
 
    
