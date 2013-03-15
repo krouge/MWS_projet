@@ -14,6 +14,7 @@ public class BadgesManager implements BadgesManagerLocal {
 
     @Override
     public Badge createBadge(String name, String descrition, String source) {
+        
         Badge badge = new Badge();
         badge.setName(name);
         badge.setDescription(descrition);
