@@ -14,6 +14,6 @@ import javax.ejb.Local;
 @Local
 public interface PhotosManagerLocal {
     
-    public void createPhoto(int points, String source, Utilisateur ustilisateur);
+    public Long createPhoto(int points, String source, Utilisateur ustilisateur);
     public void remove(Object object);
 }

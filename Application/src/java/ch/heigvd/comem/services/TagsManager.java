@@ -20,12 +20,13 @@ public class TagsManager implements TagsManagerLocal {
     @PersistenceContext
     EntityManager em; 
     
-    public void createTag(String titre){
+    public Long createTag(String titre){
         Tag tag = new Tag();
         tag.setTitre(titre);
         
         em.persist(tag);
         em.flush();
+        return tag.getId();
     }
     
     

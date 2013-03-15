@@ -32,6 +32,9 @@ public class Utilisateur implements Serializable {
     private String mdp;
     
     @ManyToMany(mappedBy="utilisateurs")
+    private List<Photo> photos_like;
+    
+    @OneToMany(mappedBy="utilisateur")
     private List<Photo> photos;
     
     @OneToMany(mappedBy="utilisateurs")

@@ -13,4 +13,6 @@ import javax.ejb.Local;
 @Local
 public interface TagsManagerLocal {
     
+    public Long createTag(String titre);
+    
 }

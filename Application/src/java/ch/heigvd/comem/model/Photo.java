@@ -40,7 +40,7 @@ public class Photo implements Serializable {
         this.theme = theme;
     }
     
-    @ManyToMany(mappedBy="photos")
+    @ManyToMany
     private List<Tag> tags;
     
     @ManyToMany

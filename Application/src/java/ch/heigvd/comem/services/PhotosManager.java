@@ -27,7 +27,7 @@ public class PhotosManager implements PhotosManagerLocal {
     EntityManager em; 
     
     @Override
-    public void createPhoto(int points, String source, Utilisateur ustilisateur){
+    public Long createPhoto(int points, String source, Utilisateur ustilisateur){
         Photo photo = new Photo();
         
         photo.setPoints(points);
@@ -35,6 +35,7 @@ public class PhotosManager implements PhotosManagerLocal {
         photo.setUtilisateur(ustilisateur);
         em.persist(photo);
         em.flush();
+        return photo.getId();
     }  
     
     public void persist(Object object) {
