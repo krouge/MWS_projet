@@ -26,6 +26,7 @@ public class PhotosManager implements PhotosManagerLocal {
     @PersistenceContext
     EntityManager em; 
     
+    @Override
     public void createPhoto(int points, String source, Utilisateur ustilisateur){
         Photo photo = new Photo();
         
@@ -40,6 +41,7 @@ public class PhotosManager implements PhotosManagerLocal {
         em.persist(object);
     }
     
+    @Override
     public void remove(Object object){
         em.remove(object);
     }
