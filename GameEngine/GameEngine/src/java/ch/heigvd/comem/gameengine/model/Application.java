@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -19,12 +20,15 @@ public class Application implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ApplicationId;
     
+    @NotNull
     private String name;
     
     private String description;
     
+    @NotNull
     private String apiKey;
     
+    @NotNull
     private String apiSecret;
 
     public Long getApplicationId() {
