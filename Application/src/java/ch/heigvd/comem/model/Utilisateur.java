@@ -5,10 +5,14 @@
 package ch.heigvd.comem.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,7 +30,32 @@ public class Utilisateur implements Serializable {
     private String email;
     
     private String mdp;
+    
+    @ManyToMany(mappedBy="utilisateurs")
+    private List<Photo> photos_like;
+    
+    @OneToMany(mappedBy="utilisateur")
+    private List<Photo> photos;
+    
+    @OneToMany(mappedBy="utilisateurs")
+    private List<Theme> themes = new ArrayList<Theme>();
 
+    public List<Theme> getThemes() {
+        return themes;
+    }
+
+    public void setThemes(List<Theme> themes) {
+        this.themes = themes;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+    
     public String getPseudo() {
         return pseudo;
     }
@@ -34,8 +63,6 @@ public class Utilisateur implements Serializable {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
-    
-    
 
     public String getEmail() {
         return email;

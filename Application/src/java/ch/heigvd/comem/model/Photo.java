@@ -5,10 +5,12 @@
 package ch.heigvd.comem.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -24,8 +26,25 @@ public class Photo implements Serializable {
     private String source;   
     private int points;
     
-    @ManyToOne protected Utilisateur utilisateur;
+    @ManyToOne
+    protected Utilisateur utilisateur;
     
+    @ManyToOne
+    private Theme theme;
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+    
+    @ManyToMany
+    private List<Tag> tags;
+    
+    @ManyToMany
+    private List<Utilisateur> utilisateurs;
 
     public Long getId() {
         return id;

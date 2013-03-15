@@ -4,7 +4,6 @@
  */
 package ch.heigvd.comem.services;
 
-import ch.heigvd.comem.model.Utilisateur;
 import javax.ejb.Local;
 
 /**
@@ -12,8 +11,8 @@ import javax.ejb.Local;
  * @author fabiencornaz
  */
 @Local
-public interface PhotosManagerLocal {
+public interface TagsManagerLocal {
     
-    public Long createPhoto(int points, String source, Utilisateur ustilisateur);
-    public void remove(Object object);
+    public Long createTag(String titre);
+    
 }
