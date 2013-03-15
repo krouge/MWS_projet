@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.gameengine.services;
 
+import ch.heigvd.comem.gameengine.model.Badge;
 import javax.ejb.Local;
 
 /**
