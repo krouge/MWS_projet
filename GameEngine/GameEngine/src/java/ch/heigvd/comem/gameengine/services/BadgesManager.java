@@ -18,7 +18,7 @@ public class BadgesManager implements BadgesManagerLocal {
     EntityManager em;
 
     @Override
-    public Long createBadge(String name, String descrition, String source) {
+    public Long create(String name, String descrition, String source) {
         
         Badge badge = new Badge();
         badge.setName(name);
@@ -28,7 +28,22 @@ public class BadgesManager implements BadgesManagerLocal {
         return badge.getBadgeId();
         
     }
-
     
+    @Override
+    public Badge find(Long badgeId) {
+        
+        Badge badge = em.find(Badge.class, badgeId);
+        
+        return badge;
+        
+    }
+
+    @Override
+    public void remove(Long badgeId) {
+        
+        Badge badge = em.find(Badge.class, badgeId);
+        em.remove(badge);
+        
+    }    
 
 }

@@ -5,13 +5,12 @@
 package ch.heigvd.comem.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToMany;
 
 /**
@@ -31,7 +30,7 @@ public class Tag implements Serializable {
     private List<Theme> themes;
     
     @ManyToMany(mappedBy="tags")
-    private List<Photo> photos;
+    private List<Photo> photos = new LinkedList<Photo>();
     
     
     public Long getId() {
