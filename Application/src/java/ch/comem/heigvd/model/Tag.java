@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package test2;
+package ch.comem.heigvd.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -12,14 +12,16 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Jonas
+ * @author fabiencornaz
  */
 @Entity
-public class test implements Serializable {
+public class Tag implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    private String titre;
 
     public Long getId() {
         return id;
@@ -27,6 +29,14 @@ public class test implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     @Override
@@ -39,10 +49,10 @@ public class test implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof test)) {
+        if (!(object instanceof Tag)) {
             return false;
         }
-        test other = (test) object;
+        Tag other = (Tag) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -51,7 +61,7 @@ public class test implements Serializable {
 
     @Override
     public String toString() {
-        return "test2.test[ id=" + id + " ]";
+        return "ch.comem.heigvd.model.Tag[ id=" + id + " ]";
     }
     
 }
