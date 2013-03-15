@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.comem.heigvd.model;
+package ch.heigvd.comem.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
