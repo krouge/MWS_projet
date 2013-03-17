@@ -23,7 +23,7 @@ public interface RulesManagerLocal {
     
     Rule update(Long ruleId, String eventType, int numberOfPoints, Long applicationId, Long badgeId);
     
-    Rule updage(Long ruleId, String eventType, int numberOfPoints, Long applicationId);
+    Rule update(Long ruleId, String eventType, int numberOfPoints, Long applicationId);
     
     void remove(Long ruleId);
     

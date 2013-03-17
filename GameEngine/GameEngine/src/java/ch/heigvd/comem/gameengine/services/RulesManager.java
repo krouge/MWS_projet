@@ -54,8 +54,7 @@ public class RulesManager implements RulesManagerLocal {
         
         Rule rule = em.find(Rule.class, ruleId);
         
-        return rule;
-        
+        return rule; 
     }
 
     @Override
@@ -63,7 +62,6 @@ public class RulesManager implements RulesManagerLocal {
         
         Rule rule = em.find(Rule.class, ruleId);
         em.remove(rule);
-        
     }
 
     @Override
@@ -80,7 +78,7 @@ public class RulesManager implements RulesManagerLocal {
     }
 
     @Override
-    public Rule updage(Long ruleId, String eventType, int numberOfPoints, Long applicationId) {
+    public Rule update(Long ruleId, String eventType, int numberOfPoints, Long applicationId) {
         
         Rule rule = em.find(Rule.class, ruleId);
         
