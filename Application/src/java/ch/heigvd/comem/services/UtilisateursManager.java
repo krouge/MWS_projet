@@ -5,7 +5,10 @@
 package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
+import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
@@ -53,10 +56,20 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         return utilisateur;
     }
     
-    public void updateEmail(Long id, String email) throws ExceptionIdUtilisateur{
-        Utilisateur utilisateur = this.find(id);
-        utilisateur.setEmail(email); 
-        em.merge(utilisateur);
+    public void update(Long id, String pseudo, String email, String mdp, List<Photo> photos, List<Theme> themes) throws ExceptionIdUtilisateur{
+        Utilisateur utilisateur = em.find(Utilisateur.class, id);
+        utilisateur.setEmail(email);
+        utilisateur.setPseudo(pseudo);
+        utilisateur.setMdp(mdp);
+        utilisateur.setPhotos(photos);
+        utilisateur.setThemes(themes);
+    }
+    
+    public void updatePhotoLike(Long id, Photo photo){
+        Utilisateur utilisateur = em.find(Utilisateur.class, id);
+        utilisateur.addPhotoLike(photo);
+        photo.addUtilisateurLike(utilisateur);
+        em.flush();
     }
 
 }

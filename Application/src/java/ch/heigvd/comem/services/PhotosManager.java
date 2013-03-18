@@ -6,14 +6,10 @@ package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Utilisateur;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
-import javax.naming.Context;
-import javax.naming.InitialContext;
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
 
 
 /**
@@ -21,20 +17,21 @@ import javax.transaction.UserTransaction;
  * @author fabiencornaz
  */
 @Stateless
+@WebService
 public class PhotosManager implements PhotosManagerLocal {
     
     @PersistenceContext
     EntityManager em; 
     
     @Override
-    public Long createPhoto(int points, String source, Utilisateur ustilisateur){
+    public Long createPhoto(int points, String source, Utilisateur utilisateur){
         Photo photo = new Photo();
-        
         photo.setPoints(points);
         photo.setSource(source);
-        photo.setUtilisateur(ustilisateur);
+        photo.setUtilisateur(utilisateur);
         em.persist(photo);
         em.flush();
+        utilisateur.addPhoto(photo);
         return photo.getId();
     }  
     

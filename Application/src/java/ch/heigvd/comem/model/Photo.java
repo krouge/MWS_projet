@@ -103,4 +103,8 @@ public class Photo implements Serializable {
         return "ch.comem.heigvd.model.Photo[ id=" + id + " ]";
     }
     
+    public void addUtilisateurLike(Utilisateur utilisateur){
+        this.utilisateurs.add(utilisateur);
+    }
+    
 }

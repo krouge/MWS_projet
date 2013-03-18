@@ -114,4 +114,17 @@ public class Utilisateur implements Serializable {
         return "ch.heigvd.comem.model.Utiliasateur[ id=" + id + " ]";
     }
     
+    public void addPhoto(Photo photo){
+        this.photos.add(photo);
+    }
+    
+    public void addTheme(Theme theme){
+        this.themes.add(theme);
+    }
+    
+    public void addPhotoLike(Photo photo){
+        this.photos_like.add(photo);
+    }
+    
+    
 }
