@@ -28,6 +28,36 @@ public class PlayersManager implements PlayersManagerLocal {
         return player.getPlayerId();
         
     }
+    
+    @Override
+    public Player find(Long playerId) {
+        
+        Player player = em.find(Player.class, playerId);
+        
+        return player;
+        
+    }
+    
+    @Override
+    public Player update(Long playerId, String firstName, String lastName, String email, int points) {
+        
+        Player player = em.find(Player.class, playerId);
+        player.setFirstName(firstName);
+        player.setLastName(lastName);
+        player.setEmail(email);
+        player.setPoints(points);
+        
+        return player;
+        
+    }
+
+    @Override
+    public void remove(Long playerId) {
+        
+        Player player = em.find(Player.class, playerId);
+        em.remove(player);
+        
+    }
 
     
 
