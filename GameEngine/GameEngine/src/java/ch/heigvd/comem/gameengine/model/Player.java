@@ -10,12 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Julien Biedermann
  */
 @Entity
+@XmlRootElement
 public class Player implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -79,6 +82,7 @@ public class Player implements Serializable {
         this.points = points;
     }
 
+    @XmlTransient
     public List<Badge> getBadges() {
         return badges;
     }
@@ -91,6 +95,7 @@ public class Player implements Serializable {
         this.badges.add(badge);
     }
     
+    @XmlTransient
     public List<Event> getEvents() {
         return events;
     }

@@ -9,12 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Julien Biedermann
  */
 @Entity
+@XmlRootElement
 public class Application implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -80,6 +83,7 @@ public class Application implements Serializable {
         this.apiSecret = apiSecret;
     }
     
+    @XmlTransient
     public List<Rule> getRules() {
         return rules;
     }
@@ -92,6 +96,7 @@ public class Application implements Serializable {
         this.rules.add(rule);
     }
 
+    @XmlTransient
     public List<Event> getEvents() {
         return events;
     }
