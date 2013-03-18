@@ -35,7 +35,7 @@ public class Application implements Serializable {
     private String apiSecret;
     
     @OneToMany(mappedBy="application")
-    private List<Rule> rules = new LinkedList <Rule>();
+    private List <Rule> rules = new LinkedList <Rule>();
     
     @OneToMany(mappedBy="application")
     private List <Event> events = new LinkedList <Event>();

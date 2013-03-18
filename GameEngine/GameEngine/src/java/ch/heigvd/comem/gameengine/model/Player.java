@@ -30,8 +30,8 @@ public class Player implements Serializable {
     
     private String email;
     
-    @OneToMany
-    private List<Event> events = new LinkedList();
+    @OneToMany(mappedBy="player")
+    private List <Event> events = new LinkedList <Event>();
 
     public List<Event> getEvents() {
         return events;
