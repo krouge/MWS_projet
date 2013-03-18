@@ -72,4 +72,5 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         em.flush();
     }
 
+
 }
