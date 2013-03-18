@@ -34,7 +34,7 @@ public class Application implements Serializable {
     @NotNull
     private String apiSecret;
     
-    @OneToMany
+    @OneToMany(mappedBy="application")
     private List<Rule> rules = new LinkedList();
     
     @OneToMany(mappedBy="application")
