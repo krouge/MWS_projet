@@ -10,6 +10,15 @@
     <service name="BadgesManager">
       <implementation-class>ch.heigvd.comem.gameengine.services.BadgesManager</implementation-class>
     </service>
+    <service name="ApplicationsManager">
+      <implementation-class>ch.heigvd.comem.gameengine.services.ApplicationsManager</implementation-class>
+    </service>
+    <service name="PlayersManager">
+      <implementation-class>ch.heigvd.comem.gameengine.services.PlayersManager</implementation-class>
+    </service>
+    <service name="TestBadgesManager">
+      <implementation-class>ch.heigvd.comem.gameengine.tests.TestBadgesManager</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>
