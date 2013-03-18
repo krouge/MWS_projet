@@ -38,13 +38,12 @@ public class PhotosManager implements PhotosManagerLocal {
         return photo.getId();
     }  
     
-    public void persist(Object object) {
-        em.persist(object);
-    }
+
     
     @Override
-    public void remove(Object object){
-        em.remove(object);
+    public void remove(Long idPhoto){
+        Photo photo = em.find(Photo.class, idPhoto);
+        em.remove(photo);
     }
     
 
