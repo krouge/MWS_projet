@@ -13,12 +13,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 /**
  *
  * @author Renouille
  */
 @Stateless
+@WebService
 public class TestEventsManager implements TestEventsManagerLocal {
 
         @EJB
@@ -28,9 +30,9 @@ public class TestEventsManager implements TestEventsManagerLocal {
 
     @Override
     public void generateEvents() {
-        
+
         Long player = playersManagerLocal.create("Julien", "Biedermann", "events@manager.com", 0);
-        Long app = applicationsManagerLocal.create("App event", "Event app", "200", "200");
+        Long app = applicationsManagerLocal.create("App event", "Event app", "200", "300");
         
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
@@ -38,7 +40,10 @@ public class TestEventsManager implements TestEventsManagerLocal {
         
         for (int i=0; i<100; i++) {
             
-            eventsManagerLocal.create(playersManagerLocal.find(player), applicationsManagerLocal.find(app), "Poster concour", new Timestamp(time));
+            eventsManagerLocal.create(playersManagerLocal.find(player), 
+                    applicationsManagerLocal.find(app), 
+                    "Poster concour", 
+                    new Timestamp(time));
         }
     }
         

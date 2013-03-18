@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.gameengine.tests;
 
+import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.services.ApplicationsManagerLocal;
 import ch.heigvd.comem.gameengine.services.RulesManagerLocal;
 import javax.ejb.EJB;
@@ -25,8 +26,8 @@ public class TestRulesManager implements TestRulesManagerLocal {
     @Override
     public void generateRules() {
         
-        Long app = applicationsManagerLocal.create("App", "App descr", "100", "100");
-        
+        Long app = applicationsManagerLocal.create("App", "App descr", "100", "300");
+
         for (int i=0; i<20; i++) {
             
             rulesManagerLocal.create("EventType Test "+1, 
