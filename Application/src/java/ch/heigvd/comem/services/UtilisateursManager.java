@@ -56,17 +56,16 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         return utilisateur;
     }
     
-    public void update(Long id, String pseudo, String email, String mdp, List<Photo> photos, List<Theme> themes) throws ExceptionIdUtilisateur{
+    public void update(Long id, String pseudo, String email, String mdp) throws ExceptionIdUtilisateur{
         Utilisateur utilisateur = em.find(Utilisateur.class, id);
         utilisateur.setEmail(email);
         utilisateur.setPseudo(pseudo);
         utilisateur.setMdp(mdp);
-        utilisateur.setPhotos(photos);
-        utilisateur.setThemes(themes);
     }
     
-    public void updatePhotoLike(Long id, Photo photo){
+    public void addPhotoLike(Long id, Long idPhoto){
         Utilisateur utilisateur = em.find(Utilisateur.class, id);
+        Photo photo = em.find(Photo.class, idPhoto);
         utilisateur.addPhotoLike(photo);
         photo.addUtilisateurLike(utilisateur);
         em.flush();
