@@ -27,7 +27,7 @@ public class Tag implements Serializable {
     private String titre;
     
     @ManyToMany
-    private List<Theme> themes;
+    private List<Theme> themes = new LinkedList<Theme>();
     
     @ManyToMany(mappedBy="tags")
     private List<Photo> photos = new LinkedList<Photo>();
