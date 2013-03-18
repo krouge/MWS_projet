@@ -89,4 +89,16 @@ public class RulesManager implements RulesManagerLocal {
         
         return rule;
     }
+
+    @Override
+    public void associateBadge(Long ruleId, Long badgeId) {
+        
+        Rule rule = em.find(Rule.class, ruleId);
+        Badge badge = em.find(Badge.class, badgeId);
+        
+        rule.addBadge(badge);
+        badge.addRule(rule);
+    }
+    
+    
 }

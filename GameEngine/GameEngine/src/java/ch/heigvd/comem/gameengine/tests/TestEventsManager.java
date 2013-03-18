@@ -25,13 +25,12 @@ public class TestEventsManager implements TestEventsManagerLocal {
 
         @EJB
         private EventsManagerLocal eventsManagerLocal;
-        private PlayersManagerLocal playersManagerLocal;
+        @EJB
         private ApplicationsManagerLocal applicationsManagerLocal;
 
     @Override
     public void generateEvents() {
 
-        Long player = playersManagerLocal.create("Julien", "Biedermann", "events@manager.com", 0);
         Long app = applicationsManagerLocal.create("App event", "Event app", "200", "300");
         
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -40,8 +39,7 @@ public class TestEventsManager implements TestEventsManagerLocal {
         
         for (int i=0; i<100; i++) {
             
-            eventsManagerLocal.create(playersManagerLocal.find(player), 
-                    applicationsManagerLocal.find(app), 
+            eventsManagerLocal.create(applicationsManagerLocal.find(app), 
                     "Poster concour", 
                     new Timestamp(time));
         }
