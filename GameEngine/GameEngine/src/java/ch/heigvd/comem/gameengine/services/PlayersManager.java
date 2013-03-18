@@ -18,7 +18,7 @@ public class PlayersManager implements PlayersManagerLocal {
     EntityManager em;
 
     @Override
-    public Long createPlayer(String firstName, String lastName, String email, int points) {
+    public Long create(String firstName, String lastName, String email, int points) {
         
         Player player = new Player();
         player.setFirstName(firstName);

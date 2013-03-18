@@ -25,6 +25,7 @@ public class ApplicationsManager implements ApplicationsManagerLocal {
         application.setDescription(description);
         application.setApiKey(apiKey);
         application.setApiSecret(apiSecret);
+        em.persist(application); em.flush();
         
         return application.getApplicationId();
     

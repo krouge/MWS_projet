@@ -10,7 +10,7 @@ import javax.ejb.Local;
 @Local
 public interface PlayersManagerLocal {
 
-    Long createPlayer(String firstName, String lastName, String email, int points);
+    Long create(String firstName, String lastName, String email, int points);
 
     Player find(Long playerId);
 
