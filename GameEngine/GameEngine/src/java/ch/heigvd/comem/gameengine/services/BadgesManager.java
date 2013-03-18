@@ -21,6 +21,7 @@ public class BadgesManager implements BadgesManagerLocal {
     public Long create(String name, String description, String source) {
         
         Badge badge = new Badge();
+        
         badge.setName(name);
         badge.setDescription(description);
         badge.setSource(source);
