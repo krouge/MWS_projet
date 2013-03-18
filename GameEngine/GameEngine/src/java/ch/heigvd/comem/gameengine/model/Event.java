@@ -20,8 +20,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Event implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
     
     @ManyToOne
@@ -34,14 +35,14 @@ public class Event implements Serializable {
     private String eventType;
     
     @NotNull
-    private Timestamp time;
+    private Timestamp eventTime;
 
-    public Timestamp getTime() {
-        return time;
+    public Timestamp getEventTime() {
+        return eventTime;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setEventTime(Timestamp eventTime) {
+        this.eventTime = eventTime;
     }
     
     public Long getEventId() {

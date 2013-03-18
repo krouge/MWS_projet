@@ -21,6 +21,13 @@ public class Rule implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
+    @ManyToOne
+    private Long badge;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ruleId;
+    
     @NotNull
     private String eventType;
     
@@ -30,14 +37,22 @@ public class Rule implements Serializable {
     @ManyToOne
     private Long application;
 
+    public Long getRuleId() {
+        return ruleId;
+    }
+
+    public void setRuleId(Long id) {
+        this.ruleId = id;
+    }
+
     public Long getApplication() {
         return application;
     }
-
+    
     public void setApplication(Long application) {
         this.application = application;
     }
-    
+
     public String getEventType() {
         return eventType;
     }
@@ -62,21 +77,6 @@ public class Rule implements Serializable {
         this.badge = badgeId;
     }
     
-    @ManyToOne
-    private Long badge;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ruleId;
-
-    public Long getRuleId() {
-        return ruleId;
-    }
-
-    public void setRuleId(Long id) {
-        this.ruleId = id;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;

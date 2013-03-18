@@ -23,14 +23,14 @@ public class EventsManager implements EventsManagerLocal{
     EntityManager em;
     
     @Override
-    public Long create(Long playerId, Long applicationId, String eventType, Timestamp time) {
+    public Long create(Long playerId, Long applicationId, String eventType, Timestamp eventTime) {
         
         Event event = new Event();
         
         event.setPlayer(playerId);
         event.setApplication(applicationId);
         event.setEventType(eventType);
-        event.setTime(time);
+        event.setEventTime(eventTime);
         em.persist(event); em.flush();
         
         return event.getEventId();
@@ -51,14 +51,14 @@ public class EventsManager implements EventsManagerLocal{
     }
 
     @Override
-    public Event update(Long eventId, Long playerId, Long applicationId, String eventType, Timestamp time) {
+    public Event update(Long eventId, Long playerId, Long applicationId, String eventType, Timestamp eventTime) {
         
         Event event = em.find(Event.class, eventId);
         
         event.setPlayer(playerId);
         event.setApplication(applicationId);
         event.setEventType(eventType);
-        event.setTime(time);
+        event.setEventTime(eventTime);
         
         return event;
     }

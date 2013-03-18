@@ -35,6 +35,9 @@ public class Application implements Serializable {
     private String apiSecret;
     
     @OneToMany(mappedBy="application")
+    private List <Rule> rules = new LinkedList <Rule>();
+    
+    @OneToMany(mappedBy="application")
     private List <Event> events = new LinkedList <Event>();
 
     public Long getApplicationId() {
@@ -75,6 +78,14 @@ public class Application implements Serializable {
 
     public void setApiSecret(String apiSecret) {
         this.apiSecret = apiSecret;
+    }
+    
+    public List<Rule> getRules() {
+        return rules;
+    }
+
+    public void setRules(List<Rule> rules) {
+        this.rules = rules;
     }
 
     public List<Event> getEvents() {

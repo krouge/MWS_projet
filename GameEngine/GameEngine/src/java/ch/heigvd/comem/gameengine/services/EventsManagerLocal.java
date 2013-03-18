@@ -14,11 +14,11 @@ import javax.ejb.Local;
  */
 @Local
 public interface EventsManagerLocal {
-     Long create(Long playerId, Long applicationId, String eventType, Timestamp time);
+     Long create(Long playerId, Long applicationId, String eventType, Timestamp eventTime);
      
      Event find(Long eventId);
      
-     Event update(Long eventId, Long playerId, Long applicationId, String eventType, Timestamp time);
+     Event update(Long eventId, Long playerId, Long applicationId, String eventType, Timestamp eventTime);
      
      void remove(Long eventId);
 }
