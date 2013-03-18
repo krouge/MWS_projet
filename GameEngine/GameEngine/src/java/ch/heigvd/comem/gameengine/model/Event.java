@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.heigvd.comem.gameengine.model;
 
 import java.io.Serializable;
@@ -45,14 +41,6 @@ public class Event implements Serializable {
         this.eventId = id;
     }
     
-    public Timestamp getEventTime() {
-        return eventTime;
-    }
-
-    public void setEventTime(Timestamp eventTime) {
-        this.eventTime = eventTime;
-    }
-    
     public Application getApplication() {
         return application;
     }
@@ -75,6 +63,14 @@ public class Event implements Serializable {
 
     public void setEventType(String eventType) {
         this.eventType = eventType;
+    }
+    
+    public Timestamp getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(Timestamp eventTime) {
+        this.eventTime = eventTime;
     }
 
     @Override

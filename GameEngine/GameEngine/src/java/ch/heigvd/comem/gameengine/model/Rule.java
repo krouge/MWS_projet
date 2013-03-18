@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.heigvd.comem.gameengine.model;
 
 import java.io.Serializable;
@@ -21,9 +17,6 @@ public class Rule implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    @ManyToOne
-    private Badge badge;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ruleId;
@@ -33,6 +26,9 @@ public class Rule implements Serializable {
     
     @NotNull 
     private int numberOfPoints;
+            
+    @ManyToOne
+    private Badge badge;
 
     @ManyToOne
     private Application application;
@@ -43,14 +39,6 @@ public class Rule implements Serializable {
 
     public void setRuleId(Long id) {
         this.ruleId = id;
-    }
-
-    public Application getApplication() {
-        return application;
-    }
-    
-    public void setApplication(Application application) {
-        this.application = application;
     }
 
     public String getEventType() {
@@ -77,8 +65,12 @@ public class Rule implements Serializable {
         this.badge = badge;
     }
     
-    public void addBadge(Badge badge) {
-        this.badge = badge;
+    public Application getApplication() {
+        return application;
+    }
+    
+    public void setApplication(Application application) {
+        this.application = application;
     }
     
     @Override
