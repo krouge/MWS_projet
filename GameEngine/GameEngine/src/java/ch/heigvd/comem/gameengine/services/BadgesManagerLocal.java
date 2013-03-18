@@ -12,10 +12,9 @@ public interface BadgesManagerLocal {
 
     Long create(String name, String description, String source);
 
-    Badge find(Long badgeId);
+    Badge read(Long badgeId);
 
     Badge update(Long badgeId, String name, String description, String source);
     
-    void remove(Long badgeId);
-    
+    void delete(Long badgeId);
 }

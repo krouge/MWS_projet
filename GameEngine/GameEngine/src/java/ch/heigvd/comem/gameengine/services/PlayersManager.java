@@ -1,5 +1,6 @@
 package ch.heigvd.comem.gameengine.services;
 
+import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Player;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
@@ -18,7 +19,7 @@ public class PlayersManager implements PlayersManagerLocal {
     EntityManager em;
 
     @Override
-    public Long createPlayer(String firstName, String lastName, String email, int points) {
+    public Long create(String firstName, String lastName, String email, int points) {
         
         Player player = new Player();
         player.setFirstName(firstName);
@@ -61,6 +62,15 @@ public class PlayersManager implements PlayersManagerLocal {
         
     }
 
+    @Override
+    public void associateBadge(Long playerId, Long badgeId) {
+        
+        Player player = em.find(Player.class, playerId);
+        Badge badge = em.find(Badge.class, badgeId);
+        
+        player.addBadge(badge);
+        badge.addPlayer(player);
+        
+    }
     
-
 }

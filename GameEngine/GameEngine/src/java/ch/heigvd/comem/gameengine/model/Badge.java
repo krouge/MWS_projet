@@ -78,6 +78,10 @@ public class Badge implements Serializable {
         this.players = players;
     }
     
+    public void addPlayer(Player player) {
+        this.players.add(player);
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

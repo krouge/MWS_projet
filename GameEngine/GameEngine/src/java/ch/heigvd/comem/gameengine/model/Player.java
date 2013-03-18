@@ -87,6 +87,9 @@ public class Player implements Serializable {
         this.badges = badges;
     }
     
+    public void addBadge(Badge badge) {
+        this.badges.add(badge);
+    }
     
     public List<Event> getEvents() {
         return events;

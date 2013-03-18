@@ -1,6 +1,7 @@
 package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Badge;
+import ch.heigvd.comem.gameengine.model.Player;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
@@ -32,7 +33,7 @@ public class BadgesManager implements BadgesManagerLocal {
     }
     
     @Override
-    public Badge find(Long badgeId) {
+    public Badge read(Long badgeId) {
         
         Badge badge = em.find(Badge.class, badgeId);
         
@@ -53,11 +54,10 @@ public class BadgesManager implements BadgesManagerLocal {
     }
 
     @Override
-    public void remove(Long badgeId) {
+    public void delete(Long badgeId) {
         
         Badge badge = em.find(Badge.class, badgeId);
         em.remove(badge);
-        
-    }    
-
+    }
+    
 }
