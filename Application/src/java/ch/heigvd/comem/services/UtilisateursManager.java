@@ -56,14 +56,15 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         return utilisateur;
     }
     
-    public void update(Long id, String pseudo, String email, String mdp) throws ExceptionIdUtilisateur{
+    public Utilisateur update(Long id, String pseudo, String email, String mdp) throws ExceptionIdUtilisateur{
         Utilisateur utilisateur = em.find(Utilisateur.class, id);
         utilisateur.setEmail(email);
         utilisateur.setPseudo(pseudo);
         utilisateur.setMdp(mdp);
+        return utilisateur;
     }
     
-    public void addPhotoLike(Long id, Long idPhoto){
+    public void associatePhotoLike(Long id, Long idPhoto){
         Utilisateur utilisateur = em.find(Utilisateur.class, id);
         Photo photo = em.find(Photo.class, idPhoto);
         utilisateur.addPhotoLike(photo);
