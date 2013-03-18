@@ -5,6 +5,7 @@ import ch.heigvd.comem.gameengine.services.BadgesManagerLocal;
 import ch.heigvd.comem.gameengine.services.EventsManagerLocal;
 import ch.heigvd.comem.gameengine.services.PlayersManagerLocal;
 import ch.heigvd.comem.gameengine.services.RulesManagerLocal;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
