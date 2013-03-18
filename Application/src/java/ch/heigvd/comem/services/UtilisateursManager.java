@@ -52,5 +52,11 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         }
         return utilisateur;
     }
+    
+    public void updateEmail(Long id, String email) throws ExceptionIdUtilisateur{
+        Utilisateur utilisateur = this.find(id);
+        utilisateur.setEmail(email); 
+        em.merge(utilisateur);
+    }
 
 }
