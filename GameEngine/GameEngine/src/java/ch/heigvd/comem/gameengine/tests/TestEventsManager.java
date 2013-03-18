@@ -6,6 +6,7 @@ package ch.heigvd.comem.gameengine.tests;
 
 import ch.heigvd.comem.gameengine.services.ApplicationsManagerLocal;
 import ch.heigvd.comem.gameengine.services.EventsManagerLocal;
+import ch.heigvd.comem.gameengine.services.PlayersManagerLocal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,11 +24,14 @@ public class TestEventsManager implements TestEventsManagerLocal {
         @EJB
         private EventsManagerLocal eventsManagerLocal;
         @EJB
+        private PlayersManagerLocal playersManagerLocal;
+        @EJB
         private ApplicationsManagerLocal applicationsManagerLocal;
 
     @Override
     public void generateEvents() {
 
+        Long player = playersManagerLocal.create("julien", "rene", "rre", 0);
         Long app = applicationsManagerLocal.create("App event", "Event app", "200", "300");
         
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -36,7 +40,8 @@ public class TestEventsManager implements TestEventsManagerLocal {
         
         for (int i=0; i<100; i++) {
             
-            eventsManagerLocal.create(applicationsManagerLocal.find(app), 
+            eventsManagerLocal.create(playersManagerLocal.find(player),
+                    applicationsManagerLocal.find(app), 
                     "Poster concours", 
                     new Timestamp(time));
         }

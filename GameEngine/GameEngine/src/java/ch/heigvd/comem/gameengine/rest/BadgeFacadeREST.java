@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ch.heigvd.comem.gameengine.rest;
 
 import ch.heigvd.comem.gameengine.model.Badge;
@@ -21,7 +20,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Julien Biedermann
+ * @author Renouille
  */
 @Stateless
 @Path("ch.heigvd.comem.gameengine.model.badge")
@@ -85,5 +84,5 @@ public class BadgeFacadeREST extends AbstractFacade<Badge> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
 }

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ch.heigvd.comem.gameengine.rest;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Julien Biedermann
+ * @author Renouille
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
@@ -59,5 +58,5 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-
+    
 }

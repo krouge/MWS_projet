@@ -108,32 +108,33 @@ public class TestDataManager implements TestDataManagerLocal {
         Date date = new Date();
         long time = date.getTime();
         
-        for (int i=0; i<10; i++) {
-            
-            Long event = eventsManagerLocal.create(applicationsManagerLocal.find(app1), 
+         Long event = eventsManagerLocal.create(playersManagerLocal.find(julien), 
+                    applicationsManagerLocal.find(app1), 
                     "Poster concours", 
                     new Timestamp(time));
             
-            playersManagerLocal.associateEvent(event, julien);
-            
-            Long event2 = eventsManagerLocal.create(applicationsManagerLocal.find(app1), 
-                    "Poster concours", 
-                    new Timestamp(time));
-            
-            playersManagerLocal.associateEvent(event2, rene);
-            
-            Long event3 = eventsManagerLocal.create(applicationsManagerLocal.find(app1), 
-                    "Poster concours", 
-                    new Timestamp(time));
-            
-            playersManagerLocal.associateEvent(event3, fabien);
-            
-            Long event4 = eventsManagerLocal.create(applicationsManagerLocal.find(app1), 
-                    "Poster concours", 
-                    new Timestamp(time));
-            
-            playersManagerLocal.associateEvent(event4, jonas);
-        }
+        playersManagerLocal.associateEvent(event, julien);
+
+        Long event2 = eventsManagerLocal.create(playersManagerLocal.find(rene), 
+                applicationsManagerLocal.find(app1), 
+                "Poster concours", 
+                new Timestamp(time));
+
+        playersManagerLocal.associateEvent(event2, rene);
+
+        Long event3 = eventsManagerLocal.create(playersManagerLocal.find(fabien), 
+                applicationsManagerLocal.find(app1), 
+                "Poster concours", 
+                new Timestamp(time));
+
+        playersManagerLocal.associateEvent(event3, fabien);
+
+        Long event4 = eventsManagerLocal.create(playersManagerLocal.find(jonas),
+                applicationsManagerLocal.find(app1), 
+                "Poster concours", 
+                new Timestamp(time));
+
+        playersManagerLocal.associateEvent(event4, jonas);
 
     }
 }

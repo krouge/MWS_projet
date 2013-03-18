@@ -25,10 +25,11 @@ public class EventsManager implements EventsManagerLocal{
     EntityManager em;
     
     @Override
-    public Long create(Application application, String eventType, Timestamp eventTime) {
+    public Long create(Player player, Application application, String eventType, Timestamp eventTime) {
         
         Event event = new Event();
        
+        event.setPlayer(player);
         event.setApplication(application);
         event.setEventType(eventType);
         event.setEventTime(eventTime);
