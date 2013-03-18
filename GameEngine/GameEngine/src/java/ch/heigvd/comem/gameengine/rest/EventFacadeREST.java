@@ -23,7 +23,7 @@ import javax.ws.rs.Produces;
  * @author Renouille
  */
 @Stateless
-@Path("ch.heigvd.comem.gameengine.model.event")
+@Path("events")
 public class EventFacadeREST extends AbstractFacade<Event> {
     @PersistenceContext(unitName = "GameEnginePU")
     private EntityManager em;

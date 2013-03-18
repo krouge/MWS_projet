@@ -23,7 +23,7 @@ import javax.ws.rs.Produces;
  * @author Renouille
  */
 @Stateless
-@Path("ch.heigvd.comem.gameengine.model.player")
+@Path("players")
 public class PlayerFacadeREST extends AbstractFacade<Player> {
     @PersistenceContext(unitName = "GameEnginePU")
     private EntityManager em;

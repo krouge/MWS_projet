@@ -23,7 +23,7 @@ import javax.ws.rs.Produces;
  * @author Renouille
  */
 @Stateless
-@Path("ch.heigvd.comem.gameengine.model.badge")
+@Path("badges")
 public class BadgeFacadeREST extends AbstractFacade<Badge> {
     @PersistenceContext(unitName = "GameEnginePU")
     private EntityManager em;
