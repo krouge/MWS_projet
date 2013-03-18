@@ -31,6 +31,9 @@ public class Badge implements Serializable {
     @NotNull
     private String source;
     
+    @ManyToMany(mappedBy="badge")
+    private List <Rule> rules = new LinkedList <Rule>();
+    
     @ManyToMany(mappedBy="badges")
     private List <Player> players = new LinkedList <Player>();
 
