@@ -26,10 +26,10 @@ public class Event implements Serializable {
     private Long eventId;
     
     @ManyToOne
-    private Long application;
+    private Application application;
     
     @ManyToOne
-    private Long player;
+    private Player player;
 
     @NotNull
     private String eventType;
@@ -37,6 +37,14 @@ public class Event implements Serializable {
     @NotNull
     private Timestamp eventTime;
 
+    public Long getEventId() {
+        return eventId;
+    }
+    
+    public void setEventId(Long id) {
+        this.eventId = id;
+    }
+    
     public Timestamp getEventTime() {
         return eventTime;
     }
@@ -45,23 +53,19 @@ public class Event implements Serializable {
         this.eventTime = eventTime;
     }
     
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public Long getApplication() {
+    public Application getApplication() {
         return application;
     }
 
-    public void setApplication(Long application) {
+    public void setApplication(Application application) {
         this.application = application;
     }
 
-    public Long getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Long player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
@@ -71,10 +75,6 @@ public class Event implements Serializable {
 
     public void setEventType(String eventType) {
         this.eventType = eventType;
-    }
-
-    public void setEventId(Long id) {
-        this.eventId = id;
     }
 
     @Override

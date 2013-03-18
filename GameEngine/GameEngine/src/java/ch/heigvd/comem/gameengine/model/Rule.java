@@ -22,7 +22,7 @@ public class Rule implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @ManyToOne
-    private Long badge;
+    private Badge badge;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class Rule implements Serializable {
     private int numberOfPoints;
 
     @ManyToOne
-    private Long application;
+    private Application application;
 
     public Long getRuleId() {
         return ruleId;
@@ -45,11 +45,11 @@ public class Rule implements Serializable {
         this.ruleId = id;
     }
 
-    public Long getApplication() {
+    public Application getApplication() {
         return application;
     }
     
-    public void setApplication(Long application) {
+    public void setApplication(Application application) {
         this.application = application;
     }
 
@@ -69,12 +69,12 @@ public class Rule implements Serializable {
         this.numberOfPoints = numberOfPoints;
     }
 
-    public Long getBadge() {
+    public Badge getBadge() {
         return badge;
     }
 
-    public void setBadge(Long badgeId) {
-        this.badge = badgeId;
+    public void setBadge(Badge badge) {
+        this.badge = badge;
     }
     
     @Override

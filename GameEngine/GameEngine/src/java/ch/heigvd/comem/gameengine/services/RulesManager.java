@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.gameengine.services;
 
+import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Rule;
 import javax.ejb.Stateless;
@@ -23,21 +24,21 @@ public class RulesManager implements RulesManagerLocal {
     private EntityManager em;
     
     @Override
-    public Long create(String eventType, int numberOfPoints, Long application, Long badgeId) {
+    public Long create(String eventType, int numberOfPoints, Application application, Badge badge) {
         
         Rule rule = new Rule();
         
        rule.setEventType(eventType);
        rule.setNumberOfPoints(numberOfPoints);
        rule.setApplication(application);
-       rule.setBadge(badgeId);
+       rule.setBadge(badge);
        em.persist(rule); em.flush();
         
         return rule.getRuleId();
     }
 
     @Override
-    public Long create(String eventType, int numberOfPoints, Long application) {
+    public Long create(String eventType, int numberOfPoints, Application application) {
         
         Rule rule = new Rule();
         
@@ -65,26 +66,26 @@ public class RulesManager implements RulesManagerLocal {
     }
 
     @Override
-    public Rule update(Long ruleId, String eventType, int numberOfPoints, Long applicationId, Long badgeId) {
+    public Rule update(Long ruleId, String eventType, int numberOfPoints, Application application, Badge badge) {
         
         Rule rule = em.find(Rule.class, ruleId);
         
         rule.setEventType(eventType);
         rule.setNumberOfPoints(numberOfPoints);
-        rule.setApplication(applicationId);
-        rule.setBadge(badgeId);
+        rule.setApplication(application);
+        rule.setBadge(badge);
         
         return rule;
     }
 
     @Override
-    public Rule update(Long ruleId, String eventType, int numberOfPoints, Long applicationId) {
+    public Rule update(Long ruleId, String eventType, int numberOfPoints, Application application) {
         
         Rule rule = em.find(Rule.class, ruleId);
         
         rule.setEventType(eventType);
         rule.setNumberOfPoints(numberOfPoints);
-        rule.setApplication(applicationId);
+        rule.setApplication(application);
         
         return rule;
     }

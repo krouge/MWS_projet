@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.gameengine.services;
 
+import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Rule;
 import javax.ejb.Local;
@@ -15,15 +16,15 @@ import javax.ejb.Local;
 @Local
 public interface RulesManagerLocal {
 
-    Long create(String eventType, int numberOfPoints, Long applicationId, Long badgeId);
+    Long create(String eventType, int numberOfPoints, Application application, Badge badge);
     
-    Long create(String eventType, int numberOfPoints, Long applicationId);
+    Long create(String eventType, int numberOfPoints, Application application);
     
     Rule find(Long ruleId);
     
-    Rule update(Long ruleId, String eventType, int numberOfPoints, Long applicationId, Long badgeId);
+    Rule update(Long ruleId, String eventType, int numberOfPoints, Application application, Badge badge);
     
-    Rule update(Long ruleId, String eventType, int numberOfPoints, Long applicationId);
+    Rule update(Long ruleId, String eventType, int numberOfPoints, Application application);
     
     void remove(Long ruleId);
     
