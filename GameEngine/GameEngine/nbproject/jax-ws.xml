@@ -19,12 +19,6 @@
     <service name="TestBadgesManager">
       <implementation-class>ch.heigvd.comem.gameengine.tests.TestBadgesManager</implementation-class>
     </service>
-    <service name="TestApplicationsManager">
-      <implementation-class>ch.heigvd.comem.gameengine.tests.TestApplicationsManager</implementation-class>
-    </service>
-    <service name="TestPlayersManager">
-      <implementation-class>ch.heigvd.comem.gameengine.tests.TestPlayersManager</implementation-class>
-    </service>
   </services>
   <clients/>
 </jax-ws>
