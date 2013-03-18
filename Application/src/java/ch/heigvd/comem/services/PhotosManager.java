@@ -4,7 +4,11 @@
  */
 package ch.heigvd.comem.services;
 
+import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
 import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.model.Tag;
+import ch.heigvd.comem.model.Tag;
+import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
@@ -24,30 +28,65 @@ public class PhotosManager implements PhotosManagerLocal {
     EntityManager em; 
     
     @Override
-    public Long createPhoto(int points, String source, Utilisateur utilisateur){
+    public Long create(int points, String source, Utilisateur utilisateur,Theme theme){
+
         Photo photo = new Photo();
         photo.setPoints(points);
         photo.setSource(source);
         photo.setUtilisateur(utilisateur);
+
+        photo.setTheme(theme);
+
         em.persist(photo);
         em.flush();
         utilisateur.addPhoto(photo);
+
+        theme.addPhoto(photo);
+        
         return photo.getId();
     }  
     
-
-    
-    @Override
-    public void remove(Long idPhoto){
+    public Photo find(Long idPhoto) throws ExceptionIdPhoto{
         Photo photo = em.find(Photo.class, idPhoto);
-        em.remove(photo);
+        
+        if (photo == null) {
+            throw new ExceptionIdPhoto();
+        }
+        return photo;        
     }
     
-
-
-   
+    public Photo update (Long idPhoto,int points, String source, Utilisateur utilisateur,Theme theme )throws ExceptionIdPhoto{
+        Photo photo = em.find(Photo.class, idPhoto);
+        if (photo == null) {
+            throw new ExceptionIdPhoto();
+        }else{
+            photo.setPoints(points);
+            photo.setSource(source);
+            photo.setUtilisateur(utilisateur);
+            photo.setTheme(theme);
+            
+            return photo;
+        }         
+    }
     
+    public void associateTag(Long idPhoto, Long idTag){
+        
+        Photo photo = em.find(Photo.class, idPhoto);
+        Tag tag = em.find(Tag.class, idTag);
+        
+        tag.addPhoto(photo);
+        photo.addTag(tag);
+        
+        em.flush();
+    }
     
-    
-
+    @Override
+    public void delete(Long idPhoto) throws ExceptionIdPhoto{
+        Photo photo = em.find(Photo.class, idPhoto);
+        
+        if (photo == null) {
+            throw new ExceptionIdPhoto();
+        }
+        em.remove(photo);
+    }
 }

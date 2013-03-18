@@ -74,4 +74,12 @@ public class Tag implements Serializable {
         return "ch.comem.heigvd.model.Tag[ id=" + id + " ]";
     }
     
+    public void addTheme(Theme theme){
+        this.themes.add(theme);
+    }
+    
+    public void addPhoto(Photo photo){
+        this.photos.add(photo);
+    }
+    
 }

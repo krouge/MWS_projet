@@ -32,6 +32,12 @@ public class Photo implements Serializable {
     @ManyToOne
     private Theme theme;
 
+    @ManyToMany
+    private List<Tag> tags;
+    
+    @ManyToMany
+    private List<Utilisateur> utilisateurs;
+    
     public Theme getTheme() {
         return theme;
     }
@@ -39,12 +45,6 @@ public class Photo implements Serializable {
     public void setTheme(Theme theme) {
         this.theme = theme;
     }
-    
-    @ManyToMany
-    private List<Tag> tags;
-    
-    @ManyToMany
-    private List<Utilisateur> utilisateurs;
 
     public Long getId() {
         return id;
@@ -106,5 +106,12 @@ public class Photo implements Serializable {
     public void addUtilisateurLike(Utilisateur utilisateur){
         this.utilisateurs.add(utilisateur);
     }
+
+    public void addTag(Tag tag){
+        this.tags.add(tag);
+    }  
     
+    public void test(){
+        
+    }
 }

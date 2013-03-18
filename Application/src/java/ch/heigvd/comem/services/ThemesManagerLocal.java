@@ -19,7 +19,7 @@ public interface ThemesManagerLocal {
     public Long create(String titre);
     public void delete(Long id) throws ExceptionIdTheme;
     public Theme find(Long id) throws ExceptionIdTheme; 
-    public Theme update(Long id, String titre);  
+    public Theme update(Long id, String titre) throws ExceptionIdTheme;  
     public void associateTag(Long idTheme, Long idTag);
     
 }

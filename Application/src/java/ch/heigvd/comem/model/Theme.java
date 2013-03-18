@@ -29,7 +29,7 @@ public class Theme implements Serializable {
     private String titre;
     
     @ManyToMany
-    private List<Tag> tags;
+    private List<Tag> tags = new LinkedList<Tag>();
     
     @ManyToOne
     private Utilisateur utilisateur;
@@ -105,4 +105,11 @@ public class Theme implements Serializable {
         return "ch.heigvd.comem.model.Theme[ id=" + id + " ]";
     }
     
+    public void addPhoto(Photo photo){
+        this.photos.add(photo);
+    }
+    
+    public void addTag(Tag tag){
+        this.tags.add(tag);
+    }
 }

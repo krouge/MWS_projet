@@ -4,8 +4,10 @@
  */
 package ch.heigvd.comem.test;
 
+import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
 import ch.heigvd.comem.services.PhotosManagerLocal;
+import ch.heigvd.comem.services.ThemesManagerLocal;
 import ch.heigvd.comem.services.UtilisateursManagerLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -25,15 +27,21 @@ public class TestDataManager implements TestDataManagerLocal {
     @EJB
     private PhotosManagerLocal photoManager;
     
+    @EJB
+    private ThemesManagerLocal themeManager;
+    
     public void generateTestData(){
         Utilisateur utilisateur = null;
+        Theme theme = null;
         Long id = utilisateurManager.create("theplayer777", "jonas@jonas.ch", "1234");
+        Long idTheme = themeManager.create("Theme");
         try{
             utilisateur = utilisateurManager.find(id);
+            theme = themeManager.find(idTheme);
         }catch(Exception e){
             
         }
-        photoManager.createPhoto(10, "http://comem.ch", utilisateur);
+        photoManager.create(10, "http://comem.ch", utilisateur, theme);
         
         
     }
