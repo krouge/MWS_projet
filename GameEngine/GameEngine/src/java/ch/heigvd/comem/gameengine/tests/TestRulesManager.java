@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.heigvd.comem.gameengine.tests;
 
-import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.services.ApplicationsManagerLocal;
 import ch.heigvd.comem.gameengine.services.RulesManagerLocal;
 import javax.ejb.EJB;
@@ -21,12 +16,13 @@ public class TestRulesManager implements TestRulesManagerLocal {
 
     @EJB
     private RulesManagerLocal rulesManagerLocal;
+    @EJB
     private ApplicationsManagerLocal applicationsManagerLocal;
     
     @Override
     public void generateRules() {
         
-        Long app = applicationsManagerLocal.create("App", "App descr", "100", "300");
+        Long app = applicationsManagerLocal.create("App", "Appdescr", "100", "300");
 
         for (int i=0; i<20; i++) {
             
