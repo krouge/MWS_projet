@@ -4,6 +4,8 @@
  */
 package ch.heigvd.comem.services;
 
+import ch.heigvd.comem.exceptions.ExceptionIdTag;
+import ch.heigvd.comem.model.Tag;
 import javax.ejb.Local;
 
 /**
@@ -13,6 +15,9 @@ import javax.ejb.Local;
 @Local
 public interface TagsManagerLocal {
     
-    public Long createTag(String titre);
+    public Long create(String titre);
+    public void delete(Long idTag) throws ExceptionIdTag;
+    public Tag update(Long idTag, String titre) throws ExceptionIdTag;
+    public Tag find (Long idTag) throws ExceptionIdTag;
     
 }

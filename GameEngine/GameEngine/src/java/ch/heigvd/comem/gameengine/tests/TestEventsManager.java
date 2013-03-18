@@ -6,21 +6,18 @@ package ch.heigvd.comem.gameengine.tests;
 
 import ch.heigvd.comem.gameengine.services.ApplicationsManagerLocal;
 import ch.heigvd.comem.gameengine.services.EventsManagerLocal;
-import ch.heigvd.comem.gameengine.services.PlayersManagerLocal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.jws.WebService;
 
 /**
  *
  * @author Renouille
  */
 @Stateless
-@WebService
 public class TestEventsManager implements TestEventsManagerLocal {
 
         @EJB

@@ -5,6 +5,7 @@
 package ch.heigvd.comem.model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,10 +34,10 @@ public class Photo implements Serializable {
     private Theme theme;
 
     @ManyToMany
-    private List<Tag> tags;
+    private List<Tag> tags = new LinkedList<Tag>();
     
     @ManyToMany
-    private List<Utilisateur> utilisateurs;
+    private List<Utilisateur> utilisateurs = new LinkedList<Utilisateur>();
     
     public Theme getTheme() {
         return theme;
