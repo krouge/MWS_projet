@@ -39,7 +39,7 @@ public class Badge implements Serializable {
     @OneToMany(mappedBy="badge")
     private List <Rule> rules = new LinkedList <Rule>();
     
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.REMOVE)
     private List <Player> players = new LinkedList <Player>();
 
     public Long getBadgeId() {
