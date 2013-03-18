@@ -21,7 +21,7 @@ public class Application implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Application ApplicationId;
+    private Long applicationId;
     
     @NotNull
     private String name;
@@ -34,15 +34,15 @@ public class Application implements Serializable {
     @NotNull
     private String apiSecret;
     
-    @OneToMany
+    @OneToMany(mappedBy="application")
     private List <Event> events = new LinkedList <Event>();
 
-    public Application getApplicationId() {
-        return ApplicationId;
+    public Long getApplicationId() {
+        return applicationId;
     }
 
-    public void setApplicationId(Application ApplicationId) {
-        this.ApplicationId = ApplicationId;
+    public void setApplicationId(Long applicationId) {
+        this.applicationId = applicationId;
     }
     
     public String getName() {
@@ -88,18 +88,18 @@ public class Application implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (ApplicationId != null ? ApplicationId.hashCode() : 0);
+        hash += (applicationId != null ? applicationId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the ApplicationId fields are not set
+        // TODO: Warning - this method won't work in the case the applicationId fields are not set
         if (!(object instanceof Application)) {
             return false;
         }
         Application other = (Application) object;
-        if ((this.ApplicationId == null && other.ApplicationId != null) || (this.ApplicationId != null && !this.ApplicationId.equals(other.ApplicationId))) {
+        if ((this.applicationId == null && other.applicationId != null) || (this.applicationId != null && !this.applicationId.equals(other.applicationId))) {
             return false;
         }
         return true;
@@ -107,7 +107,7 @@ public class Application implements Serializable {
 
     @Override
     public String toString() {
-        return "ch.heigvd.comem.gameengine.model.Application[ id=" + ApplicationId + " ]";
+        return "ch.heigvd.comem.gameengine.model.Application[ id=" + applicationId + " ]";
     }
 
 }
