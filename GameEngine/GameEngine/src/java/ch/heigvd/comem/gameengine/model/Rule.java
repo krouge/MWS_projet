@@ -45,7 +45,6 @@ public class Rule implements Serializable {
         this.ruleId = id;
     }
 
-    
     public Long getApplication() {
         return application;
     }

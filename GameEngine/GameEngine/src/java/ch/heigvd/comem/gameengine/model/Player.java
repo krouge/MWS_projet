@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -28,6 +29,17 @@ public class Player implements Serializable {
     private String lastName;
     
     private String email;
+    
+    @OneToMany
+    private List<Event> events = new LinkedList();
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
     
     @NotNull
     private int points;
