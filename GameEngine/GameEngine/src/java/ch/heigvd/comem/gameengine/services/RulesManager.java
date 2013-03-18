@@ -96,7 +96,7 @@ public class RulesManager implements RulesManagerLocal {
         Rule rule = em.find(Rule.class, ruleId);
         Badge badge = em.find(Badge.class, badgeId);
         
-        rule.addBadge(badge);
+        rule.setBadge(badge);
         badge.addRule(rule);
     }
     

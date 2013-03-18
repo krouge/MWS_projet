@@ -87,6 +87,10 @@ public class Application implements Serializable {
     public void setRules(List<Rule> rules) {
         this.rules = rules;
     }
+    
+    public void addRule(Rule rule) {
+        this.rules.add(rule);
+    }
 
     public List<Event> getEvents() {
         return events;
@@ -94,6 +98,10 @@ public class Application implements Serializable {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+    
+    public void addEvent(Event event) {
+        this.events.add(event);
     }
     
     @Override

@@ -40,7 +40,7 @@ public class TestEventsManager implements TestEventsManagerLocal {
         for (int i=0; i<100; i++) {
             
             eventsManagerLocal.create(applicationsManagerLocal.find(app), 
-                    "Poster concour", 
+                    "Poster concours", 
                     new Timestamp(time));
         }
     }

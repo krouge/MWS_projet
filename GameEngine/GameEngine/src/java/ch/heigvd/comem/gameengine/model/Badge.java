@@ -81,6 +81,14 @@ public class Badge implements Serializable {
     public void addPlayer(Player player) {
         this.players.add(player);
     }
+
+    public List<Rule> getRules() {
+        return rules;
+    }
+
+    public void setRules(List<Rule> rules) {
+        this.rules = rules;
+    }
     
     public void addRule(Rule rule) {
         this.rules.add(rule);
