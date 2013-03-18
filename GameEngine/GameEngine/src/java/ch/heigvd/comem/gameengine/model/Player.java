@@ -99,6 +99,10 @@ public class Player implements Serializable {
         this.events = events;
     }
     
+    public void addEvent(Event event) {
+        this.events.add(event);
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

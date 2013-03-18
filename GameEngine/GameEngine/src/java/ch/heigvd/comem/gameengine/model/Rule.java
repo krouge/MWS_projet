@@ -77,6 +77,10 @@ public class Rule implements Serializable {
         this.badge = badge;
     }
     
+    public void addBadge(Badge badge) {
+        this.badge = badge;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -100,6 +104,5 @@ public class Rule implements Serializable {
     @Override
     public String toString() {
         return "ch.heigvd.comem.gameengine.model.Rule[ id=" + ruleId + " ]";
-    }
-    
+    }  
 }

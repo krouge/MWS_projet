@@ -1,6 +1,7 @@
 package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Badge;
+import ch.heigvd.comem.gameengine.model.Event;
 import ch.heigvd.comem.gameengine.model.Player;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
@@ -70,7 +71,17 @@ public class PlayersManager implements PlayersManagerLocal {
         
         player.addBadge(badge);
         badge.addPlayer(player);
-        
     }
+
+    @Override
+    public void associateEvent(Long playerId, Long eventId) {
+        
+        Player player = em.find(Player.class, playerId);
+        Event event = em.find(Event.class, eventId);
+        
+        player.addEvent(event);
+    }
+    
+    
     
 }

@@ -27,5 +27,7 @@ public interface RulesManagerLocal {
     Rule update(Long ruleId, String eventType, int numberOfPoints, Application application);
     
     void remove(Long ruleId);
+
+    void associateBadge(Long ruleId, Long badgeId);
     
 }
