@@ -17,5 +17,7 @@ public interface PlayersManagerLocal {
     Player update(Long playerId, String firstName, String lastName, String email, int points);
     
     void remove(Long playerId);
+
+    void associateBadge(Long playerId, Long badgeId);
         
 }
