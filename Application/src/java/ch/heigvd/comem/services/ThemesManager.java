@@ -5,6 +5,7 @@
 package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.exceptions.ExceptionIdTheme;
+import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,6 +39,29 @@ public class ThemesManager implements ThemesManagerLocal {
         }else{
             throw new ExceptionIdTheme();
         }
+    }
+    
+    public Theme find(Long id) throws ExceptionIdTheme{
+        Theme theme = em.find(Theme.class, id);
+        
+        if(theme == null){
+            throw new ExceptionIdTheme();
+        }
+        return theme;
+    }
+    
+    public Theme update(Long id, String titre) throws ExceptionIdTheme{
+        Theme theme = em.find(Theme.class, id);
+        theme.setTitre(titre);
+        return theme;
+    }
+    
+    public void associateTag(Long idTheme, Long idTag){
+        Theme theme = em.find(Theme.class, idTheme);
+        Tag tag = em.find(Tag.class, idTag);
+        theme.addTag(tag);
+        tag.addTheme(theme);
+        em.flush();
     }
 
 
