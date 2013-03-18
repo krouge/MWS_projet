@@ -7,7 +7,7 @@ package ch.heigvd.comem.gameengine.services;
 import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.model.Event;
 import ch.heigvd.comem.gameengine.model.Player;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
