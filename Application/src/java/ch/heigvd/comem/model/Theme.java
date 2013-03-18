@@ -7,6 +7,7 @@ package ch.heigvd.comem.model;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +35,7 @@ public class Theme implements Serializable {
     @ManyToOne
     private Utilisateur utilisateur;
     
-    @OneToMany (mappedBy="theme")
+    @OneToMany(mappedBy="theme", cascade=CascadeType.REMOVE)
     private List<Photo> photos = new LinkedList<Photo>();
 
     public List<Tag> getTags() {
