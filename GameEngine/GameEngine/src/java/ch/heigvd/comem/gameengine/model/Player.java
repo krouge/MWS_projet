@@ -32,20 +32,12 @@ public class Player implements Serializable {
     
     @OneToMany(mappedBy="player")
     private List <Event> events = new LinkedList <Event>();
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
+    
+    @ManyToMany(mappedBy="players")
+    private List <Badge> badges = new LinkedList <Badge>();
     
     @NotNull
     private int points;
-    
-    @ManyToMany
-    private List <Badge> badges = new LinkedList <Badge> ();
 
     public Long getPlayerId() {
         return playerId;
@@ -93,6 +85,15 @@ public class Player implements Serializable {
 
     public void setBadges(List<Badge> badges) {
         this.badges = badges;
+    }
+    
+    
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
     
     @Override

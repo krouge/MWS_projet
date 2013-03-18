@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -31,10 +32,10 @@ public class Badge implements Serializable {
     @NotNull
     private String source;
     
-    @ManyToMany(mappedBy="badge")
+    @OneToMany(mappedBy="badge")
     private List <Rule> rules = new LinkedList <Rule>();
     
-    @ManyToMany(mappedBy="badges")
+    @ManyToMany
     private List <Player> players = new LinkedList <Player>();
 
     public Long getBadgeId() {

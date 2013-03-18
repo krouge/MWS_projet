@@ -21,9 +21,6 @@ public class Rule implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    @ManyToOne
-    private Long badge;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ruleId;
@@ -36,6 +33,9 @@ public class Rule implements Serializable {
 
     @ManyToOne
     private Long application;
+    
+    @ManyToOne
+    private Long badge;
 
     public Long getRuleId() {
         return ruleId;
