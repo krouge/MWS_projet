@@ -2,6 +2,7 @@ package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Application;
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -10,6 +11,7 @@ import javax.persistence.PersistenceContext;
  * @author Julien Biedermann
  */
 @Stateless
+@WebService
 public class ApplicationsManager implements ApplicationsManagerLocal {
     
     @PersistenceContext

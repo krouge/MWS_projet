@@ -26,7 +26,7 @@ public class RulesManager implements RulesManagerLocal {
     @Override
     public Long create(String eventType, int numberOfPoints, Application application, Badge badge) {
         
-        Rule rule = new Rule();
+       Rule rule = new Rule();
         
        rule.setEventType(eventType);
        rule.setNumberOfPoints(numberOfPoints);

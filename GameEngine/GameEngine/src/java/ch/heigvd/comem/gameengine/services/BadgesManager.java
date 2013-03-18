@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author julien
+ * @author Julien Biedermann
  */
 @Stateless
 @WebService
@@ -21,8 +21,10 @@ public class BadgesManager implements BadgesManagerLocal {
     public Long create(String name, String description, String source) {
         
         Badge badge = new Badge();
+        
         badge.setName(name);
         badge.setDescription(description);
+        badge.setSource(source);
         em.persist(badge); em.flush();
         
         return badge.getBadgeId();
