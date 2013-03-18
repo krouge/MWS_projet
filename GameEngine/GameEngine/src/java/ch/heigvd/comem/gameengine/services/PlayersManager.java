@@ -80,7 +80,6 @@ public class PlayersManager implements PlayersManagerLocal {
         Event event = em.find(Event.class, eventId);
         
         player.addEvent(event);
-        event.setPlayer(player);
     }
     
     
