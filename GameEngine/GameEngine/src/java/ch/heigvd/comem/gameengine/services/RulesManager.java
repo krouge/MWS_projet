@@ -23,13 +23,13 @@ public class RulesManager implements RulesManagerLocal {
     private EntityManager em;
     
     @Override
-    public Long create(String eventType, int numberOfPoints, Long applicationId, Long badgeId) {
+    public Long create(String eventType, int numberOfPoints, Long application, Long badgeId) {
         
         Rule rule = new Rule();
         
        rule.setEventType(eventType);
        rule.setNumberOfPoints(numberOfPoints);
-       rule.setApplication(applicationId);
+       rule.setApplication(application);
        rule.setBadge(badgeId);
        em.persist(rule); em.flush();
         
