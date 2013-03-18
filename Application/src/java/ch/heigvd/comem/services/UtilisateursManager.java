@@ -71,5 +71,9 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         photo.addUtilisateurLike(utilisateur);
         em.flush();
     }
+    
+    public void bidon(){
+        
+    }
 
 }
