@@ -34,6 +34,7 @@ public class EventsManager implements EventsManagerLocal{
         event.setApplication(application);
         event.setEventType(eventType);
         event.setEventTime(eventTime);
+        player.addEvent(event);
         em.persist(event); em.flush();
         
         return event.getEventId();
@@ -59,6 +60,8 @@ public class EventsManager implements EventsManagerLocal{
         Event event = em.find(Event.class, eventId);
         
         event.setPlayer(player);
+        player.getEvents().remove(event);
+        player.addEvent(event);
         event.setApplication(application);
         event.setEventType(eventType);
         event.setEventTime(eventTime);

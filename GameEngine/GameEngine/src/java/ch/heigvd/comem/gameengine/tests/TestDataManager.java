@@ -51,17 +51,17 @@ public class TestDataManager implements TestDataManagerLocal {
         Long julien = playersManagerLocal.create("Julien",
                                    "Biedermann", 
                                    "julien.biedermann@gmail.com",
-                                   0);
+                                   50);
             
         Long rene = playersManagerLocal.create("René",
                                    "Grossmann", 
                                    "rene.grossmann.skater@caramail.com",
-                                   0);
+                                   30);
 
         Long fabien = playersManagerLocal.create("Fabien",
                                    "Cornaz", 
                                    "fabien.licorne@caramail.com",
-                                   0);
+                                   10);
             
         Long jonas = playersManagerLocal.create("Jonas",
                                    "Nicole", 
@@ -114,28 +114,23 @@ public class TestDataManager implements TestDataManagerLocal {
                     "Poster concours", 
                     new Timestamp(time));
             
-        playersManagerLocal.associateEvent(event, julien);
 
         Long event2 = eventsManagerLocal.create(playersManagerLocal.find(rene), 
                 applicationsManagerLocal.find(app1), 
                 "Poster concours", 
                 new Timestamp(time));
 
-        playersManagerLocal.associateEvent(event2, rene);
 
         Long event3 = eventsManagerLocal.create(playersManagerLocal.find(fabien), 
                 applicationsManagerLocal.find(app1), 
                 "Poster concours", 
                 new Timestamp(time));
 
-        playersManagerLocal.associateEvent(event3, fabien);
-
         Long event4 = eventsManagerLocal.create(playersManagerLocal.find(jonas),
                 applicationsManagerLocal.find(app1), 
                 "Poster concours", 
                 new Timestamp(time));
 
-        playersManagerLocal.associateEvent(event4, jonas);
 
     }
 }

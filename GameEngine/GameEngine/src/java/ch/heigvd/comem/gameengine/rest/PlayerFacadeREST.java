@@ -1,7 +1,11 @@
 package ch.heigvd.comem.gameengine.rest;
 
+import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Player;
+import ch.heigvd.comem.gameengine.services.PlayersManagerLocal;
+import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +27,9 @@ import javax.ws.rs.Produces;
 public class PlayerFacadeREST extends AbstractFacade<Player> {
     @PersistenceContext(unitName = "GameEnginePU")
     private EntityManager em;
+    
+    @EJB
+    private PlayersManagerLocal playersManagerLocal;
 
     public PlayerFacadeREST() {
         super(Player.class);
@@ -68,10 +75,27 @@ public class PlayerFacadeREST extends AbstractFacade<Player> {
     public List<Player> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
+    
+    @GET
+    @Path("{id}/badges")
+    @Produces({"application/xml", "application/json"})
+    public List<Badge> getAllBadges(@PathParam("id") Long id) {
+        Player player = em.find(Player.class, id);
+        
+        return player.getBadges();
+    }
+    
+    @GET
+    @Path("leaderboard")
+    @Produces({"application/xml", "application/json"})
+    public List<Player> getLeaderboard() {
+        
+        return playersManagerLocal.getLeaderboard();
+    }
 
     @GET
     @Path("count")
-    @Produces("text/plain")
+    @Produces({"application/xml", "application/json"})
     public String countREST() {
         return String.valueOf(super.count());
     }
