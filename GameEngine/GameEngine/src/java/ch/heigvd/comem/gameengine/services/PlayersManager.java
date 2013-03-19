@@ -1,12 +1,13 @@
 package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Badge;
-import ch.heigvd.comem.gameengine.model.Event;
 import ch.heigvd.comem.gameengine.model.Player;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -72,4 +73,16 @@ public class PlayersManager implements PlayersManagerLocal {
         player.addBadge(badge);
         badge.addPlayer(player);
     }
+
+    @Override
+    public List<Player> getLeaderboard() {
+        
+        Query query = em.createQuery("SELECT p FROM Player AS p ORDER BY p.points DESC");
+
+        List<Player> leaderboard = (List<Player>)query.getResultList();
+        
+        return leaderboard;
+    }
+    
+    
 }

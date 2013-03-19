@@ -51,17 +51,17 @@ public class TestDataManager implements TestDataManagerLocal {
         Long julien = playersManagerLocal.create("Julien",
                                    "Biedermann", 
                                    "julien.biedermann@gmail.com",
-                                   0);
+                                   50);
             
         Long rene = playersManagerLocal.create("René",
                                    "Grossmann", 
                                    "rene.grossmann.skater@caramail.com",
-                                   0);
+                                   30);
 
         Long fabien = playersManagerLocal.create("Fabien",
                                    "Cornaz", 
                                    "fabien.licorne@caramail.com",
-                                   0);
+                                   10);
             
         Long jonas = playersManagerLocal.create("Jonas",
                                    "Nicole", 

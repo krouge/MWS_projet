@@ -29,7 +29,7 @@ public class BadgeFacadeREST extends AbstractFacade<Badge> {
 
     
     @EJB
-    private BadgesManagerLocal man;
+    private BadgesManagerLocal badgesManagerLocal;
     
     public BadgeFacadeREST() {
         super(Badge.class);
@@ -52,7 +52,7 @@ public class BadgeFacadeREST extends AbstractFacade<Badge> {
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
-        man.delete(man.read(id).getBadgeId());
+        badgesManagerLocal.delete(badgesManagerLocal.read(id).getBadgeId());
     }
 
     @GET
