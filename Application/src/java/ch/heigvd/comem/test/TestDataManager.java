@@ -18,7 +18,6 @@ import javax.jws.WebService;
  * @author Jonas
  */
 @Stateless
-@WebService
 public class TestDataManager implements TestDataManagerLocal {
     
     @EJB

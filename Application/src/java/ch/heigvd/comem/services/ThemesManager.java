@@ -26,6 +26,8 @@ public class ThemesManager implements ThemesManagerLocal {
     public Long create(String titre, Utilisateur utilisateur){
         Theme theme = new Theme();
         theme.setTitre(titre);
+        theme.setUtilisateur(utilisateur);
+        utilisateur.addTheme(theme);
         em.persist(theme);
         em.flush();
         theme.setUtilisateur(utilisateur);

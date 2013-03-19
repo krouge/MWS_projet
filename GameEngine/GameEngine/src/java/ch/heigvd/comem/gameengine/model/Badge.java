@@ -5,11 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,10 +37,10 @@ public class Badge implements Serializable {
     @NotNull
     private String source;
     
-    @OneToMany(mappedBy="badge")
-    private List <Rule> rules = new LinkedList <Rule>();
+    @ManyToOne(optional=true)
+    private Rule rule;
     
-    @ManyToMany(cascade=CascadeType.REMOVE)
+    @ManyToMany(cascade=CascadeType.REMOVE, mappedBy="badges")
     private List <Player> players = new LinkedList <Player>();
 
     public Long getBadgeId() {
@@ -88,16 +89,12 @@ public class Badge implements Serializable {
     }
 
     @XmlTransient
-    public List<Rule> getRules() {
-        return rules;
+    public Rule getRule() {
+        return rule;
     }
 
-    public void setRules(List<Rule> rules) {
-        this.rules = rules;
-    }
-    
-    public void addRule(Rule rule) {
-        this.rules.add(rule);
+    public void setRule(Rule rule) {
+        this.rule = rule;
     }
     
     @Override

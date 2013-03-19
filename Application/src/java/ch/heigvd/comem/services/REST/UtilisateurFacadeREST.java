@@ -4,8 +4,11 @@
  */
 package ch.heigvd.comem.services.REST;
 
+import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
+import ch.heigvd.comem.services.UtilisateursManagerLocal;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +30,9 @@ import javax.ws.rs.Produces;
 public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
     @PersistenceContext(unitName = "ApplicationPU")
     private EntityManager em;
+    
+    @EJB
+    private UtilisateursManagerLocal u; 
 
     public UtilisateurFacadeREST() {
         super(Utilisateur.class);
@@ -56,13 +62,23 @@ public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
     public Utilisateur find(@PathParam("id") Long id) {
+
         return super.find(id);
+    }
+    
+    @GET
+    @Path("{id}/themes")
+    @Produces({"application/xml", "application/json"})
+    public List<Theme> findTheme(@PathParam("id") Long id) {
+
+        return super.find(id).getThemes();
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
     public List<Utilisateur> findAll() {
+        
         return super.findAll();
     }
 

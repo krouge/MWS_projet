@@ -23,5 +23,4 @@ public class TestREST {
     public void create() {
         testDataManagerLocal.generateData();
     }
-    
 }
