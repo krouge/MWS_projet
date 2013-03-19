@@ -7,11 +7,13 @@ package ch.heigvd.comem.model;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -32,9 +34,10 @@ public class Theme implements Serializable {
     @ManyToMany
     private List<Tag> tags = new LinkedList<Tag>();
     
+    @ManyToOne
     private Utilisateur utilisateur;
     
-    @OneToMany(mappedBy="theme")
+    @OneToMany(mappedBy="theme", cascade=CascadeType.REMOVE)
     private List<Photo> photos = new LinkedList<Photo>();
 
     @XmlTransient
@@ -46,14 +49,12 @@ public class Theme implements Serializable {
         this.tags = tags;
     }
     
-    
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur2) {
-        this.utilisateur = utilisateur2;
-        utilisateur2.getThemes().add(this);
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 
     @XmlTransient
