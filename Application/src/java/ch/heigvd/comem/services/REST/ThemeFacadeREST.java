@@ -1,7 +1,10 @@
-package ch.heigvd.comem.gameengine.rest;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ch.heigvd.comem.services.REST;
 
-import ch.heigvd.comem.gameengine.model.Badge;
-import ch.heigvd.comem.gameengine.model.Player;
+import ch.heigvd.comem.model.Theme;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,29 +20,29 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Renouille
+ * @author Jonas
  */
 @Stateless
-@Path("players")
-public class PlayerFacadeREST extends AbstractFacade<Player> {
-    @PersistenceContext(unitName = "GameEnginePU")
+@Path("ch.heigvd.comem.model.theme")
+public class ThemeFacadeREST extends AbstractFacade<Theme> {
+    @PersistenceContext(unitName = "ApplicationPU")
     private EntityManager em;
 
-    public PlayerFacadeREST() {
-        super(Player.class);
+    public ThemeFacadeREST() {
+        super(Theme.class);
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Player entity) {
+    public void create(Theme entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void edit(Player entity) {
+    public void edit(Theme entity) {
         super.edit(entity);
     }
 
@@ -52,31 +55,22 @@ public class PlayerFacadeREST extends AbstractFacade<Player> {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Player find(@PathParam("id") Long id) {
+    public Theme find(@PathParam("id") Long id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
-    public List<Player> findAll() {
+    public List<Theme> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<Player> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Theme> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
-    }
-    
-    @GET
-    @Path("{id}/badges")
-    @Produces({"application/xml", "application/json"})
-    public List<Badge> getAllBadges(@PathParam("id") Long id) {
-        Player player = em.find(Player.class, id);
-        
-        return player.getBadges();
     }
 
     @GET

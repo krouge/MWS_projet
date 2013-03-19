@@ -18,11 +18,12 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Renouille
+ * @author Julien Biedermann
  */
 @Stateless
 @Path("badges")
 public class BadgeFacadeREST extends AbstractFacade<Badge> {
+    
     @PersistenceContext(unitName = "GameEnginePU")
     private EntityManager em;
 

@@ -1,11 +1,15 @@
-package ch.heigvd.comem.gameengine.rest;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ch.heigvd.comem.services.REST;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
  *
- * @author Renouille
+ * @author Jonas
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;

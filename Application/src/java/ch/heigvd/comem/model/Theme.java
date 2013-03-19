@@ -15,12 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author Jonas
  */
 @Entity
+@XmlRootElement
 public class Theme implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,6 +40,7 @@ public class Theme implements Serializable {
     @OneToMany(mappedBy="theme", cascade=CascadeType.REMOVE)
     private List<Photo> photos = new LinkedList<Photo>();
 
+    @XmlTransient
     public List<Tag> getTags() {
         return tags;
     }
@@ -54,6 +57,7 @@ public class Theme implements Serializable {
         this.utilisateur = utilisateur;
     }
 
+    @XmlTransient
     public List<Photo> getPhotos() {
         return photos;
     }
