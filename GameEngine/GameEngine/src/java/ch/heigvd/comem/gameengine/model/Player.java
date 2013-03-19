@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public class Player implements Serializable {
     @OneToMany(mappedBy="player", cascade=CascadeType.REMOVE)
     private List <Event> events = new LinkedList <Event>();
     
-    @ManyToMany(mappedBy="players", cascade=CascadeType.REMOVE)
+    @ManyToMany(cascade=CascadeType.REMOVE)
     private List <Badge> badges = new LinkedList <Badge>();
     
     @NotNull
