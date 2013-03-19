@@ -2,7 +2,7 @@ package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Rule;
-import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
@@ -60,16 +60,15 @@ public class BadgesManager implements BadgesManagerLocal {
         
         Badge badge = em.find(Badge.class, badgeId);
         
-        Query query = em.createQuery( "Select * from RULE where RULE.BADGE_BADGEID = ?1" );
-        query.setParameter( 1, badgeId );
+        Query query = em.createQuery("SELECT r FROM Rule AS r WHERE r.badge=:badge");
+        query.setParameter( "badge", badge );
         
-        ArrayList<Rule> results = (ArrayList<Rule>)query.getResultList();
-        
-        badge.setRule(null);
-        
-        for(Rule rule : results) {
+        for(Rule rule : (List<Rule>)query.getResultList()) {
             rule.setBadge(null);
         }
+        
+        badge.setRule(null);
+
         em.flush();
         em.remove(badge);
     }
