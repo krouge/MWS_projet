@@ -37,7 +37,7 @@ public class Theme implements Serializable {
     @ManyToOne
     private Utilisateur utilisateur;
     
-    @OneToMany(mappedBy="theme", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="theme")
     private List<Photo> photos = new LinkedList<Photo>();
 
     @XmlTransient
@@ -49,12 +49,14 @@ public class Theme implements Serializable {
         this.tags = tags;
     }
     
+    
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setUtilisateur(Utilisateur utilisateur2) {
+        this.utilisateur = utilisateur2;
+        utilisateur2.getThemes().add(this);
     }
 
     @XmlTransient
