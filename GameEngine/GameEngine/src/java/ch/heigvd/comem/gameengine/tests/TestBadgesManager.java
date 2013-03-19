@@ -3,14 +3,12 @@ package ch.heigvd.comem.gameengine.tests;
 import ch.heigvd.comem.gameengine.services.BadgesManagerLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.jws.WebService;
 
 /**
  *
  * @author Julien Biedermann
  */
 @Stateless
-@WebService
 public class TestBadgesManager implements TestBadgesManagerLocal {
     
     @EJB

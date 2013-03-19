@@ -3,14 +3,12 @@ package ch.heigvd.comem.gameengine.tests;
 import ch.heigvd.comem.gameengine.services.ApplicationsManagerLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.jws.WebService;
 
 /**
  *
  * @author julien
  */
 @Stateless
-@WebService
 public class TestApplicationsManager implements TestApplicationsManagerLocal {
     
     @EJB

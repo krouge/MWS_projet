@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package ch.heigvd.comem.gameengine.rest;
 
 import ch.heigvd.comem.gameengine.model.Rule;
@@ -21,10 +16,10 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Julien Biedermann
+ * @author Renouille
  */
 @Stateless
-@Path("ch.heigvd.comem.gameengine.model.rule")
+@Path("rules")
 public class RuleFacadeREST extends AbstractFacade<Rule> {
     @PersistenceContext(unitName = "GameEnginePU")
     private EntityManager em;
@@ -85,5 +80,5 @@ public class RuleFacadeREST extends AbstractFacade<Rule> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
 }

@@ -5,6 +5,7 @@ import ch.heigvd.comem.gameengine.services.BadgesManagerLocal;
 import ch.heigvd.comem.gameengine.services.EventsManagerLocal;
 import ch.heigvd.comem.gameengine.services.PlayersManagerLocal;
 import ch.heigvd.comem.gameengine.services.RulesManagerLocal;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,57 +37,70 @@ public class TestDataManager implements TestDataManagerLocal {
     public void generateData() {
         
         // Création des applications
-        applicationsManagerLocal.create("Kit-Kat",
+        Long app1 = applicationsManagerLocal.create("Kit-Kat",
                                         "Description", 
                                         "sd898sa98da8s9d8aa",
                                         "9d9Da23jhFkksls103D");
         
-        applicationsManagerLocal.create("Cool pics",
+        Long app2 = applicationsManagerLocal.create("Cool pics",
                                         "Description", 
                                         "sadadasdsadsadasd8s9d8aa",
                                         "9dsdsdsadsagggdfdsc");
         
         // Création des joueurs
-        
-        playersManagerLocal.create("Julien",
+        Long julien = playersManagerLocal.create("Julien",
                                    "Biedermann", 
                                    "julien.biedermann@gmail.com",
                                    0);
             
-        playersManagerLocal.create("René",
+        Long rene = playersManagerLocal.create("René",
                                    "Grossmann", 
                                    "rene.grossmann.skater@caramail.com",
                                    0);
 
-        playersManagerLocal.create("Fabien",
+        Long fabien = playersManagerLocal.create("Fabien",
                                    "Cornaz", 
                                    "fabien.licorne@caramail.com",
                                    0);
             
-        playersManagerLocal.create("Jonas",
+        Long jonas = playersManagerLocal.create("Jonas",
                                    "Nicole", 
                                    "jojolatorpie@caramail.com",
                                    0);
         
         // Création des badges
         
-        for (int i=0; i<100; i++) {
+        for (int i=0; i<10; i++) {
             
-            badgesManagerLocal.create("Badge "+i, 
+            Long badge = badgesManagerLocal.create("Badge "+i, 
                                       "Description badge " +i, 
                                       "http://rene.com/img.jpg");
+            
+            playersManagerLocal.associateBadge(rene, badge);
+            
+            Long badge2 = badgesManagerLocal.create("Badge "+i, 
+                                      "Description badge " +i, 
+                                      "http://julien.com/img.jpg");
+            
+            playersManagerLocal.associateBadge(julien, badge2);
             
         }
         
         //Règles
         
-        Long app = applicationsManagerLocal.create("App", "Appdescr", "100", "300");
-
-        for (int i=0; i<20; i++) {
+        Long badgeRule = badgesManagerLocal.create("Badge ", 
+                                      "Description badge ", 
+                                      "http://rene.com/img.jpg");
             
-            rulesManagerLocal.create("EventType Test "+1, 
+        playersManagerLocal.associateBadge(rene, badgeRule);
+        
+        for (int i=0; i<10; i++) {
+            
+            Long rule = rulesManagerLocal.create("EventType Test "+1, 
                                       20, 
-                                      applicationsManagerLocal.find(app));
+                                      applicationsManagerLocal.find(app1));
+            
+            rulesManagerLocal.associateBadge(rule, badgeRule);
         }
         
         // Evénements
@@ -95,18 +109,33 @@ public class TestDataManager implements TestDataManagerLocal {
         Date date = new Date();
         long time = date.getTime();
         
-        for (int i=0; i<100; i++) {
-            
-            eventsManagerLocal.create(applicationsManagerLocal.find(app), 
+         Long event = eventsManagerLocal.create(playersManagerLocal.find(julien), 
+                    applicationsManagerLocal.find(app1), 
                     "Poster concours", 
                     new Timestamp(time));
-        }
-        
-        
-        
-        
+            
+        playersManagerLocal.associateEvent(event, julien);
+
+        Long event2 = eventsManagerLocal.create(playersManagerLocal.find(rene), 
+                applicationsManagerLocal.find(app1), 
+                "Poster concours", 
+                new Timestamp(time));
+
+        playersManagerLocal.associateEvent(event2, rene);
+
+        Long event3 = eventsManagerLocal.create(playersManagerLocal.find(fabien), 
+                applicationsManagerLocal.find(app1), 
+                "Poster concours", 
+                new Timestamp(time));
+
+        playersManagerLocal.associateEvent(event3, fabien);
+
+        Long event4 = eventsManagerLocal.create(playersManagerLocal.find(jonas),
+                applicationsManagerLocal.find(app1), 
+                "Poster concours", 
+                new Timestamp(time));
+
+        playersManagerLocal.associateEvent(event4, jonas);
+
     }
-
-    
-
 }

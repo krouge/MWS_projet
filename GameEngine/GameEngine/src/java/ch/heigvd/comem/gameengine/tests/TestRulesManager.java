@@ -4,14 +4,12 @@ import ch.heigvd.comem.gameengine.services.ApplicationsManagerLocal;
 import ch.heigvd.comem.gameengine.services.RulesManagerLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.jws.WebService;
 
 /**
  *
  * @author Renouille
  */
 @Stateless
-@WebService
 public class TestRulesManager implements TestRulesManagerLocal {
 
     @EJB
