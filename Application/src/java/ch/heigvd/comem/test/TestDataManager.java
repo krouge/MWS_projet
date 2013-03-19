@@ -46,7 +46,7 @@ public class TestDataManager implements TestDataManagerLocal {
 
         }catch(Exception e){
         }
-        photoManager.create(10, "http://comem.ch", utilisateur, theme);
+        //photoManager.create(10, "http://comem.ch", utilisateur, theme);
         
         
     }
