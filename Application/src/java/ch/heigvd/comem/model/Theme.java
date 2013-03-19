@@ -49,7 +49,7 @@ public class Theme implements Serializable {
         this.tags = tags;
     }
 
-    //@XmlTransient
+ 
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }

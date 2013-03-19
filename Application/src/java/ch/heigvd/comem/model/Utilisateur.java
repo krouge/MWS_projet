@@ -29,6 +29,7 @@ public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Column(name="ID", table="UTILISATEUR")
     private Long id;
     
     private String pseudo;
@@ -40,7 +41,7 @@ public class Utilisateur implements Serializable {
     @ManyToMany(mappedBy="utilisateurs", cascade=CascadeType.REMOVE)
     private List<Photo> photos_like = new LinkedList<Photo>();
     
-    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
     private List<Photo> photos = new LinkedList<Photo>();
     
     @OneToMany(mappedBy="utilisateur", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
