@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author fabiencornaz
+ * @author Jonas
  */
 @Stateless
 @Path("ch.heigvd.comem.model.tag")

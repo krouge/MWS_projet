@@ -5,9 +5,7 @@
 package ch.heigvd.comem.services.REST;
 
 import ch.heigvd.comem.model.Photo;
-import ch.heigvd.comem.services.PhotosManagerLocal;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,16 +20,13 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author fabiencornaz
+ * @author Jonas
  */
 @Stateless
-@Path("photo")
+@Path("ch.heigvd.comem.model.photo")
 public class PhotoFacadeREST extends AbstractFacade<Photo> {
     @PersistenceContext(unitName = "ApplicationPU")
     private EntityManager em;
-    
-    @EJB
-    private PhotosManagerLocal photoManager;
 
     public PhotoFacadeREST() {
         super(Photo.class);
@@ -41,6 +36,7 @@ public class PhotoFacadeREST extends AbstractFacade<Photo> {
     @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Photo entity) {
+        super.create(entity);
     }
 
     @PUT
@@ -60,13 +56,7 @@ public class PhotoFacadeREST extends AbstractFacade<Photo> {
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
     public Photo find(@PathParam("id") Long id) {
-        
-        Photo photo = null;
-        try {
-            photo = photoManager.find(id);
-        } catch (Exception e) {
-        }
-        return photo;
+        return super.find(id);
     }
 
     @GET

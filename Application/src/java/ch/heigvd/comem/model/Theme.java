@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -40,6 +42,8 @@ public class Theme implements Serializable {
     @OneToMany(mappedBy="theme", cascade=CascadeType.REMOVE)
     private List<Photo> photos = new LinkedList<Photo>();
 
+    @XmlTransient
+    @JsonIgnore
     public List<Tag> getTags() {
         return tags;
     }
@@ -56,6 +60,8 @@ public class Theme implements Serializable {
         this.utilisateur = utilisateur;
     }
 
+    @XmlTransient
+    @JsonIgnore
     public List<Photo> getPhotos() {
         return photos;
     }
