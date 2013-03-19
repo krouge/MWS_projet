@@ -114,28 +114,23 @@ public class TestDataManager implements TestDataManagerLocal {
                     "Poster concours", 
                     new Timestamp(time));
             
-        playersManagerLocal.associateEvent(event, julien);
 
         Long event2 = eventsManagerLocal.create(playersManagerLocal.find(rene), 
                 applicationsManagerLocal.find(app1), 
                 "Poster concours", 
                 new Timestamp(time));
 
-        playersManagerLocal.associateEvent(event2, rene);
 
         Long event3 = eventsManagerLocal.create(playersManagerLocal.find(fabien), 
                 applicationsManagerLocal.find(app1), 
                 "Poster concours", 
                 new Timestamp(time));
 
-        playersManagerLocal.associateEvent(event3, fabien);
-
         Long event4 = eventsManagerLocal.create(playersManagerLocal.find(jonas),
                 applicationsManagerLocal.find(app1), 
                 "Poster concours", 
                 new Timestamp(time));
 
-        playersManagerLocal.associateEvent(event4, jonas);
 
     }
 }

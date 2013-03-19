@@ -72,16 +72,4 @@ public class PlayersManager implements PlayersManagerLocal {
         player.addBadge(badge);
         badge.addPlayer(player);
     }
-
-    @Override
-    public void associateEvent(Long playerId, Long eventId) {
-        
-        Player player = em.find(Player.class, playerId);
-        Event event = em.find(Event.class, eventId);
-        
-        player.addEvent(event);
-    }
-    
-    
-    
 }

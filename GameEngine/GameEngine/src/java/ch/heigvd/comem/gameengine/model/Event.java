@@ -2,14 +2,12 @@ package ch.heigvd.comem.gameengine.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -29,7 +27,7 @@ public class Event implements Serializable {
     @ManyToOne
     private Application application;
     
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Player player;
 
     @NotNull

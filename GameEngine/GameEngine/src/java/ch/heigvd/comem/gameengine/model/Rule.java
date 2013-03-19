@@ -29,7 +29,7 @@ public class Rule implements Serializable {
     @NotNull 
     private int numberOfPoints;
             
-    @ManyToOne
+    @ManyToOne(optional=true)
     private Badge badge;
 
     @ManyToOne

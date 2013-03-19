@@ -19,7 +19,4 @@ public interface PlayersManagerLocal {
     void remove(Long playerId);
 
     void associateBadge(Long playerId, Long badgeId);
-
-    void associateEvent(Long playerId, Long eventId);
-        
 }
