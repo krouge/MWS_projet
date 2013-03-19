@@ -1,7 +1,9 @@
 package ch.heigvd.comem.gameengine.rest;
 
 import ch.heigvd.comem.gameengine.model.Badge;
+import ch.heigvd.comem.gameengine.services.BadgesManagerLocal;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +27,10 @@ public class BadgeFacadeREST extends AbstractFacade<Badge> {
     @PersistenceContext(unitName = "GameEnginePU")
     private EntityManager em;
 
+    
+    @EJB
+    private BadgesManagerLocal badgesManagerLocal;
+    
     public BadgeFacadeREST() {
         super(Badge.class);
     }
@@ -46,7 +52,7 @@ public class BadgeFacadeREST extends AbstractFacade<Badge> {
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+        badgesManagerLocal.delete(badgesManagerLocal.read(id).getBadgeId());
     }
 
     @GET

@@ -1,6 +1,7 @@
 package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Player;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -20,6 +21,5 @@ public interface PlayersManagerLocal {
 
     void associateBadge(Long playerId, Long badgeId);
 
-    void associateEvent(Long playerId, Long eventId);
-        
+    List<Player> getLeaderboard();
 }
