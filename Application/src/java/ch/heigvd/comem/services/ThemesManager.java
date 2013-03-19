@@ -7,6 +7,7 @@ package ch.heigvd.comem.services;
 import ch.heigvd.comem.exceptions.ExceptionIdTheme;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
+import ch.heigvd.comem.model.Utilisateur;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,11 +23,12 @@ public class ThemesManager implements ThemesManagerLocal {
     private EntityManager em;
 
     
-    public Long create(String titre){
+    public Long create(String titre, Utilisateur utilisateur){
         Theme theme = new Theme();
         theme.setTitre(titre);
         em.persist(theme);
         em.flush();
+        theme.setUtilisateur(utilisateur);
         return theme.getId();
         
     }

@@ -34,12 +34,17 @@ public class TestDataManager implements TestDataManagerLocal {
         Utilisateur utilisateur = null;
         Theme theme = null;
         Long id = utilisateurManager.create("theplayer777", "jonas@jonas.ch", "1234");
-        Long idTheme = themeManager.create("Theme");
+        
         try{
             utilisateur = utilisateurManager.find(id);
-            theme = themeManager.find(idTheme);
+            try {
+                Long idTheme = themeManager.create("Theme",utilisateur);
+                theme = themeManager.find(idTheme);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }catch(Exception e){
-            
         }
         photoManager.create(10, "http://comem.ch", utilisateur, theme);
         
