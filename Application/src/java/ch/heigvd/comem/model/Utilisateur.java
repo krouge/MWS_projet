@@ -38,7 +38,7 @@ public class Utilisateur implements Serializable {
     @ManyToMany(mappedBy="utilisateurs", cascade=CascadeType.REMOVE)
     private List<Photo> photos_like = new LinkedList<Photo>();
     
-    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.ALL)
     private List<Photo> photos = new LinkedList<Photo>();
     
     @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
