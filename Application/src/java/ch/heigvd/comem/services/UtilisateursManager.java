@@ -8,7 +8,7 @@ import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
-import java.util.List;
+import java.util.LinkedList;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
@@ -41,6 +41,11 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         Utilisateur utilisateur = em.find(Utilisateur.class, id);
         
         if(utilisateur != null){
+            for (Theme theme : utilisateur.getThemes()){
+                Theme theme2 = em.find(Theme.class, theme.getId());
+                em.remove(theme2);
+                utilisateur.getThemes().clear();
+            }
             em.remove(utilisateur);
         }else{
             throw new ExceptionIdUtilisateur();
