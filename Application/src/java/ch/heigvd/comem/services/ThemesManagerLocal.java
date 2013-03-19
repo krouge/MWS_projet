@@ -7,6 +7,7 @@ package ch.heigvd.comem.services;
 import ch.heigvd.comem.exceptions.ExceptionIdTheme;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
+import ch.heigvd.comem.model.Utilisateur;
 import javax.ejb.Local;
 
 /**
@@ -16,7 +17,7 @@ import javax.ejb.Local;
 @Local
 public interface ThemesManagerLocal {
     
-    public Long create(String titre);
+    public Long create(String titre,Utilisateur utilisateur);
     public void delete(Long id) throws ExceptionIdTheme;
     public Theme find(Long id) throws ExceptionIdTheme; 
     public Theme update(Long id, String titre) throws ExceptionIdTheme;  

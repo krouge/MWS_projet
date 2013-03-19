@@ -14,12 +14,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Jonas
  */
 @Entity
+@XmlRootElement
 public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,12 +38,13 @@ public class Utilisateur implements Serializable {
     @ManyToMany(mappedBy="utilisateurs", cascade=CascadeType.REMOVE)
     private List<Photo> photos_like = new LinkedList<Photo>();
     
-    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.ALL)
     private List<Photo> photos = new LinkedList<Photo>();
     
     @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
     private List<Theme> themes = new LinkedList<Theme>();
 
+    @XmlTransient
     public List<Theme> getThemes() {
         return themes;
     }
@@ -49,6 +53,7 @@ public class Utilisateur implements Serializable {
         this.themes = themes;
     }
 
+    @XmlTransient
     public List<Photo> getPhotos() {
         return photos;
     }
