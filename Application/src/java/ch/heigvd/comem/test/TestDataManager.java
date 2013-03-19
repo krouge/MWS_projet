@@ -18,7 +18,6 @@ import javax.jws.WebService;
  * @author Jonas
  */
 @Stateless
-@WebService
 public class TestDataManager implements TestDataManagerLocal {
     
     @EJB
@@ -46,7 +45,7 @@ public class TestDataManager implements TestDataManagerLocal {
 
         }catch(Exception e){
         }
-        //photoManager.create(10, "http://comem.ch", utilisateur, theme);
+        photoManager.create(10, "http://comem.ch", utilisateur, theme);
         
         
     }

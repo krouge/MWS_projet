@@ -8,7 +8,9 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,7 +43,7 @@ public class Utilisateur implements Serializable {
     @OneToMany(mappedBy="utilisateur", cascade=CascadeType.ALL)
     private List<Photo> photos = new LinkedList<Photo>();
     
-    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="utilisateur", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
     private List<Theme> themes = new LinkedList<Theme>();
 
     @XmlTransient
