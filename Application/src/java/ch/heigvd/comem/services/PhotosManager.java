@@ -48,7 +48,6 @@ public class PhotosManager implements PhotosManagerLocal {
     
     public Photo find(Long idPhoto) throws ExceptionIdPhoto{
         Photo photo = em.find(Photo.class, idPhoto);
-        
         if (photo == null) {
             throw new ExceptionIdPhoto();
         }

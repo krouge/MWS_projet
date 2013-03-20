@@ -81,6 +81,25 @@ public class Photo implements Serializable {
         this.utilisateur = utilisateur;
     }
     
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
+    
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -113,6 +132,7 @@ public class Photo implements Serializable {
     public void addTag(Tag tag){
         this.tags.add(tag);
     }  
+    
     
     public void test(){
         
