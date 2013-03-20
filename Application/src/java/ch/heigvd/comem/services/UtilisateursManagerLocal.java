@@ -7,6 +7,7 @@ package ch.heigvd.comem.services;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Utilisateur;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -21,6 +22,8 @@ public interface UtilisateursManagerLocal {
     public void delete(Long id) throws ExceptionIdUtilisateur;
     
     public Utilisateur find(Long id) throws ExceptionIdUtilisateur;
+    
+    public List<Utilisateur> findAll();
   
     public Utilisateur update(Long id, String pseudo, String email, String mdp) throws ExceptionIdUtilisateur;
     
