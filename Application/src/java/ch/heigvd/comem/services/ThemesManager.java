@@ -30,7 +30,6 @@ public class ThemesManager implements ThemesManagerLocal {
         utilisateur.addTheme(theme);
         em.persist(theme);
         em.flush();
-        
         return theme.getId();
         
     }

@@ -6,13 +6,13 @@ package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
-import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -56,6 +56,12 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         return utilisateur;
     }
     
+    public List<Utilisateur> findAll(){
+        Query query = em.createQuery("SELECT u FROM Utilisateur u");
+        
+        return (List<Utilisateur>)query.getResultList();
+    }
+    
     public Utilisateur update(Long id, String pseudo, String email, String mdp) throws ExceptionIdUtilisateur{
         Utilisateur utilisateur = em.find(Utilisateur.class, id);
         utilisateur.setEmail(email);
@@ -71,6 +77,6 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         photo.addUtilisateurLike(utilisateur);
         em.flush();
     }
-
+    
 
 }

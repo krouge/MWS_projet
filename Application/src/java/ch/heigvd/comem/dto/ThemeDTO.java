@@ -2,48 +2,39 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.heigvd.comem.model;
+package ch.heigvd.comem.dto;
 
-import java.io.Serializable;
+import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.model.Tag;
+import ch.heigvd.comem.model.Theme;
+import ch.heigvd.comem.model.Utilisateur;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
 /**
  *
  * @author Jonas
  */
-@Entity
 @XmlRootElement
-public class Theme implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+public class ThemeDTO {
+    
     private Long id;
     
     private String titre;
     
-    @ManyToMany
     private List<Tag> tags = new LinkedList<Tag>();
     
-    @ManyToOne
     private Utilisateur utilisateur;
     
-    @OneToMany(mappedBy="theme", cascade=CascadeType.REMOVE)
     private List<Photo> photos = new LinkedList<Photo>();
-    
-    
 
-    //@XmlTransient
     public List<Tag> getTags() {
         return tags;
     }
@@ -52,7 +43,6 @@ public class Theme implements Serializable {
         this.tags = tags;
     }
 
-    @XmlTransient
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
@@ -61,7 +51,6 @@ public class Theme implements Serializable {
         this.utilisateur = utilisateur;
     }
 
-    @XmlTransient
     public List<Photo> getPhotos() {
         return photos;
     }
@@ -88,31 +77,6 @@ public class Theme implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Theme)) {
-            return false;
-        }
-        Theme other = (Theme) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "ch.heigvd.comem.model.Theme[ id=" + id + " ]";
-    }
     
     public void addPhoto(Photo photo){
         this.photos.add(photo);
@@ -121,4 +85,5 @@ public class Theme implements Serializable {
     public void addTag(Tag tag){
         this.tags.add(tag);
     }
+    
 }

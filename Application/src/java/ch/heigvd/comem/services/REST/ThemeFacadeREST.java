@@ -4,8 +4,9 @@
  */
 package ch.heigvd.comem.services.REST;
 
-import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.dto.ThemeDTO;
 import ch.heigvd.comem.model.Theme;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,13 +19,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
  * @author Jonas
  */
 @Stateless
-@Path("ch.heigvd.comem.model.theme")
+@Path("theme")
 public class ThemeFacadeREST extends AbstractFacade<Theme> {
     @PersistenceContext(unitName = "ApplicationPU")
     private EntityManager em;
@@ -69,10 +71,33 @@ public class ThemeFacadeREST extends AbstractFacade<Theme> {
     }
 
     @GET
-    @Override
     @Produces({"application/xml", "application/json"})
-    public List<Theme> findAll() {
-        return super.findAll();
+    public List<ThemeDTO> findAll(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur) {
+        
+        List<Theme> themes = super.findAll();
+        List<ThemeDTO> themesDTO = new LinkedList<ThemeDTO>();
+        
+        for(Theme theme : themes){
+            ThemeDTO themeDTO = new ThemeDTO();
+            themeDTO.setId(theme.getId());
+            themeDTO.setTitre(theme.getTitre());
+            
+            if(withPhotos != null && withPhotos == 1){
+                themeDTO.setPhotos(theme.getPhotos());
+            }
+            
+            if(withTags != null && withTags == 1){
+                themeDTO.setTags(theme.getTags());
+            }
+            
+            if(withUtilisateur != null && withUtilisateur == 1){
+                themeDTO.setUtilisateur(theme.getUtilisateur());
+            }
+            
+            themesDTO.add(themeDTO);
+        }
+        
+        return themesDTO;
     }
 
     @GET

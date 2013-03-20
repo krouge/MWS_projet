@@ -4,9 +4,11 @@
  */
 package ch.heigvd.comem.services.REST;
 
-import ch.heigvd.comem.model.Theme;
+import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Utilisateur;
+import ch.heigvd.comem.model.UtilisateurDTO;
 import ch.heigvd.comem.services.UtilisateursManagerLocal;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -20,13 +22,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
  * @author Jonas
  */
 @Stateless
-@Path("ch.heigvd.comem.model.utilisateur")
+@Path("utilisateur")
 public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
     @PersistenceContext(unitName = "ApplicationPU")
     private EntityManager em;
@@ -61,25 +64,66 @@ public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Utilisateur find(@PathParam("id") Long id) {
+    public UtilisateurDTO find(@PathParam("id") Long id, @QueryParam("themes") Long withThemes, @QueryParam("photos") Long withPhotos) throws ExceptionIdUtilisateur {
 
-        return super.find(id);
+        Utilisateur utilisateur = u.find(id);
+        
+        
+        UtilisateurDTO utilisateurDTO = new UtilisateurDTO();
+        
+        utilisateurDTO.setId(utilisateur.getId());
+        utilisateurDTO.setEmail(utilisateur.getEmail());
+        utilisateurDTO.setMdp(utilisateur.getMdp());
+        utilisateurDTO.setPseudo(utilisateur.getPseudo());
+        
+       
+        if(withThemes != null && withThemes == 1){
+            utilisateurDTO.setThemes(utilisateur.getThemes());
+        }
+        
+        if(withPhotos != null && withPhotos == 1){
+            utilisateurDTO.setPhotos(utilisateur.getPhotos());
+        }
+        
+        return utilisateurDTO;
     }
     
-    @GET
+    /*@GET
     @Path("{id}/themes")
     @Produces({"application/xml", "application/json"})
     public List<Theme> findTheme(@PathParam("id") Long id) {
 
         return super.find(id).getThemes();
-    }
+    }*/
 
     @GET
-    @Override
     @Produces({"application/xml", "application/json"})
-    public List<Utilisateur> findAll() {
+    public List<UtilisateurDTO> findAll(@QueryParam("themes") Long withThemes, @QueryParam("photos") Long withPhotos) {
         
-        return super.findAll();
+        List<Utilisateur> utilisateurs = super.findAll();
+        List<UtilisateurDTO> utilisateursDTO = new LinkedList<UtilisateurDTO>();
+        
+        for(Utilisateur utilisateur : utilisateurs){
+            UtilisateurDTO utilisateurDTO = new UtilisateurDTO();
+            utilisateurDTO.setId(utilisateur.getId());
+            utilisateurDTO.setEmail(utilisateur.getEmail());
+            utilisateurDTO.setMdp(utilisateur.getMdp());
+            utilisateurDTO.setPseudo(utilisateur.getPseudo());
+            
+            if(withThemes != null && withThemes == 1){
+                utilisateurDTO.setThemes(utilisateur.getThemes());
+            }
+        
+            if(withPhotos != null && withPhotos == 1){
+                utilisateurDTO.setPhotos(utilisateur.getPhotos());
+            }
+            
+            utilisateursDTO.add(utilisateurDTO);
+        }
+       
+        
+        
+        return utilisateursDTO;
     }
 
     @GET
