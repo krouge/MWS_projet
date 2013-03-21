@@ -3,6 +3,8 @@ package ch.heigvd.comem.gameengine.rest;
 import ch.heigvd.comem.gameengine.model.Player;
 import ch.heigvd.comem.gameengine.services.PlayersManagerLocal;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,6 +17,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  *
@@ -22,56 +26,49 @@ import javax.ws.rs.Produces;
  */
 @Stateless
 @Path("players")
-public class PlayerFacadeREST extends AbstractFacade<Player> {
-    @PersistenceContext(unitName = "GameEnginePU")
-    private EntityManager em;
+public class PlayerFacadeREST {
     
     @EJB
     private PlayersManagerLocal playersManagerLocal;
 
-    public PlayerFacadeREST() {
-        super(Player.class);
-    }
-
     @POST
-    @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Player entity) {
-        super.create(entity);
+    public String create(Player entity) {
+        Long playerId = playersManagerLocal.create(entity.getPoints());
+        
+        String jsonPlayer = null;
+        try {
+            jsonPlayer = new JSONObject().put("playerId", playerId.toString()).toString();
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return jsonPlayer;
     }
 
     @PUT
-    @Override
     @Consumes({"application/xml", "application/json"})
     public void edit(Player entity) {
-        super.edit(entity);
+        playersManagerLocal.update(entity.getPlayerId(), entity.getPoints());
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+        playersManagerLocal.remove(id);
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
     public Player find(@PathParam("id") Long id) {
-        return super.find(id);
+        return playersManagerLocal.find(id);
     }
 
     @GET
-    @Override
     @Produces({"application/xml", "application/json"})
     public List<Player> findAll() {
-        return super.findAll();
-    }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Player> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+        return playersManagerLocal.findAll();
     }
     
     /*
@@ -94,16 +91,10 @@ public class PlayerFacadeREST extends AbstractFacade<Player> {
         return playersManagerLocal.getLeaderboard();
     }
 
-    @GET
-    @Path("count")
-    @Produces({"application/xml", "application/json"})
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-    
+//    @GET
+//    @Path("count")
+//    @Produces({"application/xml", "application/json"})
+//    public String countREST() {
+//        return String.valueOf(super.count());
+//    }
 }

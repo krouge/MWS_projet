@@ -21,11 +21,10 @@ public class PlayersManager implements PlayersManagerLocal {
     EntityManager em;
 
     @Override
-    public Long create(Long userId, int points) {
+    public Long create(int points) {
         
         Player player = new Player();
         player.setPoints(points);
-        player.setUserId(userId);
         em.persist(player); em.flush();
         
         return player.getPlayerId();
@@ -77,6 +76,16 @@ public class PlayersManager implements PlayersManagerLocal {
         List<Player> leaderboard = (List<Player>)query.getResultList();
         
         return leaderboard;
+    }
+
+    @Override
+    public List<Player> findAll() {
+        
+        Query query = em.createQuery("SELECT p FROM Player");
+        
+        List<Player> listPlayer = (List<Player>)query.getResultList();
+        
+        return listPlayer;
     }
     
     
