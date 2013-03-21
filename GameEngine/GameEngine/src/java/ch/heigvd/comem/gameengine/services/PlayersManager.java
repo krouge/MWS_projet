@@ -21,10 +21,11 @@ public class PlayersManager implements PlayersManagerLocal {
     EntityManager em;
 
     @Override
-    public Long create(int points) {
+    public Long create(Long userId, int points) {
         
         Player player = new Player();
         player.setPoints(points);
+        player.setUserId(userId);
         em.persist(player); em.flush();
         
         return player.getPlayerId();

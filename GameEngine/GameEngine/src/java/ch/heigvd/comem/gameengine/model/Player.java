@@ -38,6 +38,9 @@ public class Player implements Serializable {
     @NotNull
     private int points;
     
+    @NotNull
+    private Long userId;
+    
     public Player () {
         events = new LinkedList <Event>();
         badges = new LinkedList <Badge>();
@@ -57,6 +60,14 @@ public class Player implements Serializable {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     //@XmlTransient

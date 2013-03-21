@@ -18,13 +18,13 @@ public class TestPlayersManager implements TestPlayersManagerLocal {
     public void generatePlayers() {
         
             
-            playersManagerLocal.create(0);
+            playersManagerLocal.create(1L, 0);
             
-            playersManagerLocal.create(0);
+            playersManagerLocal.create(2L, 0);
 
-            playersManagerLocal.create(0);
+            playersManagerLocal.create(3L, 0);
             
-            playersManagerLocal.create(0);
+            playersManagerLocal.create(4L, 0);
         
     }
 
