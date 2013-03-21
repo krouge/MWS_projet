@@ -5,18 +5,21 @@
 package ch.heigvd.comem.services.REST;
 
 import ch.heigvd.comem.dto.PhotoDTO;
-import ch.heigvd.comem.dto.TagDTO;
 import ch.heigvd.comem.dto.ThemeDTO;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Utilisateur;
 import ch.heigvd.comem.dto.UtilisateurDTO;
+import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.services.UtilisateursManagerLocal;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.Entity;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -119,14 +122,16 @@ public class UtilisateurFacadeREST{
     }
     
     
-    /*@GET
-    @Path("{id}/themes")
-    @Produces({"application/xml", "application/json"})
-    public List<Theme> findTheme(@PathParam("id") Long id) {
+    @POST
+    @Path("login")
+    @Consumes({"application/xml", "application/json"})
+    public String login(Utilisateur entity) {
 
-        return super.find(id).getThemes();
-    }*/
-
+        return utilisateurManager.login(entity.getPseudo(),entity.getMdp());
+    }
+    
+    
+    
     @GET
     @Produces({"application/xml", "application/json"})
     public List<UtilisateurDTO> findAll(@QueryParam("themes") Long withThemes, @QueryParam("photos") Long withPhotos, @QueryParam("like") Long withLike) {

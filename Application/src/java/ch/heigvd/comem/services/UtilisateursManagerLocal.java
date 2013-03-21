@@ -28,5 +28,7 @@ public interface UtilisateursManagerLocal {
     public Utilisateur update(Long id, String pseudo, String email, String mdp) throws ExceptionIdUtilisateur;
     
     public void associatePhotoLike(Long id, Long idPhoto);
+
+    public String login(String pseudoUser, String mdpUser);
     
 }
