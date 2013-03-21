@@ -31,7 +31,7 @@ public class TestEventsManager implements TestEventsManagerLocal {
     @Override
     public void generateEvents() {
 
-        Long player = playersManagerLocal.create(1L, 0);
+        Long player = playersManagerLocal.create(0);
         Long app = applicationsManagerLocal.create("App event", "Event app", "200", "300");
         
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

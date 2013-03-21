@@ -48,13 +48,13 @@ public class TestDataManager implements TestDataManagerLocal {
                                         "9dsdsdsadsagggdfdsc");
         
         // Création des joueurs
-        Long julien = playersManagerLocal.create(1L, 50);
+        Long julien = playersManagerLocal.create(50);
             
-        Long rene = playersManagerLocal.create(2L, 30);
+        Long rene = playersManagerLocal.create(30);
 
-        Long fabien = playersManagerLocal.create(3L, 10);
+        Long fabien = playersManagerLocal.create(10);
             
-        Long jonas = playersManagerLocal.create(4L, 0);
+        Long jonas = playersManagerLocal.create(0);
         
         // Création des badges
         
