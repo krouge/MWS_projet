@@ -1,6 +1,7 @@
 package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Badge;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -12,7 +13,9 @@ public interface BadgesManagerLocal {
 
     Long create(String name, String description, String source);
 
-    Badge read(Long badgeId);
+    Badge find(Long badgeId);
+    
+    List<Badge> findAll();
 
     Badge update(Long badgeId, String name, String description, String source);
     

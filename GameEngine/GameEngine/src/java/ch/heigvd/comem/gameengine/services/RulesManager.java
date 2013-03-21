@@ -7,10 +7,12 @@ package ch.heigvd.comem.gameengine.services;
 import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Rule;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -56,6 +58,16 @@ public class RulesManager implements RulesManagerLocal {
         Rule rule = em.find(Rule.class, ruleId);
         
         return rule; 
+    }
+    
+    @Override
+    public List<Rule> findAll() {
+
+        Query query = em.createQuery("SELECT r FROM Rule AS r");
+        
+        List<Rule> listRule = (List<Rule>)query.getResultList();
+        
+        return listRule;        
     }
 
     @Override
