@@ -97,6 +97,16 @@ public class Utilisateur implements Serializable {
         this.id = id;
     }
 
+    public List<Photo> getPhotos_like() {
+        return photos_like;
+    }
+
+    public void setPhotos_like(List<Photo> photos_like) {
+        this.photos_like = photos_like;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
