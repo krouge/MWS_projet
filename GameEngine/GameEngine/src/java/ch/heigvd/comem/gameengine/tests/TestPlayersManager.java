@@ -18,25 +18,13 @@ public class TestPlayersManager implements TestPlayersManagerLocal {
     public void generatePlayers() {
         
             
-            playersManagerLocal.create("Julien",
-                                       "Biedermann", 
-                                       "julien.biedermann@gmail.com",
-                                       0);
+            playersManagerLocal.create(0);
             
-            playersManagerLocal.create("René",
-                                       "Grossmann", 
-                                       "rene.grossmann.skater@caramail.com",
-                                       0);
+            playersManagerLocal.create(0);
 
-            playersManagerLocal.create("Fabien",
-                                       "Cornaz", 
-                                       "fabien.licorne@caramail.com",
-                                       0);
+            playersManagerLocal.create(0);
             
-            playersManagerLocal.create("Jonas",
-                                       "Nicole", 
-                                       "jojolatorpie@caramail.com",
-                                       0);
+            playersManagerLocal.create(0);
         
     }
 

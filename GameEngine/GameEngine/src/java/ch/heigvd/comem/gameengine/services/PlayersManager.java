@@ -21,12 +21,9 @@ public class PlayersManager implements PlayersManagerLocal {
     EntityManager em;
 
     @Override
-    public Long create(String firstName, String lastName, String email, int points) {
+    public Long create(int points) {
         
         Player player = new Player();
-        player.setFirstName(firstName);
-        player.setLastName(lastName);
-        player.setEmail(email);
         player.setPoints(points);
         em.persist(player); em.flush();
         
@@ -44,12 +41,9 @@ public class PlayersManager implements PlayersManagerLocal {
     }
     
     @Override
-    public Player update(Long playerId, String firstName, String lastName, String email, int points) {
+    public Player update(Long playerId, int points) {
         
         Player player = em.find(Player.class, playerId);
-        player.setFirstName(firstName);
-        player.setLastName(lastName);
-        player.setEmail(email);
         player.setPoints(points);
         
         return player;

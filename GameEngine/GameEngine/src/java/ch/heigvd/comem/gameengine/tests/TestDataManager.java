@@ -48,25 +48,13 @@ public class TestDataManager implements TestDataManagerLocal {
                                         "9dsdsdsadsagggdfdsc");
         
         // Création des joueurs
-        Long julien = playersManagerLocal.create("Julien",
-                                   "Biedermann", 
-                                   "julien.biedermann@gmail.com",
-                                   50);
+        Long julien = playersManagerLocal.create(50);
             
-        Long rene = playersManagerLocal.create("René",
-                                   "Grossmann", 
-                                   "rene.grossmann.skater@caramail.com",
-                                   30);
+        Long rene = playersManagerLocal.create(30);
 
-        Long fabien = playersManagerLocal.create("Fabien",
-                                   "Cornaz", 
-                                   "fabien.licorne@caramail.com",
-                                   10);
+        Long fabien = playersManagerLocal.create(10);
             
-        Long jonas = playersManagerLocal.create("Jonas",
-                                   "Nicole", 
-                                   "jojolatorpie@caramail.com",
-                                   0);
+        Long jonas = playersManagerLocal.create(0);
         
         // Création des badges
         
