@@ -11,11 +11,11 @@ import javax.ejb.Local;
 @Local
 public interface PlayersManagerLocal {
 
-    Long create(String firstName, String lastName, String email, int points);
+    Long create(int points);
 
     Player find(Long playerId);
 
-    Player update(Long playerId, String firstName, String lastName, String email, int points);
+    Player update(Long playerId, int points);
     
     void remove(Long playerId);
 
