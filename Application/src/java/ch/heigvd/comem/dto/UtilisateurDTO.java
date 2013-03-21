@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.heigvd.comem.model;
+package ch.heigvd.comem.dto;
 
+import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.model.Theme;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;

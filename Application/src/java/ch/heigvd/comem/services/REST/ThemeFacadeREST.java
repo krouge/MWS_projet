@@ -61,14 +61,6 @@ public class ThemeFacadeREST extends AbstractFacade<Theme> {
     public Theme find(@PathParam("id") Long id) {
         return super.find(id);
     }
-    
-    @GET
-    @Path("{id}/photos")
-    @Produces({"application/xml", "application/json"})
-    public List<Photo> findPhoto(@PathParam("id") Long id) {
-
-        return super.find(id).getPhotos();
-    }
 
     @GET
     @Produces({"application/xml", "application/json"})

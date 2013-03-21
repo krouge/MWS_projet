@@ -6,7 +6,7 @@ package ch.heigvd.comem.services.REST;
 
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Utilisateur;
-import ch.heigvd.comem.model.UtilisateurDTO;
+import ch.heigvd.comem.dto.UtilisateurDTO;
 import ch.heigvd.comem.services.UtilisateursManagerLocal;
 import java.util.LinkedList;
 import java.util.List;
