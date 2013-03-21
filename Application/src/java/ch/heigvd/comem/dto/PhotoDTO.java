@@ -5,14 +5,9 @@
 package ch.heigvd.comem.dto;
 
 import ch.heigvd.comem.model.Tag;
-import ch.heigvd.comem.model.Tag;
-import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
-import ch.heigvd.comem.model.Utilisateur;
 import java.util.LinkedList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 

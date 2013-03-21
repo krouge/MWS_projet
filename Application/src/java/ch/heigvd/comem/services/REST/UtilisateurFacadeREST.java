@@ -10,9 +10,6 @@ import ch.heigvd.comem.dto.ThemeDTO;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Utilisateur;
 import ch.heigvd.comem.dto.UtilisateurDTO;
-import ch.heigvd.comem.model.Photo;
-import ch.heigvd.comem.model.Tag;
-import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.services.UtilisateursManagerLocal;
 import java.util.LinkedList;
 import java.util.List;
@@ -120,6 +117,7 @@ public class UtilisateurFacadeREST{
         
         return utilisateurDTO;
     }
+    
     
     /*@GET
     @Path("{id}/themes")
