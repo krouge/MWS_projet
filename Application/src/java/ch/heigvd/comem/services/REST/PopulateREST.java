@@ -28,8 +28,11 @@ public class PopulateREST {
     
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create() {
+    public String create() {
+        
         testDataManager.generateTestData();
+        
+        return "BRAVO !!!! Tu as populé la Base";
     }
     
     

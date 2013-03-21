@@ -44,7 +44,7 @@ public class Utilisateur implements Serializable {
     @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
     private List<Photo> photos = new LinkedList<Photo>();
     
-    @OneToMany(mappedBy="utilisateur", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
     private List<Theme> themes = new LinkedList<Theme>();
 
     @XmlTransient
@@ -96,6 +96,17 @@ public class Utilisateur implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    @XmlTransient
+    public List<Photo> getPhotos_like() {
+        return photos_like;
+    }
+
+    public void setPhotos_like(List<Photo> photos_like) {
+        this.photos_like = photos_like;
+    }
+    
+    
 
     @Override
     public int hashCode() {

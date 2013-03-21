@@ -8,9 +8,11 @@ import ch.heigvd.comem.exceptions.ExceptionIdTheme;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -23,16 +25,25 @@ public class ThemesManager implements ThemesManagerLocal {
     private EntityManager em;
 
     
-    public Long create(String titre, Utilisateur utilisateur){
+    public Long create(String titreTheme, Utilisateur utilisateur){
         Theme theme = new Theme();
-        theme.setTitre(titre);
-        theme.setUtilisateur(utilisateur);
-        utilisateur.addTheme(theme);
-        em.persist(theme);
-        em.flush();
-        theme.setUtilisateur(utilisateur);
-        //utilisateur.addTheme(theme);
-        return theme.getId();
+        
+        Query query = em.createQuery("SELECT t FROM Theme t WHERE t.titre LIKE :titre");
+        query.setParameter("titre", titreTheme);
+         
+        if (query.getResultList().isEmpty()) {
+             theme.setTitre(titreTheme);
+             theme.setUtilisateur(utilisateur);
+             utilisateur.addTheme(theme);
+             em.persist(theme);
+             em.flush();
+            
+            return theme.getId();
+        }else{
+            Theme themeExistant = (Theme) query.getSingleResult();
+       
+            return theme.getId();
+        }
         
     }
 
@@ -68,6 +79,14 @@ public class ThemesManager implements ThemesManagerLocal {
         tag.addTheme(theme);
         em.flush();
     }
+    
+    public List<Theme> findAll(){
+        
+        Query query = em.createQuery("SELECT t FROM Theme t");
+        
+        return (List<Theme>)query.getResultList();
+    }
+
 
 
 }

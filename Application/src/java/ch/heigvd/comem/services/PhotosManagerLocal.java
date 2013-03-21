@@ -8,6 +8,7 @@ import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -22,5 +23,6 @@ public interface PhotosManagerLocal {
     public Photo find(Long idPhoto) throws ExceptionIdPhoto;  
     public void associateTag(Long idPhoto, Long idTag);
     public Photo update (Long idPhoto,int points, String source, Utilisateur utilisateur,Theme theme )throws ExceptionIdPhoto;
+    public List<Photo> findAll();
     
 }

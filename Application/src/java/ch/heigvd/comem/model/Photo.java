@@ -41,6 +41,7 @@ public class Photo implements Serializable {
     @ManyToMany
     private List<Utilisateur> utilisateurs = new LinkedList<Utilisateur>();
     
+    
     public Theme getTheme() {
         return theme;
     }
@@ -72,7 +73,8 @@ public class Photo implements Serializable {
     public void setPoints(int points) {
         this.points = points;
     }
-
+    
+        
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
@@ -80,6 +82,25 @@ public class Photo implements Serializable {
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
+    
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
+    
+    
+    
     
     @Override
     public int hashCode() {
@@ -113,6 +134,7 @@ public class Photo implements Serializable {
     public void addTag(Tag tag){
         this.tags.add(tag);
     }  
+    
     
     public void test(){
         
