@@ -21,6 +21,8 @@ public class UtilisateurDTO implements Serializable {
     
     private Long id;
     
+    private Long idPlayer;
+    
     private String pseudo;
     
     private String email;
@@ -88,19 +90,15 @@ public class UtilisateurDTO implements Serializable {
     public void setPhotos_like(List<Photo> photos_like) {
         this.photos_like = photos_like;
     }
-    
-    /*
-    public void addPhoto(Photo photo){
-        this.photos.add(photo);
+
+    public Long getIdPlayer() {
+        return idPlayer;
+    }
+
+    public void setIdPlayer(Long idPlayer) {
+        this.idPlayer = idPlayer;
     }
     
-    public void addTheme(Theme theme){
-        this.themes.add(theme);
-    }
     
-    public void addPhotoLike(Photo photo){
-        this.photos_like.add(photo);
-    }
-    */
     
 }
