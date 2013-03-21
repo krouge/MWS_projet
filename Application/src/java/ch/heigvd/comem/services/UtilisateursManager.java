@@ -6,6 +6,7 @@ package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -77,6 +78,25 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         photo.addUtilisateurLike(utilisateur);
         em.flush();
     }
+    
+     public String login(String pseudoUser, String mdpUser){
+         
+
+         Query query = em.createQuery("SELECT u FROM Utilisateur u WHERE u.pseudo LIKE :pseudo AND u.mdp LIKE :mdp");
+         query.setParameter("pseudo", pseudoUser);
+         query.setParameter("mdp", mdpUser);
+         
+         
+         if (query.getResultList().isEmpty()) {
+
+            return "DEGAGE  "+mdpUser+pseudoUser;
+        }else{
+            Utilisateur utilisateurExistant = (Utilisateur) query.getSingleResult();
+       
+            return "BRAVO";
+        }
+                  
+     }
     
 
 }

@@ -42,7 +42,7 @@ public class ThemesManager implements ThemesManagerLocal {
         }else{
             Theme themeExistant = (Theme) query.getSingleResult();
        
-            return theme.getId();
+            return themeExistant.getId();
         }
         
     }
