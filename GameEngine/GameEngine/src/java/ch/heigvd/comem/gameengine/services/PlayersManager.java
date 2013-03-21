@@ -81,7 +81,7 @@ public class PlayersManager implements PlayersManagerLocal {
     @Override
     public List<Player> findAll() {
         
-        Query query = em.createQuery("SELECT p FROM Player");
+        Query query = em.createQuery("SELECT p FROM Player AS p");
         
         List<Player> listPlayer = (List<Player>)query.getResultList();
         
