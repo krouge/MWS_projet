@@ -8,7 +8,9 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,6 +29,7 @@ public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Column(name="ID", table="UTILISATEUR")
     private Long id;
     
     private String pseudo;
@@ -38,7 +41,7 @@ public class Utilisateur implements Serializable {
     @ManyToMany(mappedBy="utilisateurs", cascade=CascadeType.REMOVE)
     private List<Photo> photos_like = new LinkedList<Photo>();
     
-    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
     private List<Photo> photos = new LinkedList<Photo>();
     
     @OneToMany(mappedBy="utilisateur", cascade=CascadeType.REMOVE)
@@ -93,6 +96,17 @@ public class Utilisateur implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    @XmlTransient
+    public List<Photo> getPhotos_like() {
+        return photos_like;
+    }
+
+    public void setPhotos_like(List<Photo> photos_like) {
+        this.photos_like = photos_like;
+    }
+    
+    
 
     @Override
     public int hashCode() {

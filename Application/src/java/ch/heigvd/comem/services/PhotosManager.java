@@ -7,13 +7,14 @@ package ch.heigvd.comem.services;
 import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Tag;
-import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 
 /**
@@ -48,7 +49,6 @@ public class PhotosManager implements PhotosManagerLocal {
     
     public Photo find(Long idPhoto) throws ExceptionIdPhoto{
         Photo photo = em.find(Photo.class, idPhoto);
-        
         if (photo == null) {
             throw new ExceptionIdPhoto();
         }
@@ -88,5 +88,13 @@ public class PhotosManager implements PhotosManagerLocal {
             throw new ExceptionIdPhoto();
         }
         em.remove(photo);
+    }
+    
+    public List<Photo> findAll(){
+        
+        Query query = em.createQuery("SELECT p FROM Photo p");
+        
+        return (List<Photo>)query.getResultList();
+        
     }
 }

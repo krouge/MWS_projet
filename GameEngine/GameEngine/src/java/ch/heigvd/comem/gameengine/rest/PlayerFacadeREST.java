@@ -1,9 +1,7 @@
 package ch.heigvd.comem.gameengine.rest;
 
-import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Player;
 import ch.heigvd.comem.gameengine.services.PlayersManagerLocal;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -76,6 +74,7 @@ public class PlayerFacadeREST extends AbstractFacade<Player> {
         return super.findRange(new int[]{from, to});
     }
     
+    /*
     @GET
     @Path("{id}/badges")
     @Produces({"application/xml", "application/json"})
@@ -84,6 +83,8 @@ public class PlayerFacadeREST extends AbstractFacade<Player> {
         
         return player.getBadges();
     }
+    
+    */
     
     @GET
     @Path("leaderboard")

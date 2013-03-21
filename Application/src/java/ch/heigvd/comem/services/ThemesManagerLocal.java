@@ -8,6 +8,7 @@ import ch.heigvd.comem.exceptions.ExceptionIdTheme;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -22,5 +23,6 @@ public interface ThemesManagerLocal {
     public Theme find(Long id) throws ExceptionIdTheme; 
     public Theme update(Long id, String titre) throws ExceptionIdTheme;  
     public void associateTag(Long idTheme, Long idTag);
+    public List<Theme> findAll();
     
 }

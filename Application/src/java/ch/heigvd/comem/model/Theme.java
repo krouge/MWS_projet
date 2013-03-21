@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,8 +40,10 @@ public class Theme implements Serializable {
     
     @OneToMany(mappedBy="theme", cascade=CascadeType.REMOVE)
     private List<Photo> photos = new LinkedList<Photo>();
+    
+    
 
-    @XmlTransient
+    //@XmlTransient
     public List<Tag> getTags() {
         return tags;
     }
@@ -49,6 +52,7 @@ public class Theme implements Serializable {
         this.tags = tags;
     }
 
+    @XmlTransient
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }

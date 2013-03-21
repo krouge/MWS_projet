@@ -30,13 +30,18 @@ public class Player implements Serializable {
     private Long playerId;
     
     @OneToMany(mappedBy="player", cascade=CascadeType.REMOVE)
-    private List <Event> events = new LinkedList <Event>();
+    private List <Event> events;
     
     @ManyToMany(cascade=CascadeType.REMOVE)
-    private List <Badge> badges = new LinkedList <Badge>();
+    private List <Badge> badges;
     
     @NotNull
     private int points;
+    
+    public Player () {
+        events = new LinkedList <Event>();
+        badges = new LinkedList <Badge>();
+    }
 
     public Long getPlayerId() {
         return playerId;
@@ -54,7 +59,7 @@ public class Player implements Serializable {
         this.points = points;
     }
 
-    @XmlTransient
+    //@XmlTransient
     public List<Badge> getBadges() {
         return badges;
     }
