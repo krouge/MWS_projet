@@ -88,6 +88,7 @@ public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
         return utilisateurDTO;
     }
     
+    
     /*@GET
     @Path("{id}/themes")
     @Produces({"application/xml", "application/json"})
