@@ -32,6 +32,8 @@ public class Utilisateur implements Serializable {
     @Column(name="ID", table="UTILISATEUR")
     private Long id;
     
+    private Long idPlayer;
+    
     private String pseudo;
     
     private String email;
@@ -144,6 +146,16 @@ public class Utilisateur implements Serializable {
     public void addPhotoLike(Photo photo){
         this.photos_like.add(photo);
     }
+
+    public Long getIdPlayer() {
+        return idPlayer;
+    }
+
+    public void setIdPlayer(Long idPlayer) {
+        this.idPlayer = idPlayer;
+    }
+    
+    
     
     
 }

@@ -6,14 +6,22 @@ package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
-import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  *
@@ -34,8 +42,27 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         utilisateur.setMdp(mdp);
         em.persist(utilisateur);
         em.flush();
+        try {
+            createPlayer(utilisateur.getId());
+        } catch (JSONException ex) {
+            Logger.getLogger(UtilisateursManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return utilisateur.getId();
         
+    }
+    
+    public void createPlayer(Long id) throws JSONException{
+        ClientConfig cc = new DefaultClientConfig();
+        Client c = Client.create(cc);
+        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players");
+        String jsonObject = "{\"points\":\"0\"}";
+        //Utilisateur request = r.accept(MediaType.APPLICATION_JSON_TYPE,MediaType.APPLICATION_XML_TYPE).type(MediaType.APPLICATION_JSON_TYPE).post(Utilisateur.class, jsonObject);        
+        ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(ClientResponse.class, jsonObject);
+        em.find(Utilisateur.class, id).setEmail(response.getEntityInputStream().toString());
+        response.getEntityInputStream().toString();
+        JSONObject json = new JSONObject(response.getEntityInputStream().toString());
+        //return response.getLocation().toString();
+   
     }
 
     public void delete(Long id) throws ExceptionIdUtilisateur {
