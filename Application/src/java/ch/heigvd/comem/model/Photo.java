@@ -73,7 +73,8 @@ public class Photo implements Serializable {
     public void setPoints(int points) {
         this.points = points;
     }
-
+    
+        
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
