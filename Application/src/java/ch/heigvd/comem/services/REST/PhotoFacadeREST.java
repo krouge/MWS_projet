@@ -29,57 +29,59 @@ import javax.ws.rs.QueryParam;
  * @author Jonas
  */
 @Stateless
-@Path("ch.heigvd.comem.model.photo")
-public class PhotoFacadeREST extends AbstractFacade<Photo> {
-    @PersistenceContext(unitName = "ApplicationPU")
-    private EntityManager em;
+@Path("photos")
+public class PhotoFacadeREST {
     
     @EJB
-    PhotosManagerLocal photosManagerLocal;
+    PhotosManagerLocal photosManager;
 
     public PhotoFacadeREST() {
-        super(Photo.class);
+        
     }
 
     @POST
-    @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Photo entity) {
-        super.create(entity);
+        photosManager.create(entity.getPoints(), entity.getSource(), entity.getUtilisateur(), entity.getTheme());
     }
 
     @PUT
-    @Override
+    @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(Photo entity) {
-        super.edit(entity);
+    public void edit(@PathParam("id") Long id,Photo entity) throws ExceptionIdPhoto {
+        photosManager.update(entity.getId(),entity.getPoints(), entity.getSource(), entity.getUtilisateur(), entity.getTheme());
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+    public void remove(@PathParam("id") Long id) throws ExceptionIdPhoto {
+        photosManager.delete(id);
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public PhotoDTO find(@PathParam("id") Long id, @QueryParam("tags") Long paramTag, @QueryParam("user") Long paramUser) throws ExceptionIdPhoto {
+    public PhotoDTO find(@PathParam("id") Long id, @QueryParam("tags") Long paramTag, @QueryParam("utilisateur") Long paramUtilisateur) throws ExceptionIdPhoto {
         
-        Photo photo = photosManagerLocal.find(id);
+        Photo photo = photosManager.find(id);
+        
         PhotoDTO photoDTO = new PhotoDTO();
         photoDTO.setPoints(photo.getPoints());
         photoDTO.setSource(photo.getSource());
         
         
-        if (paramUser != null && paramUser == 1) {
+        if (paramUtilisateur != null && paramUtilisateur == 1) {
             photoDTO.setUtilisateur(photo.getUtilisateur());
         }
         
         if (paramTag != null && paramTag == 1) {
             photoDTO.setTags(photo.getTags());
         }
-        
+        /*
+        if (paramLike != null && paramLike == 1) {
+            photoDTO.setUtilisateurs(photo.getUtilisateurs());
+        }
+        */
         return photoDTO;
     }
 
@@ -87,7 +89,7 @@ public class PhotoFacadeREST extends AbstractFacade<Photo> {
     @Produces({"application/xml", "application/json"})
     public List<PhotoDTO> findAll(@QueryParam("tags") Long paramTag, @QueryParam("user") Long paramUser) {
         
-         List<Photo> listePhoto =  super.findAll();
+         List<Photo> listePhoto =  photosManager.findAll();
          List<PhotoDTO> listePhotoDTO = new LinkedList<PhotoDTO>();
          
          for(Photo photo : listePhoto){
@@ -103,14 +105,19 @@ public class PhotoFacadeREST extends AbstractFacade<Photo> {
              if (paramTag != null && paramTag == 1) {
                  photoDTO.setTags(photo.getTags());
              }
-             
+             /*
+             if (paramLike != null && paramLike == 1) {
+                 photoDTO.setUtilisateurs(photo.getUtilisateurs());
+             }
+             */
              listePhotoDTO.add(photoDTO);
          }
          
          
          return listePhotoDTO;
     }
-
+    
+    /*
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
@@ -124,10 +131,5 @@ public class PhotoFacadeREST extends AbstractFacade<Photo> {
     public String countREST() {
         return String.valueOf(super.count());
     }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-    
+    */
 }
