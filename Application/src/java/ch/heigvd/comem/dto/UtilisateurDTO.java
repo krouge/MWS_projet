@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.heigvd.comem.model;
+package ch.heigvd.comem.dto;
 
+import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.model.Theme;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,23 +29,23 @@ public class UtilisateurDTO implements Serializable {
     
     private List<Photo> photos_like = new LinkedList<Photo>();
     
-    private List<Photo> photos = new LinkedList<Photo>();
+    private List<PhotoDTO> photos = new LinkedList<PhotoDTO>();
     
-    private List<Theme> themes = new LinkedList<Theme>();
+    private List<ThemeDTO> themes = new LinkedList<ThemeDTO>();
 
-    public List<Theme> getThemes() {
+    public List<ThemeDTO> getThemes() {
         return themes;
     }
 
-    public void setThemes(List<Theme> themes) {
+    public void setThemes(List<ThemeDTO> themes) {
         this.themes = themes;
     }
 
-    public List<Photo> getPhotos() {
+    public List<PhotoDTO> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<Photo> photos) {
+    public void setPhotos(List<PhotoDTO> photos) {
         this.photos = photos;
     }
     
@@ -78,7 +80,16 @@ public class UtilisateurDTO implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public List<Photo> getPhotos_like() {
+        return photos_like;
+    }
+
+    public void setPhotos_like(List<Photo> photos_like) {
+        this.photos_like = photos_like;
+    }
     
+    /*
     public void addPhoto(Photo photo){
         this.photos.add(photo);
     }
@@ -90,6 +101,6 @@ public class UtilisateurDTO implements Serializable {
     public void addPhotoLike(Photo photo){
         this.photos_like.add(photo);
     }
-    
+    */
     
 }

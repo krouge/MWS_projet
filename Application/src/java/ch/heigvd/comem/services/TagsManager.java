@@ -5,12 +5,13 @@
 package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.exceptions.ExceptionIdTag;
-import ch.heigvd.comem.exceptions.ExceptionIdTheme;
 import ch.heigvd.comem.model.Tag;
-import ch.heigvd.comem.model.Tag;
+import ch.heigvd.comem.model.Utilisateur;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,13 +23,26 @@ public class TagsManager implements TagsManagerLocal {
     @PersistenceContext
     EntityManager em; 
     
-    public Long create(String titre){
+    public Long create(String titreTag){
         Tag tag = new Tag();
-        tag.setTitre(titre);
         
-        em.persist(tag);
-        em.flush();
-        return tag.getId();
+        Query query = em.createQuery("SELECT t FROM Tag t WHERE t.titre LIKE :titre");
+        query.setParameter("titre", titreTag);
+         
+        if (query.getResultList().isEmpty()) {
+            tag.setTitre(titreTag);
+            em.persist(tag);
+            em.flush();
+            
+            return tag.getId();
+        }else{
+            Tag tagExistant = (Tag) query.getSingleResult();
+            
+            return tagExistant.getId();
+        }
+        
+            
+        
     }
     
     public void delete(Long idTag) throws ExceptionIdTag {
@@ -60,5 +74,11 @@ public class TagsManager implements TagsManagerLocal {
         }else{       
             return tag;
         }   
+    }
+    
+    public List<Tag> findAll(){
+        Query query = em.createQuery("SELECT t FROM Tag t");
+        
+        return (List<Tag>)query.getResultList();
     }
 }

@@ -96,7 +96,8 @@ public class Utilisateur implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
+    
+    @XmlTransient
     public List<Photo> getPhotos_like() {
         return photos_like;
     }

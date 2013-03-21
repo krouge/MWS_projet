@@ -61,7 +61,7 @@ public class PhotoFacadeREST {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public PhotoDTO find(@PathParam("id") Long id, @QueryParam("tags") Long paramTag, @QueryParam("utilisateur") Long paramUtilisateur) throws ExceptionIdPhoto {
+    public PhotoDTO find(@PathParam("id") Long id, @QueryParam("tags") Long paramTag, @QueryParam("utilisateur") Long paramUtilisateur, @QueryParam("like") Long paramLike) throws ExceptionIdPhoto {
         
         Photo photo = photosManager.find(id);
         
@@ -77,17 +77,17 @@ public class PhotoFacadeREST {
         if (paramTag != null && paramTag == 1) {
             photoDTO.setTags(photo.getTags());
         }
-        /*
+         
         if (paramLike != null && paramLike == 1) {
             photoDTO.setUtilisateurs(photo.getUtilisateurs());
         }
-        */
+        
         return photoDTO;
     }
 
     @GET
     @Produces({"application/xml", "application/json"})
-    public List<PhotoDTO> findAll(@QueryParam("tags") Long paramTag, @QueryParam("user") Long paramUser) {
+    public List<PhotoDTO> findAll(@QueryParam("tags") Long paramTag, @QueryParam("utilisateur") Long paramUser, @QueryParam("like") Long paramLike) {
         
          List<Photo> listePhoto =  photosManager.findAll();
          List<PhotoDTO> listePhotoDTO = new LinkedList<PhotoDTO>();
@@ -105,11 +105,11 @@ public class PhotoFacadeREST {
              if (paramTag != null && paramTag == 1) {
                  photoDTO.setTags(photo.getTags());
              }
-             /*
+             
              if (paramLike != null && paramLike == 1) {
                  photoDTO.setUtilisateurs(photo.getUtilisateurs());
              }
-             */
+             
              listePhotoDTO.add(photoDTO);
          }
          

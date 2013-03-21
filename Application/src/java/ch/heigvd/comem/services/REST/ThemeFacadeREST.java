@@ -4,13 +4,18 @@
  */
 package ch.heigvd.comem.services.REST;
 
+import ch.heigvd.comem.dto.PhotoDTO;
+import ch.heigvd.comem.dto.TagDTO;
 import ch.heigvd.comem.dto.ThemeDTO;
+import ch.heigvd.comem.exceptions.ExceptionIdTheme;
+import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
+import ch.heigvd.comem.services.ThemesManagerLocal;
 import java.util.LinkedList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,55 +31,46 @@ import javax.ws.rs.QueryParam;
  * @author Jonas
  */
 @Stateless
-@Path("theme")
-public class ThemeFacadeREST extends AbstractFacade<Theme> {
-    @PersistenceContext(unitName = "ApplicationPU")
-    private EntityManager em;
-
+@Path("themes")
+public class ThemeFacadeREST {
+    
+    @EJB
+    ThemesManagerLocal themesManager;
+    
     public ThemeFacadeREST() {
-        super(Theme.class);
     }
 
     @POST
-    @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Theme entity) {
-        super.create(entity);
+        themesManager.create(entity.getTitre(), entity.getUtilisateur());
     }
 
     @PUT
-    @Override
+    @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(Theme entity) {
-        super.edit(entity);
+    public void edit(@PathParam("id") Long id, Theme entity) throws ExceptionIdTheme {
+        themesManager.update(entity.getId(), entity.getTitre());
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+    public void remove(@PathParam("id") Long id) throws ExceptionIdTheme {
+        themesManager.delete(id);
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Theme find(@PathParam("id") Long id) {
-        return super.find(id);
-    }
-    
-    @GET
-    @Path("{id}/photos")
-    @Produces({"application/xml", "application/json"})
-    public List<Photo> findPhoto(@PathParam("id") Long id) {
-
-        return super.find(id).getPhotos();
+    public Theme find(@PathParam("id") Long id) throws ExceptionIdTheme {
+        return themesManager.find(id);
     }
 
     @GET
     @Produces({"application/xml", "application/json"})
     public List<ThemeDTO> findAll(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur) {
         
-        List<Theme> themes = super.findAll();
+        List<Theme> themes = themesManager.findAll();
         List<ThemeDTO> themesDTO = new LinkedList<ThemeDTO>();
         
         for(Theme theme : themes){
@@ -83,11 +79,39 @@ public class ThemeFacadeREST extends AbstractFacade<Theme> {
             themeDTO.setTitre(theme.getTitre());
             
             if(withPhotos != null && withPhotos == 1){
-                themeDTO.setPhotos(theme.getPhotos());
+                List<PhotoDTO> photoDTOS = new LinkedList<PhotoDTO>();
+                List<Photo> photos = theme.getPhotos();
+
+                for(Photo photo : photos){
+
+                    PhotoDTO photoDto = new PhotoDTO();
+                    photoDto.setPoints(photo.getPoints());
+                    photoDto.setSource(photo.getSource());
+
+                    photoDTOS.add(photoDto);
+
+                }
+
+                themeDTO.setPhotos(photoDTOS);
             }
             
+            
             if(withTags != null && withTags == 1){
-                themeDTO.setTags(theme.getTags());
+                
+                List<TagDTO> tagDTOS = new LinkedList<TagDTO>();
+                List<Tag> tags = theme.getTags();
+
+                for(Tag tag : tags){
+
+                    TagDTO tagDTO = new TagDTO();
+                    tagDTO.setTitre(tag.getTitre());
+
+                    tagDTOS.add(tagDTO);
+
+                }
+
+                themeDTO.setTags(tagDTOS);
+                
             }
             
             if(withUtilisateur != null && withUtilisateur == 1){
@@ -95,11 +119,14 @@ public class ThemeFacadeREST extends AbstractFacade<Theme> {
             }
             
             themesDTO.add(themeDTO);
+            
         }
+        
         
         return themesDTO;
     }
-
+    
+    /*
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
@@ -118,5 +145,6 @@ public class ThemeFacadeREST extends AbstractFacade<Theme> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    */
     
 }

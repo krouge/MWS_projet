@@ -29,17 +29,17 @@ public class ThemeDTO {
     
     private String titre;
     
-    private List<Tag> tags = new LinkedList<Tag>();
+    private List<TagDTO> tags = new LinkedList<TagDTO>();
     
     private Utilisateur utilisateur;
     
-    private List<Photo> photos = new LinkedList<Photo>();
+    private List<PhotoDTO> photos = new LinkedList<PhotoDTO>();
 
-    public List<Tag> getTags() {
+    public List<TagDTO> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(List<TagDTO> tags) {
         this.tags = tags;
     }
 
@@ -51,11 +51,11 @@ public class ThemeDTO {
         this.utilisateur = utilisateur;
     }
 
-    public List<Photo> getPhotos() {
+    public List<PhotoDTO> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<Photo> photos) {
+    public void setPhotos(List<PhotoDTO> photos) {
         this.photos = photos;
     }
     
@@ -77,7 +77,7 @@ public class ThemeDTO {
     public void setId(Long id) {
         this.id = id;
     }
-    
+    /*
     public void addPhoto(Photo photo){
         this.photos.add(photo);
     }
@@ -85,5 +85,5 @@ public class ThemeDTO {
     public void addTag(Tag tag){
         this.tags.add(tag);
     }
-    
+    */
 }

@@ -34,10 +34,11 @@ public class TestDataManager implements TestDataManagerLocal {
     private TagsManagerLocal tagManager;
     
     public void generateTestData(){
-        
+        /*
         Utilisateur utilisateur = null;
         Theme theme = null;
         Tag tag = null;
+        
         Long id = utilisateurManager.create("theplayer777", "jonas@jonas.ch", "1234");
         
         
@@ -45,13 +46,13 @@ public class TestDataManager implements TestDataManagerLocal {
         
        
         Long idTheme = 0L;
-        //Long idTheme2 = 0L;
+        Long idTheme2 = 0L;
         
         try{
             utilisateur = utilisateurManager.find(id);
             try {
                 idTheme = themeManager.create("Theme",utilisateur);
-                //idTheme2 = themeManager.create("Theme",utilisateur);
+                idTheme2 = themeManager.create("Themes",utilisateur);
                 theme = themeManager.find(idTheme);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -64,7 +65,7 @@ public class TestDataManager implements TestDataManagerLocal {
         photoManager.associateTag(idPhoto, idTag);
         themeManager.associateTag(idTheme, idTag);
         utilisateurManager.associatePhotoLike(id, idPhoto);
-        /*
+        */
         Utilisateur utilisateur = null;
         Utilisateur utilisateur2 = null;
         Utilisateur utilisateur3 = null;
@@ -85,7 +86,7 @@ public class TestDataManager implements TestDataManagerLocal {
         
         Long idTheme=0L;
         Long idTheme2=0L;
-        Long idTheme3=0L;
+        //Long idTheme3=0L;
         Long idTheme4=0L;
         
         try{
@@ -96,8 +97,8 @@ public class TestDataManager implements TestDataManagerLocal {
                 
 
                 idTheme = themeManager.create("Neige",utilisateur);
-                idTheme2 = themeManager.create("Chien",utilisateur);
-                //Long idTheme3 = themeManager.create("Chien",utilisateur);
+                idTheme2 = themeManager.create("Chien",utilisateur3);
+                //idTheme3 = themeManager.create("Chien",utilisateur);
                 idTheme4 = themeManager.create("Montagne",utilisateur);
                 
                 theme = themeManager.find(idTheme);
@@ -116,29 +117,29 @@ public class TestDataManager implements TestDataManagerLocal {
         Long idPhoto = photoManager.create(10, "s", utilisateur, theme);
         Long idPhoto2 = photoManager.create(2, "http://comem.ch/new.jpg", utilisateur2, theme2);
         Long idPhoto3 = photoManager.create(12, "http://comem.ch/xxx.jpg", utilisateur2, theme2);
-        Long idPhoto4 = photoManager.create(100, "http://comem.ch/new.jpg", utilisateur3, theme);
-        Long idPhoto5 = photoManager.create(78, "http://comem.ch/new.jpg", utilisateur3, theme4);
-        Long idPhoto6 = photoManager.create(69, "http://comem.ch/new.jpg", utilisateur, theme);
+        Long idPhoto4 = photoManager.create(100, "http://comem.ch/new1.jpg", utilisateur3, theme);
+        Long idPhoto5 = photoManager.create(78, "http://comem.ch/new2.jpg", utilisateur3, theme4);
+        Long idPhoto6 = photoManager.create(69, "http://comem.ch/new3.jpg", utilisateur, theme);
         
         photoManager.associateTag(idPhoto, idTag2);
         photoManager.associateTag(idPhoto, idTag3);
-//        photoManager.associateTag(idPhoto3, idTag);
-//        photoManager.associateTag(idPhoto4, idTag2);
+        photoManager.associateTag(idPhoto3, idTag);
+        photoManager.associateTag(idPhoto4, idTag2);
         
         
-        utilisateurManager.associatePhotoLike(idUser, idPhoto);
-//        utilisateurManager.associatePhotoLike(idUser2, idPhoto2);
-//        utilisateurManager.associatePhotoLike(idUser2, idPhoto3);
-//        utilisateurManager.associatePhotoLike(idUser3, idPhoto4);
-//        utilisateurManager.associatePhotoLike(idUser, idPhoto5);
-//        utilisateurManager.associatePhotoLike(idUser3, idPhoto6);
+        utilisateurManager.associatePhotoLike(idUser3, idPhoto);
+        utilisateurManager.associatePhotoLike(idUser2, idPhoto4);
+        utilisateurManager.associatePhotoLike(idUser, idPhoto4);
+        utilisateurManager.associatePhotoLike(idUser3, idPhoto4);
+        utilisateurManager.associatePhotoLike(idUser, idPhoto5);
+        utilisateurManager.associatePhotoLike(idUser3, idPhoto6);
         
         themeManager.associateTag(idTheme, idTag2);
         themeManager.associateTag(idTheme2, idTag3);
         themeManager.associateTag(idTheme, idTag3);
         themeManager.associateTag(idTheme4, idTag2);
         themeManager.associateTag(idTheme4, idTag);
-        */
+        
     }
 
 }
