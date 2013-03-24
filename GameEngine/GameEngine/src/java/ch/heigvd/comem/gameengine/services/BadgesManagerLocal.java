@@ -19,5 +19,5 @@ public interface BadgesManagerLocal {
 
     Badge update(Long badgeId, String name, String description, String source);
     
-    void delete(Long badgeId);
+    void remove(Long badgeId);
 }

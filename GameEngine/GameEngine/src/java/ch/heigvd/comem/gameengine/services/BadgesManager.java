@@ -67,7 +67,7 @@ public class BadgesManager implements BadgesManagerLocal {
     }
 
     @Override
-    public void delete(Long badgeId) {
+    public void remove(Long badgeId) {
         
         Badge badge = em.find(Badge.class, badgeId);
         

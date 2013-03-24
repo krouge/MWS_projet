@@ -42,7 +42,7 @@ public class BadgeFacadeREST {
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
-        badgesManagerLocal.delete(badgesManagerLocal.find(id).getBadgeId());
+        badgesManagerLocal.remove(badgesManagerLocal.find(id).getBadgeId());
     }
 
     @GET

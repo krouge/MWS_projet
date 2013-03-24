@@ -1,10 +1,11 @@
 package ch.heigvd.comem.gameengine.rest;
 
 import ch.heigvd.comem.gameengine.model.Rule;
+import ch.heigvd.comem.gameengine.services.RulesManagerLocal;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,65 +21,54 @@ import javax.ws.rs.Produces;
  */
 @Stateless
 @Path("rules")
-public class RuleFacadeREST extends AbstractFacade<Rule> {
-    @PersistenceContext(unitName = "GameEnginePU")
-    private EntityManager em;
-
-    public RuleFacadeREST() {
-        super(Rule.class);
-    }
+public class RuleFacadeREST {
+   
+    @EJB
+    private RulesManagerLocal rulesManagerLocal;
 
     @POST
-    @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Rule entity) {
-        super.create(entity);
+        rulesManagerLocal.create(entity.getEventType(), entity.getNumberOfPoints(), entity.getApplication());
     }
 
     @PUT
-    @Override
     @Consumes({"application/xml", "application/json"})
     public void edit(Rule entity) {
-        super.edit(entity);
+        rulesManagerLocal.update(entity.getRuleId(), entity.getEventType(), entity.getNumberOfPoints(), entity.getApplication());
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+        rulesManagerLocal.remove(id);
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
     public Rule find(@PathParam("id") Long id) {
-        return super.find(id);
+        return rulesManagerLocal.find(id);
     }
 
     @GET
-    @Override
     @Produces({"application/xml", "application/json"})
     public List<Rule> findAll() {
-        return super.findAll();
+        return rulesManagerLocal.findAll();
     }
 
-    @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Rule> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+//    @GET
+//    @Path("{from}/{to}")
+//    @Produces({"application/xml", "application/json"})
+//    public List<Rule> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+//        return super.findRange(new int[]{from, to});
+//    }
+//
+//    @GET
+//    @Path("count")
+//    @Produces("text/plain")
+//    public String countREST() {
+//        return String.valueOf(super.count());
+//    }
     
 }
