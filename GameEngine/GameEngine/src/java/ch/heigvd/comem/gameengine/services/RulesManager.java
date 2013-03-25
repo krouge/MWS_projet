@@ -8,6 +8,7 @@ import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Rule;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
@@ -25,14 +26,17 @@ public class RulesManager implements RulesManagerLocal {
     @PersistenceContext
     private EntityManager em;
     
+    @EJB
+    private ApplicationsManagerLocal appManagerLocal;
+    
     @Override
-    public Long create(String eventType, int numberOfPoints, Application application, Badge badge) {
+    public Long create(String eventType, int numberOfPoints, String apiKey, String apiSecret, Badge badge) {
         
        Rule rule = new Rule();
         
        rule.setEventType(eventType);
        rule.setNumberOfPoints(numberOfPoints);
-       rule.setApplication(application);
+       rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
        rule.setBadge(badge);
        em.persist(rule); em.flush();
         
@@ -40,13 +44,13 @@ public class RulesManager implements RulesManagerLocal {
     }
 
     @Override
-    public Long create(String eventType, int numberOfPoints, Application application) {
+    public Long create(String eventType, int numberOfPoints, String apiKey, String apiSecret) {
         
         Rule rule = new Rule();
         
         rule.setEventType(eventType);
         rule.setNumberOfPoints(numberOfPoints);
-        rule.setApplication(application);
+        rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
         em.persist(rule); em.flush();
         
         return rule.getRuleId();
@@ -78,26 +82,26 @@ public class RulesManager implements RulesManagerLocal {
     }
 
     @Override
-    public Rule update(Long ruleId, String eventType, int numberOfPoints, Application application, Badge badge) {
+    public Rule update(Long ruleId, String eventType, int numberOfPoints, String apiKey, String apiSecret, Badge badge) {
         
         Rule rule = em.find(Rule.class, ruleId);
         
         rule.setEventType(eventType);
         rule.setNumberOfPoints(numberOfPoints);
-        rule.setApplication(application);
+        rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
         rule.setBadge(badge);
         
         return rule;
     }
 
     @Override
-    public Rule update(Long ruleId, String eventType, int numberOfPoints, Application application) {
+    public Rule update(Long ruleId, String eventType, int numberOfPoints,String apiKey, String apiSecret) {
         
         Rule rule = em.find(Rule.class, ruleId);
         
         rule.setEventType(eventType);
         rule.setNumberOfPoints(numberOfPoints);
-        rule.setApplication(application);
+        rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
         
         return rule;
     }

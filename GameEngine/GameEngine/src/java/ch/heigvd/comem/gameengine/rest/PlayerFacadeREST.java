@@ -31,9 +31,7 @@ public class PlayerFacadeREST {
     public Player create(Player entity) {
         
         Long playerId = playersManagerLocal.create(entity.getPoints());
-        Player player = playersManagerLocal.find(playerId);
-        
-        return player;
+        return playersManagerLocal.find(playerId);
     }
 
     @PUT

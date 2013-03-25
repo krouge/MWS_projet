@@ -92,7 +92,7 @@ public class TestDataManager implements TestDataManagerLocal {
             
             Long rule = rulesManagerLocal.create("CreationPhoto", 
                                       20, 
-                                      applicationsManagerLocal.find(apiKey,apiSecret));
+                                      apiKey, apiSecret);
             
             rulesManagerLocal.associateBadge(rule, badgeRule);
         }
