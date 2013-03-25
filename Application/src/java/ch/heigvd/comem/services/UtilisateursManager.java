@@ -58,10 +58,10 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         String jsonObject = "{\"points\":\"0\"}";
         //Utilisateur request = r.accept(MediaType.APPLICATION_JSON_TYPE,MediaType.APPLICATION_XML_TYPE).type(MediaType.APPLICATION_JSON_TYPE).post(Utilisateur.class, jsonObject);        
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(ClientResponse.class, jsonObject);
-        em.find(Utilisateur.class, id).setEmail(response.getEntity(String.class));
-        response.getEntityInputStream().toString();
-        JSONObject json = new JSONObject(response.getEntityInputStream().toString());
-        //return response.getLocation().toString();
+        
+        JSONObject json = new JSONObject(response.getEntity(String.class));
+        String playerId = json.getString("playerId");
+        em.find(Utilisateur.class, id).setIdPlayer(Long.parseLong(playerId));
    
     }
 

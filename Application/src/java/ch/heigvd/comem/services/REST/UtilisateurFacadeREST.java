@@ -146,6 +146,7 @@ public class UtilisateurFacadeREST{
             utilisateurDTO.setEmail(utilisateur.getEmail());
             utilisateurDTO.setMdp(utilisateur.getMdp());
             utilisateurDTO.setPseudo(utilisateur.getPseudo());
+            utilisateurDTO.setIdPlayer(utilisateur.getIdPlayer());
             
             if(withThemes != null && withThemes == 1){
                 
