@@ -4,17 +4,25 @@
  */
 package ch.heigvd.comem.services;
 
+import ch.heigvd.comem.config.GestionnaireGameEngine;
 import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.codehaus.jettison.json.JSONObject;
 
 
 /**
@@ -44,8 +52,20 @@ public class PhotosManager implements PhotosManagerLocal {
 
         theme.addPhoto(photo);
         
+        createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"CreationPhoto", new Date());
+        
         return photo.getId();
     }  
+    
+    private void createEvent(Utilisateur utilisateur, String API_KEY, String API_SECRET, String creationPhoto, Date date) {
+        ClientConfig cc = new DefaultClientConfig();
+        Client c = Client.create(cc);
+        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/events");
+        String jsonObject = "{\"utilisateur\":\""+utilisateur+"\",\"apiKey\":\""+API_KEY+"\",\"apiSecret\":\""+API_SECRET+"\",\"eventType\":\""+creationPhoto+"\",\"eventTime\":\""+date+"\"}";
+        
+        //return jsonObject;
+    }
+    
     
     public Photo find(Long idPhoto) throws ExceptionIdPhoto{
         Photo photo = em.find(Photo.class, idPhoto);
@@ -97,4 +117,6 @@ public class PhotosManager implements PhotosManagerLocal {
         return (List<Photo>)query.getResultList();
         
     }
+
+
 }
