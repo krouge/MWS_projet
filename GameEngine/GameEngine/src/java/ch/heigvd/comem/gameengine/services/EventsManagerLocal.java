@@ -18,13 +18,13 @@ import javax.ejb.Local;
 @Local
 public interface EventsManagerLocal {
     
-     Long create(Player player, Application application, String eventType, Timestamp eventTime);
+     Long create(Long playerId, String apiKey, String apiSecret, String eventType, Timestamp eventTime);
      
      Event find(Long eventId);
      
      List<Event> findAll();
      
-     Event update(Long eventId, Player player, Application application, String eventType, Timestamp eventTime);
+     Event update(Long eventId, Player player, String apiKey, String apiSecret, String eventType, Timestamp eventTime);
      
      void remove(Long eventId);
 }

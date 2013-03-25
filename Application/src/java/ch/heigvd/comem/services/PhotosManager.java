@@ -4,17 +4,31 @@
  */
 package ch.heigvd.comem.services;
 
+import ch.heigvd.comem.config.GestionnaireGameEngine;
 import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 
 /**
@@ -44,8 +58,41 @@ public class PhotosManager implements PhotosManagerLocal {
 
         theme.addPhoto(photo);
         
+        String json = null;
+        try {
+            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"CreationPhoto", new Date());
+        } catch (JSONException ex) {
+            Logger.getLogger(PhotosManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        photo.setSource(json);
+        
         return photo.getId();
     }  
+    
+    private String createEvent(Utilisateur utilisateur, String API_KEY, String API_SECRET, String creationPhoto, Date date) throws JSONException {
+        ClientConfig cc = new DefaultClientConfig();
+        Client c = Client.create(cc);
+
+        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/events");
+        
+        JSONObject jsonPrincipal = new JSONObject();
+        
+        JSONObject player = new JSONObject();
+        player.put("playerId", utilisateur.getIdPlayer());
+        
+        JSONObject app = new JSONObject();
+        app.put("apiKey", API_KEY);
+        app.put("apiSecret", API_SECRET);
+        
+        jsonPrincipal.put("player", player);
+        jsonPrincipal.put("application", app);
+        jsonPrincipal.put("eventType", creationPhoto);        
+        
+        ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(ClientResponse.class, jsonPrincipal);
+
+        return jsonPrincipal.toString();
+    }
+    
     
     public Photo find(Long idPhoto) throws ExceptionIdPhoto{
         Photo photo = em.find(Photo.class, idPhoto);
@@ -97,4 +144,6 @@ public class PhotosManager implements PhotosManagerLocal {
         return (List<Photo>)query.getResultList();
         
     }
+
+
 }

@@ -4,11 +4,11 @@
  */
 package ch.heigvd.comem.gameengine.services;
 
-import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.model.Event;
 import ch.heigvd.comem.gameengine.model.Player;
 import java.sql.Timestamp;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
@@ -25,14 +25,20 @@ public class EventsManager implements EventsManagerLocal{
 
     @PersistenceContext
     EntityManager em;
+    @EJB
+    ApplicationsManagerLocal applicationsManagerLocal;
+    
+    @EJB
+    PlayersManagerLocal playersManagerLocal;
     
     @Override
-    public Long create(Player player, Application application, String eventType, Timestamp eventTime) {
+    public Long create(Long playerId, String apiKey, String apiSecret, String eventType, Timestamp eventTime) {
         
+        Player player = playersManagerLocal.find(playerId);
         Event event = new Event();
        
         event.setPlayer(player);
-        event.setApplication(application);
+        event.setApplication(applicationsManagerLocal.find(apiKey, apiSecret));
         event.setEventType(eventType);
         event.setEventTime(eventTime);
         player.addEvent(event);
@@ -66,14 +72,14 @@ public class EventsManager implements EventsManagerLocal{
     }
 
     @Override
-    public Event update(Long eventId, Player player, Application application, String eventType, Timestamp eventTime) {
+    public Event update(Long eventId, Player player, String apiKey, String apiSecret, String eventType, Timestamp eventTime) {
         
         Event event = em.find(Event.class, eventId);
         
         event.setPlayer(player);
         player.getEvents().remove(event);
         player.addEvent(event);
-        event.setApplication(application);
+        event.setApplication(applicationsManagerLocal.find(apiKey, apiSecret));
         event.setEventType(eventType);
         event.setEventTime(eventTime);
         

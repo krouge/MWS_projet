@@ -15,6 +15,8 @@ public interface ApplicationsManagerLocal {
 
     Application find(Long applicationId);
     
+    Application find(String apiKey, String apiSecret);
+    
     List<Application> findAll();
 
     Application update(Long applicationId, String name, String description, String apiKey, String apiSecret);
