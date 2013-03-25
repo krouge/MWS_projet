@@ -5,7 +5,6 @@ import ch.heigvd.comem.gameengine.services.EventsManagerLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,8 +27,11 @@ public class EventFacadeREST {
     
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Event entity) {
-        eventManagerLocal.create(entity.getPlayer(), entity.getApplication(), entity.getEventType(), entity.getEventTime());
+    @Produces({"application/xml", "application/json"})
+    public Event create(Event entity) {
+        Long eventId = eventManagerLocal.create(entity.getPlayer(), entity.getApplication(), entity.getEventType(), entity.getEventTime());
+        
+        return eventManagerLocal.find(eventId);
     }
 
     @PUT

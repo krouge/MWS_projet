@@ -29,8 +29,11 @@ public class BadgeFacadeREST {
 
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Badge entity) {
-        badgesManagerLocal.create(entity.getName(), entity.getDescription(), entity.getSource());
+    @Produces({"application/xml", "application/json"})
+    public Badge create(Badge entity) {
+        Long badgeId = badgesManagerLocal.create(entity.getName(), entity.getDescription(), entity.getSource());
+        
+        return badgesManagerLocal.find(badgeId);
     }
 
     @PUT

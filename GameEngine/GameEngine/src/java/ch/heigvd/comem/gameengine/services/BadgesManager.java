@@ -1,7 +1,6 @@
 package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Badge;
-import ch.heigvd.comem.gameengine.model.Player;
 import ch.heigvd.comem.gameengine.model.Rule;
 import java.util.List;
 import javax.ejb.Stateless;

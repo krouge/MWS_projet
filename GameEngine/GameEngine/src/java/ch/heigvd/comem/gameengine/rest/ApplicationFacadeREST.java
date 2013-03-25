@@ -5,7 +5,6 @@ import ch.heigvd.comem.gameengine.services.ApplicationsManagerLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,8 +27,11 @@ public class ApplicationFacadeREST {
     
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Application entity) {
-        appManagerLocal.create(entity.getName(), entity.getDescription(), entity.getApiKey(), entity.getApiSecret());
+    @Produces({"application/xml", "application/json"})
+    public Application create(Application entity) {
+        Long appId = appManagerLocal.create(entity.getName(), entity.getDescription(), entity.getApiKey(), entity.getApiSecret());
+        
+        return appManagerLocal.find(appId);
     }
 
     @PUT
