@@ -25,5 +25,6 @@ public interface ThemesManagerLocal {
     public void associateTag(Long idTheme, Long idTag);
     public List<Theme> findAll();
     public List<Theme> findLast20();
+    public List<Theme> findByName(String search);
     
 }
