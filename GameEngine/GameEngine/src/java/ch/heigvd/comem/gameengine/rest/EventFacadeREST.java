@@ -29,7 +29,7 @@ public class EventFacadeREST {
     @Consumes({"application/xml", "application/json"})
     @Produces({"application/xml", "application/json"})
     public Event create(Event entity) {
-        Long eventId = eventManagerLocal.create(entity.getPlayer(), entity.getApplication(), entity.getEventType(), entity.getEventTime());
+        Long eventId = eventManagerLocal.create(entity.getPlayer(), entity.getApplication().getApiKey(), entity.getApplication().getApiSecret(), entity.getEventType(), entity.getEventTime());
         
         return eventManagerLocal.find(eventId);
     }
@@ -37,7 +37,7 @@ public class EventFacadeREST {
     @PUT
     @Consumes({"application/xml", "application/json"})
     public void edit(Event entity) {
-        eventManagerLocal.update(entity.getEventId(), entity.getPlayer(), entity.getApplication(), entity.getEventType(), entity.getEventTime());
+        eventManagerLocal.update(entity.getEventId(), entity.getPlayer(), entity.getApplication().getApiKey(), entity.getApplication().getApiSecret(), entity.getEventType(), entity.getEventTime());
     }
 
     @DELETE

@@ -41,7 +41,7 @@ public class TestEventsManager implements TestEventsManagerLocal {
         for (int i=0; i<100; i++) {
             
             eventsManagerLocal.create(playersManagerLocal.find(player),
-                    applicationsManagerLocal.find(app), 
+                    "sd898sa98da8s9d8aa", "9d9Da23jhFkksls103D", 
                     "Poster concours", 
                     new Timestamp(time));
         }
