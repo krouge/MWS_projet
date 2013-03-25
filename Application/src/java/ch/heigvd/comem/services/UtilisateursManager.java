@@ -106,7 +106,7 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         em.flush();
     }
     
-     public String login(String pseudoUser, String mdpUser){
+     public Utilisateur login(String pseudoUser, String mdpUser){
          
 
          Query query = em.createQuery("SELECT u FROM Utilisateur u WHERE u.pseudo LIKE :pseudo AND u.mdp LIKE :mdp");
@@ -116,11 +116,11 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
          
          if (query.getResultList().isEmpty()) {
 
-            return "DEGAGE  "+mdpUser+pseudoUser;
+            return null;
         }else{
             Utilisateur utilisateurExistant = (Utilisateur) query.getSingleResult();
        
-            return "BRAVO";
+            return utilisateurExistant;
         }
                   
      }

@@ -29,6 +29,6 @@ public interface UtilisateursManagerLocal {
     
     public void associatePhotoLike(Long id, Long idPhoto);
 
-    public String login(String pseudoUser, String mdpUser);
+    public Utilisateur login(String pseudoUser, String mdpUser);
     
 }
