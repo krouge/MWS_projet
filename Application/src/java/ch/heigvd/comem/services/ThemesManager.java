@@ -86,6 +86,14 @@ public class ThemesManager implements ThemesManagerLocal {
         
         return (List<Theme>)query.getResultList();
     }
+    
+    public List<Theme> findLast20(){
+        Query query = em.createQuery("SELECT t FROM Theme t ORDER BY t.id");
+        query.setFirstResult(0);
+        query.setMaxResults(20);
+        
+        return query.getResultList();
+    }
 
 
 
