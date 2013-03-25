@@ -17,7 +17,7 @@ import javax.ejb.Local;
 @Local
 public interface RulesManagerLocal {
 
-    Long create(String eventType, int numberOfPoints, String apiKey, String apiSecret, Badge badge);
+    Long create(String eventType, int numberOfPoints, String apiKey, String apiSecret, Long badgeId);
     
     Long create(String eventType, int numberOfPoints, String apiKey, String apiSecret);
     
@@ -25,12 +25,14 @@ public interface RulesManagerLocal {
     
     List<Rule> findAll();
     
-    Rule update(Long ruleId, String eventType, int numberOfPoints, String apiKey, String apiSecret, Badge badge);
+    Rule update(Long ruleId, String eventType, int numberOfPoints, String apiKey, String apiSecret, Long badgeId);
     
     Rule update(Long ruleId, String eventType, int numberOfPoints, String apiKey, String apiSecret);
     
     void remove(Long ruleId);
 
     void associateBadge(Long ruleId, Long badgeId);
+
+    Rule findByEventType(String eventType);
     
 }

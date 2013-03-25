@@ -29,15 +29,18 @@ public class RulesManager implements RulesManagerLocal {
     @EJB
     private ApplicationsManagerLocal appManagerLocal;
     
+    @EJB
+    private BadgesManagerLocal badgesManagerLocal;
+    
     @Override
-    public Long create(String eventType, int numberOfPoints, String apiKey, String apiSecret, Badge badge) {
+    public Long create(String eventType, int numberOfPoints, String apiKey, String apiSecret, Long badgeId) {
         
        Rule rule = new Rule();
         
        rule.setEventType(eventType);
        rule.setNumberOfPoints(numberOfPoints);
        rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
-       rule.setBadge(badge);
+       rule.setBadge(badgesManagerLocal.find(badgeId));
        em.persist(rule); em.flush();
         
         return rule.getRuleId();
@@ -64,6 +67,8 @@ public class RulesManager implements RulesManagerLocal {
         return rule; 
     }
     
+    
+    
     @Override
     public List<Rule> findAll() {
 
@@ -72,6 +77,15 @@ public class RulesManager implements RulesManagerLocal {
         List<Rule> listRule = (List<Rule>)query.getResultList();
         
         return listRule;        
+    }
+    
+    @Override
+    public Rule findByEventType(String eventType) {
+        
+        Query query = em.createQuery("SELECT r FROM Rule AS r WHERE r.eventType = :eventType");
+        query.setParameter("eventType", eventType);
+        
+        return (Rule)query.getSingleResult();
     }
 
     @Override
@@ -82,14 +96,14 @@ public class RulesManager implements RulesManagerLocal {
     }
 
     @Override
-    public Rule update(Long ruleId, String eventType, int numberOfPoints, String apiKey, String apiSecret, Badge badge) {
+    public Rule update(Long ruleId, String eventType, int numberOfPoints, String apiKey, String apiSecret, Long badgeId) {
         
         Rule rule = em.find(Rule.class, ruleId);
         
         rule.setEventType(eventType);
         rule.setNumberOfPoints(numberOfPoints);
         rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
-        rule.setBadge(badge);
+        rule.setBadge(badgesManagerLocal.find(badgeId));
         
         return rule;
     }
@@ -114,7 +128,5 @@ public class RulesManager implements RulesManagerLocal {
         
         rule.setBadge(badge);
         badge.setRule(rule);
-    }
-    
-    
+    } 
 }
