@@ -37,7 +37,7 @@ public class TestDataManager implements TestDataManagerLocal {
     public void generateData() {
         
         // Création des applications
-        Long app1 = applicationsManagerLocal.create("Kit-Kat",
+        Long app1 = applicationsManagerLocal.create("Reflex",
                                         "Description", 
                                         "sd898sa98da8s9d8aa",
                                         "9d9Da23jhFkksls103D");
