@@ -5,7 +5,6 @@ import ch.heigvd.comem.gameengine.services.RulesManagerLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,8 +27,11 @@ public class RuleFacadeREST {
 
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Rule entity) {
-        rulesManagerLocal.create(entity.getEventType(), entity.getNumberOfPoints(), entity.getApplication());
+    @Produces({"application/xml", "application/json"})
+    public Rule create(Rule entity) {
+        Long ruleId = rulesManagerLocal.create(entity.getEventType(), entity.getNumberOfPoints(), entity.getApplication());
+        
+        return rulesManagerLocal.find(ruleId);
     }
 
     @PUT
