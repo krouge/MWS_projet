@@ -85,7 +85,9 @@ public class PlayersManager implements PlayersManagerLocal {
         
         List<Player> listPlayer = (List<Player>)query.getResultList();
         
+        
         return listPlayer;
+        
     }
     
     
