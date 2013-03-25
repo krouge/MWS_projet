@@ -4,7 +4,6 @@
  */
 package ch.heigvd.comem.gameengine.services;
 
-import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.model.Event;
 import ch.heigvd.comem.gameengine.model.Player;
 import java.sql.Timestamp;
@@ -29,9 +28,13 @@ public class EventsManager implements EventsManagerLocal{
     @EJB
     ApplicationsManagerLocal applicationsManagerLocal;
     
+    @EJB
+    PlayersManagerLocal playersManagerLocal;
+    
     @Override
-    public Long create(Player player, String apiKey, String apiSecret, String eventType, Timestamp eventTime) {
+    public Long create(Long playerId, String apiKey, String apiSecret, String eventType, Timestamp eventTime) {
         
+        Player player = playersManagerLocal.find(playerId);
         Event event = new Event();
        
         event.setPlayer(player);

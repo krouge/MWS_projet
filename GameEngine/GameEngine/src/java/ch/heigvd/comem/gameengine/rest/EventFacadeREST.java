@@ -2,6 +2,10 @@ package ch.heigvd.comem.gameengine.rest;
 
 import ch.heigvd.comem.gameengine.model.Event;
 import ch.heigvd.comem.gameengine.services.EventsManagerLocal;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -29,7 +33,13 @@ public class EventFacadeREST {
     @Consumes({"application/xml", "application/json"})
     @Produces({"application/xml", "application/json"})
     public Event create(Event entity) {
-        Long eventId = eventManagerLocal.create(entity.getPlayer(), entity.getApplication().getApiKey(), entity.getApplication().getApiSecret(), entity.getEventType(), entity.getEventTime());
+        
+        
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        long time = date.getTime();
+        
+        Long eventId = eventManagerLocal.create(entity.getPlayer().getPlayerId(), entity.getApplication().getApiKey(), entity.getApplication().getApiSecret(), entity.getEventType(),  new Timestamp(time));
         
         return eventManagerLocal.find(eventId);
     }
