@@ -127,7 +127,7 @@ public class UtilisateurFacadeREST{
     @Path("login")
     @Consumes({"application/xml", "application/json"})
     @Produces("application/json")
-    public String login(Utilisateur entity) {
+    public Utilisateur login(Utilisateur entity) {
 
         return utilisateurManager.login(entity.getPseudo(),entity.getMdp());
     }
