@@ -1,10 +1,11 @@
 package ch.heigvd.comem.gameengine.rest;
 
 import ch.heigvd.comem.gameengine.model.Application;
+import ch.heigvd.comem.gameengine.services.ApplicationsManagerLocal;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,65 +21,53 @@ import javax.ws.rs.Produces;
  */
 @Stateless
 @Path("applications")
-public class ApplicationFacadeREST extends AbstractFacade<Application> {
-    @PersistenceContext(unitName = "GameEnginePU")
-    private EntityManager em;
-
-    public ApplicationFacadeREST() {
-        super(Application.class);
-    }
-
+public class ApplicationFacadeREST {
+    
+    @EJB
+    private ApplicationsManagerLocal appManagerLocal;
+    
     @POST
-    @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Application entity) {
-        super.create(entity);
+        appManagerLocal.create(entity.getName(), entity.getDescription(), entity.getApiKey(), entity.getApiSecret());
     }
 
     @PUT
-    @Override
     @Consumes({"application/xml", "application/json"})
     public void edit(Application entity) {
-        super.edit(entity);
+        appManagerLocal.update(entity.getApplicationId(), entity.getName(), entity.getDescription(), entity.getApiKey(), entity.getApiSecret());
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+        appManagerLocal.remove(id);
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
     public Application find(@PathParam("id") Long id) {
-        return super.find(id);
+        return appManagerLocal.find(id);
     }
 
     @GET
-    @Override
     @Produces({"application/xml", "application/json"})
     public List<Application> findAll() {
-        return super.findAll();
+        return appManagerLocal.findAll();
     }
 
-    @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Application> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-    
+//    @GET
+//    @Path("{from}/{to}")
+//    @Produces({"application/xml", "application/json"})
+//    public List<Application> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+//        return super.findRange(new int[]{from, to});
+//    }
+//
+//    @GET
+//    @Path("count")
+//    @Produces("text/plain")
+//    public String countREST() {
+//        return String.valueOf(super.count());
+//    }
 }

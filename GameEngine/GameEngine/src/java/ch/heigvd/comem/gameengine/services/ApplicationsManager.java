@@ -1,10 +1,12 @@
 package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Application;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -59,6 +61,15 @@ public class ApplicationsManager implements ApplicationsManagerLocal {
         Application application = em.find(Application.class, applicationId);
         em.remove(application);
     
+    }
+
+    @Override
+    public List<Application> findAll() {
+        Query query = em.createQuery("SELECT a FROM Application AS a");
+        
+        List<Application> listApp = (List<Application>)query.getResultList();
+        
+        return listApp;        
     }
 
 }

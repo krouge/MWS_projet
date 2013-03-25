@@ -22,70 +22,54 @@ import javax.ws.rs.Produces;
  */
 @Stateless
 @Path("badges")
-public class BadgeFacadeREST extends AbstractFacade<Badge> {
-    
-    @PersistenceContext(unitName = "GameEnginePU")
-    private EntityManager em;
+public class BadgeFacadeREST {
 
-    
     @EJB
     private BadgesManagerLocal badgesManagerLocal;
-    
-    public BadgeFacadeREST() {
-        super(Badge.class);
-    }
 
     @POST
-    @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Badge entity) {
-        super.create(entity);
+        badgesManagerLocal.create(entity.getName(), entity.getDescription(), entity.getSource());
     }
 
     @PUT
-    @Override
     @Consumes({"application/xml", "application/json"})
     public void edit(Badge entity) {
-        super.edit(entity);
+        badgesManagerLocal.update(entity.getBadgeId(), entity.getName(), entity.getDescription(), entity.getSource());
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
-        badgesManagerLocal.delete(badgesManagerLocal.read(id).getBadgeId());
+        badgesManagerLocal.remove(badgesManagerLocal.find(id).getBadgeId());
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
     public Badge find(@PathParam("id") Long id) {
-        return super.find(id);
+        return badgesManagerLocal.find(id);
     }
 
     @GET
-    @Override
     @Produces({"application/xml", "application/json"})
     public List<Badge> findAll() {
-        return super.findAll();
+        return badgesManagerLocal.findAll();
     }
 
-    @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Badge> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
+//    @GET
+//    @Path("{from}/{to}")
+//    @Produces({"application/xml", "application/json"})
+//    public List<Badge> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+//        return super.findRange(new int[]{from, to});
+//    }
 
-    @GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+//    @GET
+//    @Path("count")
+//    @Produces("text/plain")
+//    public String countREST() {
+//        return String.valueOf(super.count());
+//    }
     
 }

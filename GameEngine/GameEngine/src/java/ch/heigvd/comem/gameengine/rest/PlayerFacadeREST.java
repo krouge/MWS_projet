@@ -3,8 +3,6 @@ package ch.heigvd.comem.gameengine.rest;
 import ch.heigvd.comem.gameengine.model.Player;
 import ch.heigvd.comem.gameengine.services.PlayersManagerLocal;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -15,8 +13,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+
 /**
  *
  * @author Renouille
@@ -30,17 +27,13 @@ public class PlayerFacadeREST {
 
     @POST
     @Consumes({"application/xml", "application/json"})
-    public String create(Player entity) {
+    @Produces("application/json")
+    public Player create(Player entity) {
+        
         Long playerId = playersManagerLocal.create(entity.getPoints());
+        Player player = playersManagerLocal.find(playerId);
         
-        String jsonPlayer = null;
-        try {
-            jsonPlayer = new JSONObject().put("playerId", playerId.toString()).toString();
-        } catch (JSONException ex) {
-            Logger.getLogger(PlayerFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return jsonPlayer;
+        return player;
     }
 
     @PUT

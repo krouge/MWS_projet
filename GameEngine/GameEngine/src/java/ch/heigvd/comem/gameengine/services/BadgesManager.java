@@ -1,6 +1,7 @@
 package ch.heigvd.comem.gameengine.services;
 
 import ch.heigvd.comem.gameengine.model.Badge;
+import ch.heigvd.comem.gameengine.model.Player;
 import ch.heigvd.comem.gameengine.model.Rule;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -35,12 +36,22 @@ public class BadgesManager implements BadgesManagerLocal {
     }
     
     @Override
-    public Badge read(Long badgeId) {
+    public Badge find(Long badgeId) {
         
         Badge badge = em.find(Badge.class, badgeId);
         
         return badge;
         
+    }
+    
+    @Override
+    public List<Badge> findAll() {
+
+        Query query = em.createQuery("SELECT b FROM Badge AS b");
+        
+        List<Badge> listBadge = (List<Badge>)query.getResultList();
+        
+        return listBadge;        
     }
     
     @Override
@@ -56,7 +67,7 @@ public class BadgesManager implements BadgesManagerLocal {
     }
 
     @Override
-    public void delete(Long badgeId) {
+    public void remove(Long badgeId) {
         
         Badge badge = em.find(Badge.class, badgeId);
         

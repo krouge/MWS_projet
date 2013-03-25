@@ -7,12 +7,13 @@ package ch.heigvd.comem.gameengine.services;
 import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.model.Event;
 import ch.heigvd.comem.gameengine.model.Player;
-import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -46,6 +47,16 @@ public class EventsManager implements EventsManagerLocal{
         Event event = em.find(Event.class, eventId);
         
         return event;
+    }
+    
+    @Override
+    public List<Event> findAll() {
+        
+        Query query = em.createQuery("SELECT e FROM Event AS e");
+        
+        List<Event> listEvent = (List<Event>)query.getResultList();
+        
+        return listEvent;  
     }
     
     @Override
