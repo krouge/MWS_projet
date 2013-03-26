@@ -45,7 +45,7 @@ public class ApplicationsManager implements ApplicationsManagerLocal {
     @Override
     public Application find(String apiKey, String apiSecret) {
 
-        Query query = em.createQuery("SELECT a FROM Application AS a WHERE apiKey = :apiKey AND apiSecret = :apiSecret");
+        Query query = em.createQuery("SELECT a FROM Application AS a WHERE a.apiKey LIKE :apiKey AND a.apiSecret LIKE :apiSecret");
         query.setParameter("apiKey", apiKey);
         query.setParameter("apiSecret", apiSecret);
         Application application = (Application) query.getSingleResult();

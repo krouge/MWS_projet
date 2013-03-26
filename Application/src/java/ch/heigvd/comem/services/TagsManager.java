@@ -6,7 +6,6 @@ package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.exceptions.ExceptionIdTag;
 import ch.heigvd.comem.model.Tag;
-import ch.heigvd.comem.model.Utilisateur;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

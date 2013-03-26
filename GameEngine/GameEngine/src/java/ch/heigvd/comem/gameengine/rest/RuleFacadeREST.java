@@ -29,7 +29,7 @@ public class RuleFacadeREST {
     @Consumes({"application/xml", "application/json"})
     @Produces({"application/xml", "application/json"})
     public Rule create(Rule entity) {
-        Long ruleId = rulesManagerLocal.create(entity.getEventType(), entity.getNumberOfPoints(), entity.getApplication());
+        Long ruleId = rulesManagerLocal.create(entity.getEventType(), entity.getNumberOfPoints(), entity.getApplication().getApiKey(), entity.getApplication().getApiSecret());
         
         return rulesManagerLocal.find(ruleId);
     }
@@ -37,7 +37,7 @@ public class RuleFacadeREST {
     @PUT
     @Consumes({"application/xml", "application/json"})
     public void edit(Rule entity) {
-        rulesManagerLocal.update(entity.getRuleId(), entity.getEventType(), entity.getNumberOfPoints(), entity.getApplication());
+        rulesManagerLocal.update(entity.getRuleId(), entity.getEventType(), entity.getNumberOfPoints(), entity.getApplication().getApiKey(), entity.getApplication().getApiSecret());
     }
 
     @DELETE

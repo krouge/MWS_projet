@@ -18,7 +18,7 @@ import javax.ejb.Local;
 @Local
 public interface EventsManagerLocal {
     
-     Long create(Player player, String apiKey, String apiSecret, String eventType, Timestamp eventTime);
+     Long create(Long playerId, String apiKey, String apiSecret, String eventType, Timestamp eventTime);
      
      Event find(Long eventId);
      

@@ -8,6 +8,7 @@ import ch.heigvd.comem.dto.PhotoDTO;
 import ch.heigvd.comem.dto.TagDTO;
 import ch.heigvd.comem.dto.ThemeDTO;
 import ch.heigvd.comem.exceptions.ExceptionIdTheme;
+import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
@@ -42,8 +43,9 @@ public class ThemeFacadeREST {
 
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Theme entity) {
-        themesManager.create(entity.getTitre(), entity.getUtilisateur());
+    public String create(Theme entity) throws ExceptionIdUtilisateur {
+        themesManager.create(entity.getTitre(), entity.getUtilisateur().getId());
+        return "aslksalkfja";
     }
 
     @PUT
@@ -71,6 +73,69 @@ public class ThemeFacadeREST {
     public List<ThemeDTO> findAll(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur) {
         
         List<Theme> themes = themesManager.findAll();
+        List<ThemeDTO> themesDTO = new LinkedList<ThemeDTO>();
+        
+        for(Theme theme : themes){
+            ThemeDTO themeDTO = new ThemeDTO();
+            themeDTO.setId(theme.getId());
+            themeDTO.setTitre(theme.getTitre());
+            
+            if(withPhotos != null && withPhotos == 1){
+                List<PhotoDTO> photoDTOS = new LinkedList<PhotoDTO>();
+                List<Photo> photos = theme.getPhotos();
+
+                for(Photo photo : photos){
+
+                    PhotoDTO photoDto = new PhotoDTO();
+                    photoDto.setId(photo.getId());
+                    photoDto.setPoints(photo.getPoints());
+                    photoDto.setSource(photo.getSource());
+
+                    photoDTOS.add(photoDto);
+
+                }
+
+                themeDTO.setPhotos(photoDTOS);
+            }
+            
+            
+            if(withTags != null && withTags == 1){
+                
+                List<TagDTO> tagDTOS = new LinkedList<TagDTO>();
+                List<Tag> tags = theme.getTags();
+
+                for(Tag tag : tags){
+
+                    TagDTO tagDTO = new TagDTO();
+                    tagDTO.setId(tag.getId());
+                    tagDTO.setTitre(tag.getTitre());
+
+                    tagDTOS.add(tagDTO);
+
+                }
+
+                themeDTO.setTags(tagDTOS);
+                
+            }
+            
+            if(withUtilisateur != null && withUtilisateur == 1){
+                themeDTO.setUtilisateur(theme.getUtilisateur());
+            }
+            
+            themesDTO.add(themeDTO);
+            
+        }
+        
+        
+        return themesDTO;
+    }
+    
+    @GET
+    @Path("last20")
+    @Produces({"application/xml", "application/json"})
+    public List<ThemeDTO> findLast20(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur) {
+        
+        List<Theme> themes = themesManager.findLast20();
         List<ThemeDTO> themesDTO = new LinkedList<ThemeDTO>();
         
         for(Theme theme : themes){
@@ -126,12 +191,13 @@ public class ThemeFacadeREST {
         return themesDTO;
     }
     
+    
     @GET
-    @Path("last20")
+    @Path("search")
     @Produces({"application/xml", "application/json"})
-    public List<ThemeDTO> findLast20(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur) {
+    public List<ThemeDTO> findByName(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur, @QueryParam("search") String search) {
         
-        List<Theme> themes = themesManager.findLast20();
+        List<Theme> themes = themesManager.findByName(search);
         List<ThemeDTO> themesDTO = new LinkedList<ThemeDTO>();
         
         for(Theme theme : themes){

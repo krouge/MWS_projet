@@ -8,6 +8,7 @@ import ch.heigvd.comem.gameengine.model.Application;
 import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Rule;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
@@ -25,28 +26,34 @@ public class RulesManager implements RulesManagerLocal {
     @PersistenceContext
     private EntityManager em;
     
+    @EJB
+    private ApplicationsManagerLocal appManagerLocal;
+    
+    @EJB
+    private BadgesManagerLocal badgesManagerLocal;
+    
     @Override
-    public Long create(String eventType, int numberOfPoints, Application application, Badge badge) {
+    public Long create(String eventType, int numberOfPoints, String apiKey, String apiSecret, Long badgeId) {
         
        Rule rule = new Rule();
         
        rule.setEventType(eventType);
        rule.setNumberOfPoints(numberOfPoints);
-       rule.setApplication(application);
-       rule.setBadge(badge);
+       rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
+       rule.setBadge(badgesManagerLocal.find(badgeId));
        em.persist(rule); em.flush();
         
         return rule.getRuleId();
     }
 
     @Override
-    public Long create(String eventType, int numberOfPoints, Application application) {
+    public Long create(String eventType, int numberOfPoints, String apiKey, String apiSecret) {
         
         Rule rule = new Rule();
         
         rule.setEventType(eventType);
         rule.setNumberOfPoints(numberOfPoints);
-        rule.setApplication(application);
+        rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
         em.persist(rule); em.flush();
         
         return rule.getRuleId();
@@ -60,6 +67,8 @@ public class RulesManager implements RulesManagerLocal {
         return rule; 
     }
     
+    
+    
     @Override
     public List<Rule> findAll() {
 
@@ -68,6 +77,15 @@ public class RulesManager implements RulesManagerLocal {
         List<Rule> listRule = (List<Rule>)query.getResultList();
         
         return listRule;        
+    }
+    
+    @Override
+    public Rule findByEventType(String eventType) {
+        
+        Query query = em.createQuery("SELECT r FROM Rule AS r WHERE r.eventType = :eventType");
+        query.setParameter("eventType", eventType);
+        
+        return (Rule)query.getSingleResult();
     }
 
     @Override
@@ -78,26 +96,26 @@ public class RulesManager implements RulesManagerLocal {
     }
 
     @Override
-    public Rule update(Long ruleId, String eventType, int numberOfPoints, Application application, Badge badge) {
+    public Rule update(Long ruleId, String eventType, int numberOfPoints, String apiKey, String apiSecret, Long badgeId) {
         
         Rule rule = em.find(Rule.class, ruleId);
         
         rule.setEventType(eventType);
         rule.setNumberOfPoints(numberOfPoints);
-        rule.setApplication(application);
-        rule.setBadge(badge);
+        rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
+        rule.setBadge(badgesManagerLocal.find(badgeId));
         
         return rule;
     }
 
     @Override
-    public Rule update(Long ruleId, String eventType, int numberOfPoints, Application application) {
+    public Rule update(Long ruleId, String eventType, int numberOfPoints,String apiKey, String apiSecret) {
         
         Rule rule = em.find(Rule.class, ruleId);
         
         rule.setEventType(eventType);
         rule.setNumberOfPoints(numberOfPoints);
-        rule.setApplication(application);
+        rule.setApplication(appManagerLocal.find(apiKey, apiSecret));
         
         return rule;
     }
@@ -110,7 +128,5 @@ public class RulesManager implements RulesManagerLocal {
         
         rule.setBadge(badge);
         badge.setRule(rule);
-    }
-    
-    
+    } 
 }

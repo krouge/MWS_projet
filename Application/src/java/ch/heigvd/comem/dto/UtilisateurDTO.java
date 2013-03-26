@@ -34,7 +34,7 @@ public class UtilisateurDTO implements Serializable {
     private List<PhotoDTO> photos = new LinkedList<PhotoDTO>();
     
     private List<ThemeDTO> themes = new LinkedList<ThemeDTO>();
-
+    
     public List<ThemeDTO> getThemes() {
         return themes;
     }
