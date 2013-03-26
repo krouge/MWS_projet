@@ -45,7 +45,8 @@ public class ThemesManager implements ThemesManagerLocal {
     public Long create(String titreTheme, Long utilisateurId) throws ExceptionIdUtilisateur{
         Theme theme = new Theme();
         
-        Utilisateur utilisateur = utilisateurManagerLocal.find(utilisateurId);
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur = utilisateurManagerLocal.find(utilisateurId);
         
         Query query = em.createQuery("SELECT t FROM Theme t WHERE t.titre LIKE :titre");
         query.setParameter("titre", titreTheme);
@@ -79,7 +80,7 @@ public class ThemesManager implements ThemesManagerLocal {
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
 
-        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/events");
+        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/events");
         
         JSONObject jsonPrincipal = new JSONObject();
         

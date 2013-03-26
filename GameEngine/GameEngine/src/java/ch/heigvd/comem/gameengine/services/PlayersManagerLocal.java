@@ -24,4 +24,6 @@ public interface PlayersManagerLocal {
     void associateBadge(Long playerId, Long badgeId);
 
     List<Player> getLeaderboard();
+
+    boolean associationExists(long playerId, long badgeId);
 }
