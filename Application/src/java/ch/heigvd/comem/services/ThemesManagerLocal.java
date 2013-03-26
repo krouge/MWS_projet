@@ -25,7 +25,5 @@ public interface ThemesManagerLocal {
     public Theme update(Long id, String titre) throws ExceptionIdTheme;  
     public void associateTag(Long idTheme, Long idTag);
     public List<Theme> findAll();
-    public List<Theme> findLast20();
-    public List<Theme> findByName(String search);
     
 }
