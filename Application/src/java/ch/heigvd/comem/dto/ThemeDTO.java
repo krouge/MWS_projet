@@ -68,8 +68,6 @@ public class ThemeDTO {
         this.titre = titre;
     }
     
-    
-
     public Long getId() {
         return id;
     }
