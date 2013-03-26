@@ -109,7 +109,7 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         
         String json = null;
         try {
-            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"AddLike", new Date());
+            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"like picture", new Date());
         } catch (JSONException ex) {
             Logger.getLogger(PhotosManager.class.getName()).log(Level.SEVERE, null, ex);
         }
