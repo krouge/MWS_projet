@@ -54,7 +54,7 @@ public class UtilisateurFacadeREST{
     @POST
     @Consumes({"application/xml", "application/json"})
     public void create(Utilisateur entity) {
-        utilisateurManager.create(entity.getPseudo(), entity.getEmail(), entity.getMdp());
+        utilisateurManager.create(entity.getNom(), entity.getPrenom(), entity.getPseudo(), entity.getEmail(), entity.getMdp());
     }
 
     @PUT
@@ -218,7 +218,7 @@ public class UtilisateurFacadeREST{
         
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
-        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/players/leaderboard");
+        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players/leaderboard");
         //Utilisateur request = r.accept(MediaType.APPLICATION_JSON_TYPE,MediaType.APPLICATION_XML_TYPE).type(MediaType.APPLICATION_JSON_TYPE).post(Utilisateur.class, jsonObject);        
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
         
@@ -286,6 +286,77 @@ public class UtilisateurFacadeREST{
         
         
         //return response.getEntityInputStream().toString();
+       
+    }
+    
+    
+    @GET
+    @Path("{id}/profil")
+    @Consumes({"application/json"})
+    @Produces("application/json")
+    public String profilUtilisateur(@PathParam("id") Long id) throws JSONException, ExceptionIdUtilisateur {
+        
+        ClientConfig cc = new DefaultClientConfig();
+        Client c = Client.create(cc);
+        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/players/"+id);
+        //Utilisateur request = r.accept(MediaType.APPLICATION_JSON_TYPE,MediaType.APPLICATION_XML_TYPE).type(MediaType.APPLICATION_JSON_TYPE).post(Utilisateur.class, jsonObject);        
+        ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        
+        
+        JSONObject json = new JSONObject(response.getEntity(String.class));
+        
+        JSONObject jsonPrincipal = new JSONObject();
+        
+        //player
+        JSONObject badgesArray = json.getJSONObject("badges");
+        
+        jsonPrincipal.put("badges", badgesArray);
+        
+        
+        //utilisateurs
+        Utilisateur utilisateur = utilisateurManager.find(id);
+        
+        JSONArray photoArray = new JSONArray();
+        
+        for(Photo photo : utilisateur.getPhotos()){
+            
+            JSONObject photoJSON = new JSONObject();
+            photoJSON.put("source", photo.getSource());
+            
+            photoArray.put(photoJSON);
+        }
+        
+        jsonPrincipal.put("photos", photoArray);
+        
+        //infos
+        jsonPrincipal.put("pseudo", utilisateur.getPseudo());
+        jsonPrincipal.put("email", utilisateur.getEmail());
+
+        
+        /*
+        JSONArray playerArray = json.getJSONArray("player");
+        //json = json.getJSONArray("player");
+        JSONArray jsonPrincipal = new JSONArray();
+        
+        for (int i = 0; i < playerArray.length(); i++) {
+            
+            JSONObject player = playerArray.getJSONObject(i);
+            
+            Long idPlayer =Long.parseLong(player.getString("playerId"));
+            int points = Integer.parseInt(player.getString("points"));
+            
+            Utilisateur utilisateur = utilisateurManager.findByIdPlayer(idPlayer);
+            
+            JSONObject jsonPlayer = new JSONObject();
+            jsonPlayer.put("points", points);
+            jsonPlayer.put("pseudo", utilisateur.getPseudo());
+            
+            jsonPrincipal.put(jsonPlayer);
+            
+            
+        }
+       */
+        return jsonPrincipal.toString();
        
     }
     

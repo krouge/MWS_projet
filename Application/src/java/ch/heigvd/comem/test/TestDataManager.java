@@ -75,9 +75,9 @@ public class TestDataManager implements TestDataManagerLocal {
         Theme theme3 = null;
         Theme theme4 = null;
         
-        Long idUser = utilisateurManager.create("theplayer777", "jonas@jonas.ch", "1234");
-        Long idUser2 = utilisateurManager.create("Chuck Norris", "chuck@norris.king", "*****");
-        Long idUser3 = utilisateurManager.create("BruceWayne", "batman@gothamCity.com", "asdf");
+        Long idUser = utilisateurManager.create("Nicole","Jonas","theplayer777", "jonas@jonas.ch", "1234");
+        Long idUser2 = utilisateurManager.create("Norris", "Chuck", "WalkerTexasRanger","chuck@norris.king", "*****");
+        Long idUser3 = utilisateurManager.create("Wayne", "Bruce", "Batman", "batman@gothamCity.com", "asdf");
         
         Long idTag = tagManager.create("beau");
         Long idTag2 = tagManager.create("taPhotoEstNul");
@@ -98,7 +98,6 @@ public class TestDataManager implements TestDataManagerLocal {
 
                 idTheme = themeManager.create("Neige",utilisateur.getId());
                 idTheme2 = themeManager.create("Chien",utilisateur3.getId());
-                //idTheme3 = themeManager.create("Chien",utilisateur);
                 idTheme4 = themeManager.create("Montagne",utilisateur.getId());
                 
                 theme = themeManager.find(idTheme);
@@ -122,12 +121,12 @@ public class TestDataManager implements TestDataManagerLocal {
         Long idPhoto6=0L;
         
         try{
-        idPhoto = photoManager.create(10, "s", utilisateur.getId(), theme);
-        idPhoto2 = photoManager.create(2, "http://comem.ch/new.jpg", utilisateur2.getId(), theme2);
-        idPhoto3 = photoManager.create(12, "http://comem.ch/xxx.jpg", utilisateur2.getId(), theme2);
-        idPhoto4 = photoManager.create(100, "http://comem.ch/new1.jpg", utilisateur3.getId(), theme);
-        idPhoto5 = photoManager.create(78, "http://comem.ch/new2.jpg", utilisateur3.getId(), theme4);
-        idPhoto6 = photoManager.create(69, "http://comem.ch/new3.jpg", utilisateur.getId(), theme);
+        idPhoto = photoManager.create(0, "neige.jpg", utilisateur.getId(), theme);
+        idPhoto2 = photoManager.create(3, "chien.jpg", utilisateur2.getId(), theme2);
+        idPhoto3 = photoManager.create(0, "chien2.jpg", utilisateur3.getId(), theme2);
+        idPhoto4 = photoManager.create(0, "montagne.jpg", utilisateur3.getId(), theme4);
+        idPhoto5 = photoManager.create(0, "montagne2.jpg", utilisateur2.getId(), theme4);
+        idPhoto6 = photoManager.create(0, "montagne3.jpg", utilisateur.getId(), theme4);
         } catch (Exception e) {
             e.printStackTrace();
         }

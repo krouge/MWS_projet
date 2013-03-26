@@ -36,6 +36,10 @@ public class Utilisateur implements Serializable {
     
     private String pseudo;
     
+    private String nom;
+    
+    private String prenom;
+    
     private String email;
     
     private String mdp;
@@ -107,7 +111,22 @@ public class Utilisateur implements Serializable {
     public void setPhotos_like(List<Photo> photos_like) {
         this.photos_like = photos_like;
     }
-    
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
     
 
     @Override

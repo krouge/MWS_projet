@@ -76,7 +76,8 @@ public class PlayersManager implements PlayersManagerLocal {
     public List<Player> getLeaderboard() {
         
         Query query = em.createQuery("SELECT p FROM Player AS p ORDER BY p.points DESC");
-
+        query.setMaxResults(10);
+        
         List<Player> leaderboard = (List<Player>)query.getResultList();
         
         return leaderboard;
