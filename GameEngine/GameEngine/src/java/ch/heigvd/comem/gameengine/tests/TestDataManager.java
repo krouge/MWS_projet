@@ -92,7 +92,8 @@ public class TestDataManager implements TestDataManagerLocal {
         Long time = date.getTime();
 
         
-        //Long event = eventsManagerLocal.create(1L, "1234", "1234", "post theme", new Timestamp(time));
+        Long event = eventsManagerLocal.create(1L, "1234", "1234", "post theme", new Timestamp(time));
+        Long event2 = eventsManagerLocal.create(1L, "1234", "1234", "post theme", new Timestamp(time));
 
     }
     
