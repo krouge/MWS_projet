@@ -17,7 +17,7 @@ import javax.ejb.Local;
 @Local
 public interface UtilisateursManagerLocal {
     
-    public Long create(String pseudo, String email, String mdp);
+    public Long create(String nom, String prenom, String pseudo, String email, String mdp);
     
     public void delete(Long id) throws ExceptionIdUtilisateur;
     
@@ -30,5 +30,6 @@ public interface UtilisateursManagerLocal {
     public void associatePhotoLike(Long id, Long idPhoto);
 
     public Utilisateur login(String pseudoUser, String mdpUser);
+    public Utilisateur findByIdPlayer(Long idPlayer);
     
 }

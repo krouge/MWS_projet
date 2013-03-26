@@ -72,6 +72,7 @@ public class TestDataManager implements TestDataManagerLocal {
         Long badge2 = badgesManagerLocal.create("Badge 10p", 
                                       "Player's points > 10", 
                                       "http://julien.com/img.jpg");
+        playersManagerLocal.associateBadge(fabien, badge2);
             
         //Création des badges
         

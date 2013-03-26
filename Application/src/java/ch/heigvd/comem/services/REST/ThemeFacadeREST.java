@@ -64,8 +64,59 @@ public class ThemeFacadeREST {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Theme find(@PathParam("id") Long id) throws ExceptionIdTheme {
-        return themesManager.find(id);
+    public ThemeDTO find(@PathParam("id") Long id, @QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur) throws ExceptionIdTheme {
+        
+        Theme theme = themesManager.find(id);
+        ThemeDTO themeDTO = new ThemeDTO();
+        
+            themeDTO.setId(theme.getId());
+            themeDTO.setTitre(theme.getTitre());
+        
+        if(withPhotos != null && withPhotos == 1){
+                List<PhotoDTO> photoDTOS = new LinkedList<PhotoDTO>();
+                List<Photo> photos = theme.getPhotos();
+
+                for(Photo photo : photos){
+
+                    PhotoDTO photoDto = new PhotoDTO();
+                    photoDto.setId(photo.getId());
+                    photoDto.setPoints(photo.getPoints());
+                    photoDto.setSource(photo.getSource());
+
+                    photoDTOS.add(photoDto);
+
+                }
+
+                themeDTO.setPhotos(photoDTOS);
+            }
+            
+            
+            if(withTags != null && withTags == 1){
+                
+                List<TagDTO> tagDTOS = new LinkedList<TagDTO>();
+                List<Tag> tags = theme.getTags();
+
+                for(Tag tag : tags){
+
+                    TagDTO tagDTO = new TagDTO();
+                    tagDTO.setId(tag.getId());
+                    tagDTO.setTitre(tag.getTitre());
+
+                    tagDTOS.add(tagDTO);
+
+                }
+
+                themeDTO.setTags(tagDTOS);
+                
+            }
+            
+            if(withUtilisateur != null && withUtilisateur == 1){
+                themeDTO.setUtilisateur(theme.getUtilisateur());
+            }
+            
+        
+        
+        return themeDTO;
     }
 
     @GET

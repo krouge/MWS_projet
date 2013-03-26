@@ -34,7 +34,6 @@ public class EventFacadeREST {
     public Event create(Event entity) {
         
         
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         long time = date.getTime();
         

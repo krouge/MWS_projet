@@ -48,7 +48,7 @@ public class PlayerFacadeREST {
 
     @GET
     @Path("{id}")
-    @Produces({"application/xml", "application/json"})
+    @Produces("application/json")
     public Player find(@PathParam("id") Long id) {
         return playersManagerLocal.find(id);
     }
@@ -73,7 +73,7 @@ public class PlayerFacadeREST {
     
     @GET
     @Path("leaderboard")
-    @Produces({"application/xml", "application/json"})
+    @Produces("application/json")
     public List<Player> getLeaderboard() {
         
         return playersManagerLocal.getLeaderboard();

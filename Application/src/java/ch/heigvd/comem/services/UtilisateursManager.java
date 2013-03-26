@@ -37,8 +37,10 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
     private EntityManager em;
 
     
-    public Long create(String pseudo, String email, String mdp){
+    public Long create(String nom, String prenom, String pseudo, String email, String mdp){
         Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setNom(nom);
+        utilisateur.setPrenom(prenom);
         utilisateur.setPseudo(pseudo);
         utilisateur.setEmail(email);
         utilisateur.setMdp(mdp);
@@ -56,7 +58,7 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
     public void createPlayer(Long id) throws JSONException{
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
-        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/players");
+        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players");
         String jsonObject = "{\"points\":\"0\"}";
         //Utilisateur request = r.accept(MediaType.APPLICATION_JSON_TYPE,MediaType.APPLICATION_XML_TYPE).type(MediaType.APPLICATION_JSON_TYPE).post(Utilisateur.class, jsonObject);        
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(ClientResponse.class, jsonObject);
@@ -157,6 +159,23 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
             return utilisateurExistant;
         }
                   
+     }
+     
+     public Utilisateur findByIdPlayer(Long idPlayer){
+         
+         Query query = em.createQuery("SELECT u FROM Utilisateur u WHERE u.idPlayer = :idPlayer");
+         query.setParameter("idPlayer", idPlayer);
+         
+         if (query.getSingleResult() == null) {
+
+            return null;
+        }else{
+            Utilisateur result = (Utilisateur) query.getSingleResult();
+       
+            return result;
+        }
+         
+         
      }
     
 
