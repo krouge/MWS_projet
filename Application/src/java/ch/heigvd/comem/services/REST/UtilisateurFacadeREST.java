@@ -54,7 +54,7 @@ public class UtilisateurFacadeREST{
     @POST
     @Consumes({"application/xml", "application/json"})
     public void create(Utilisateur entity) {
-        utilisateurManager.create(entity.getPseudo(), entity.getEmail(), entity.getMdp());
+        utilisateurManager.create(entity.getNom(), entity.getPrenom(), entity.getPseudo(), entity.getEmail(), entity.getMdp());
     }
 
     @PUT

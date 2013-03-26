@@ -37,8 +37,10 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
     private EntityManager em;
 
     
-    public Long create(String pseudo, String email, String mdp){
+    public Long create(String nom, String prenom, String pseudo, String email, String mdp){
         Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setNom(nom);
+        utilisateur.setPrenom(prenom);
         utilisateur.setPseudo(pseudo);
         utilisateur.setEmail(email);
         utilisateur.setMdp(mdp);

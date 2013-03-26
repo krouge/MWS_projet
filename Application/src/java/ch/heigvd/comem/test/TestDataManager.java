@@ -75,9 +75,9 @@ public class TestDataManager implements TestDataManagerLocal {
         Theme theme3 = null;
         Theme theme4 = null;
         
-        Long idUser = utilisateurManager.create("theplayer777", "jonas@jonas.ch", "1234");
-        Long idUser2 = utilisateurManager.create("Chuck Norris", "chuck@norris.king", "*****");
-        Long idUser3 = utilisateurManager.create("BruceWayne", "batman@gothamCity.com", "asdf");
+        Long idUser = utilisateurManager.create("Nicole","Jonas","theplayer777", "jonas@jonas.ch", "1234");
+        Long idUser2 = utilisateurManager.create("Norris", "Chuck", "WalkerTexasRanger","chuck@norris.king", "*****");
+        Long idUser3 = utilisateurManager.create("Wayne", "Bruce", "Batman", "batman@gothamCity.com", "asdf");
         
         Long idTag = tagManager.create("beau");
         Long idTag2 = tagManager.create("taPhotoEstNul");
