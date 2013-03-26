@@ -8,12 +8,18 @@ import ch.heigvd.comem.dto.PhotoDTO;
 import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
-import ch.heigvd.comem.services.ApplicationManagerLocal;
 import ch.heigvd.comem.services.PhotosManagerLocal;
+import com.sun.jersey.multipart.BodyPartEntity;
+import com.sun.jersey.multipart.MultiPart;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.imageio.ImageIO;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -40,9 +46,34 @@ public class PhotoFacadeREST {
     }
     
     @POST
-    @Consumes({"application/xml", "application/json", "multipart/form-data"})
-    public void create(Photo entity) throws ExceptionIdUtilisateur {
-        photosManager.create(entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme());
+    @Consumes({"application/xml", "application/json", "multipart/mixed"})
+    public String create(MultiPart multipart) throws ExceptionIdUtilisateur {
+        System.out.println("LOL");
+        return "it works";
+//        BodyPartEntity bpe = (BodyPartEntity) multipart.getEntity();
+//        String id = UUID.randomUUID().toString();
+//        boolean isProcessed = false;
+//        String message = null;
+//        try {
+//          InputStream source = bpe.getInputStream();
+//          BufferedImage bi = ImageIO.read(source);
+//
+//          File file = new File("C:/Users/Renouille/Desktop/image.png");
+//
+//          //storing the image to file system.
+//          if (file.isDirectory()) {
+//            ImageIO.write(bi, "png", file);
+//          } else {
+//            file.mkdirs();
+//            ImageIO.write(bi, "png", file);
+//          }
+//          isProcessed = true;
+//
+//        } catch (Exception e) {
+//          message = e.getMessage();
+//        }
+//        
+//        photosManager.create(entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme());
     }
 
     @PUT

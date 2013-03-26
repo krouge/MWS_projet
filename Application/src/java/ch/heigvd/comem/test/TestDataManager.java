@@ -121,35 +121,35 @@ public class TestDataManager implements TestDataManagerLocal {
         Long idPhoto5=0L;
         Long idPhoto6=0L;
         
-        try{
-        idPhoto = photoManager.create(10, "s", utilisateur.getId(), theme);
-        idPhoto2 = photoManager.create(2, "http://comem.ch/new.jpg", utilisateur2.getId(), theme2);
-        idPhoto3 = photoManager.create(12, "http://comem.ch/xxx.jpg", utilisateur2.getId(), theme2);
-        idPhoto4 = photoManager.create(100, "http://comem.ch/new1.jpg", utilisateur3.getId(), theme);
-        idPhoto5 = photoManager.create(78, "http://comem.ch/new2.jpg", utilisateur3.getId(), theme4);
-        idPhoto6 = photoManager.create(69, "http://comem.ch/new3.jpg", utilisateur.getId(), theme);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try{
+//        idPhoto = photoManager.create(10, "s", utilisateur.getId(), theme);
+//        idPhoto2 = photoManager.create(2, "http://comem.ch/new.jpg", utilisateur2.getId(), theme2);
+//        idPhoto3 = photoManager.create(12, "http://comem.ch/xxx.jpg", utilisateur2.getId(), theme2);
+//        idPhoto4 = photoManager.create(100, "http://comem.ch/new1.jpg", utilisateur3.getId(), theme);
+//        idPhoto5 = photoManager.create(78, "http://comem.ch/new2.jpg", utilisateur3.getId(), theme4);
+//        idPhoto6 = photoManager.create(69, "http://comem.ch/new3.jpg", utilisateur.getId(), theme);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        
+//        photoManager.associateTag(idPhoto, idTag2);
+//        photoManager.associateTag(idPhoto, idTag3);
+//        photoManager.associateTag(idPhoto3, idTag);
+//        photoManager.associateTag(idPhoto4, idTag2);
+//        
+//        
+//        utilisateurManager.associatePhotoLike(idUser3, idPhoto);
+//        utilisateurManager.associatePhotoLike(idUser2, idPhoto4);
+//        utilisateurManager.associatePhotoLike(idUser, idPhoto4);
+//        utilisateurManager.associatePhotoLike(idUser3, idPhoto4);
+//        utilisateurManager.associatePhotoLike(idUser, idPhoto5);
+//        utilisateurManager.associatePhotoLike(idUser3, idPhoto6);
         
-        photoManager.associateTag(idPhoto, idTag2);
-        photoManager.associateTag(idPhoto, idTag3);
-        photoManager.associateTag(idPhoto3, idTag);
-        photoManager.associateTag(idPhoto4, idTag2);
-        
-        
-        utilisateurManager.associatePhotoLike(idUser3, idPhoto);
-        utilisateurManager.associatePhotoLike(idUser2, idPhoto4);
-        utilisateurManager.associatePhotoLike(idUser, idPhoto4);
-        utilisateurManager.associatePhotoLike(idUser3, idPhoto4);
-        utilisateurManager.associatePhotoLike(idUser, idPhoto5);
-        utilisateurManager.associatePhotoLike(idUser3, idPhoto6);
-        
-        themeManager.associateTag(idTheme, idTag2);
-        themeManager.associateTag(idTheme2, idTag3);
-        themeManager.associateTag(idTheme, idTag3);
-        themeManager.associateTag(idTheme4, idTag2);
-        themeManager.associateTag(idTheme4, idTag);
+//        themeManager.associateTag(idTheme, idTag2);
+//        themeManager.associateTag(idTheme2, idTag3);
+//        themeManager.associateTag(idTheme, idTag3);
+//        themeManager.associateTag(idTheme4, idTag2);
+//        themeManager.associateTag(idTheme4, idTag);
         
     }
 

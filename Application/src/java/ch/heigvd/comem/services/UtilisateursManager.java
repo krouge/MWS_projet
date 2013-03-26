@@ -120,7 +120,7 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
 
-        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/events");
+        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/events");
         
         JSONObject jsonPrincipal = new JSONObject();
         
