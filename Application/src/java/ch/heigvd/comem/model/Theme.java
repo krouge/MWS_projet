@@ -52,7 +52,7 @@ public class Theme implements Serializable {
         this.tags = tags;
     }
 
-    @XmlTransient
+    //@XmlTransient
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }

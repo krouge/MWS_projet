@@ -17,6 +17,8 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -56,6 +58,13 @@ public class ThemesManager implements ThemesManagerLocal {
              em.flush();
              
              utilisateur.addTheme(theme);
+             
+             String json = null;
+        try {
+            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"post theme", new Date());
+        } catch (JSONException ex) {
+            Logger.getLogger(PhotosManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
              
             return theme.getId();
         }else{
@@ -129,7 +138,22 @@ public class ThemesManager implements ThemesManagerLocal {
         
         return (List<Theme>)query.getResultList();
     }
+    
+    
+    public List<Theme> findLast20(){
+        Query query = em.createQuery("SELECT t FROM Theme t ORDER BY t.id");
+        query.setFirstResult(0);
+        query.setMaxResults(20);
 
+        return query.getResultList();
+    }
 
+    
+    public List<Theme> findByName(String search){
+        Query query = em.createQuery("SELECT t FROM Theme t WHERE LOWER(t.titre) LIKE :search");
+        query.setParameter("search","%" + search.toLowerCase() + "%");
 
+        return query.getResultList();
+
+    }
 }
