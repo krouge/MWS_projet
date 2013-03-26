@@ -191,6 +191,68 @@ public class ThemeFacadeREST {
         return themesDTO;
     }
     
+    
+    @GET
+    @Path("search")
+    @Produces({"application/xml", "application/json"})
+    public List<ThemeDTO> findByName(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur, @QueryParam("search") String search) {
+        
+        List<Theme> themes = themesManager.findByName(search);
+        List<ThemeDTO> themesDTO = new LinkedList<ThemeDTO>();
+        
+        for(Theme theme : themes){
+            ThemeDTO themeDTO = new ThemeDTO();
+            themeDTO.setId(theme.getId());
+            themeDTO.setTitre(theme.getTitre());
+            
+            if(withPhotos != null && withPhotos == 1){
+                List<PhotoDTO> photoDTOS = new LinkedList<PhotoDTO>();
+                List<Photo> photos = theme.getPhotos();
+
+                for(Photo photo : photos){
+
+                    PhotoDTO photoDto = new PhotoDTO();
+                    photoDto.setPoints(photo.getPoints());
+                    photoDto.setSource(photo.getSource());
+
+                    photoDTOS.add(photoDto);
+
+                }
+
+                themeDTO.setPhotos(photoDTOS);
+            }
+            
+            
+            if(withTags != null && withTags == 1){
+                
+                List<TagDTO> tagDTOS = new LinkedList<TagDTO>();
+                List<Tag> tags = theme.getTags();
+
+                for(Tag tag : tags){
+
+                    TagDTO tagDTO = new TagDTO();
+                    tagDTO.setTitre(tag.getTitre());
+
+                    tagDTOS.add(tagDTO);
+
+                }
+
+                themeDTO.setTags(tagDTOS);
+                
+            }
+            
+            if(withUtilisateur != null && withUtilisateur == 1){
+                themeDTO.setUtilisateur(theme.getUtilisateur());
+            }
+            
+            themesDTO.add(themeDTO);
+            
+        }
+        
+        
+        return themesDTO;
+    }
+    
     /*
     @GET
     @Path("{from}/{to}")

@@ -104,6 +104,14 @@ public class ThemesManager implements ThemesManagerLocal {
         
         return query.getResultList();
     }
+    
+    public List<Theme> findByName(String search){
+        Query query = em.createQuery("SELECT t FROM Theme t WHERE LOWER(t.titre) LIKE :search");
+        query.setParameter("search","%" + search.toLowerCase() + "%");
+        
+        return query.getResultList();
+        
+    }
 
 
 

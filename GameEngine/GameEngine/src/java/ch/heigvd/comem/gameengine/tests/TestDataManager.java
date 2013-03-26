@@ -54,78 +54,46 @@ public class TestDataManager implements TestDataManagerLocal {
                                         "9dsdsdsadsagggdfdsc");
         
         // Création des joueurs
-        Long julien = playersManagerLocal.create(50);
+        Long julien = playersManagerLocal.create(0);
             
-        Long rene = playersManagerLocal.create(30);
+        Long rene = playersManagerLocal.create(0);
 
-        Long fabien = playersManagerLocal.create(10);
+        Long fabien = playersManagerLocal.create(0);
             
         Long jonas = playersManagerLocal.create(0);
         
         // Création des badges
         
-        for (int i=0; i<10; i++) {
-            
-            Long badge = badgesManagerLocal.create("Badge "+i, 
-                                      "Description badge " +i, 
+        Long badge1 = badgesManagerLocal.create("Badge 5p", 
+                                      "Player's points > 5", 
                                       "http://rene.com/img.jpg");
             
-            playersManagerLocal.associateBadge(rene, badge);
             
-            Long badge2 = badgesManagerLocal.create("Badge "+i, 
-                                      "Description badge " +i, 
+        Long badge2 = badgesManagerLocal.create("Badge 10p", 
+                                      "Player's points > 10", 
                                       "http://julien.com/img.jpg");
             
-            playersManagerLocal.associateBadge(julien, badge2);
-            
-        }
+        //Création des badges
         
-        //Règles
+        Long rule5p = rulesManagerLocal.create("points>5", 0, apiKey, apiSecret, badge1);
         
-        Long badgeRule = badgesManagerLocal.create("Badge ", 
-                                      "Description badge ", 
-                                      "http://rene.com/img.jpg");
-            
-        playersManagerLocal.associateBadge(rene, badgeRule);
+        Long rule10p = rulesManagerLocal.create("points>10", 0, apiKey, apiSecret, badge2);
         
-        for (int i=0; i<10; i++) {
-            
-            Long rule = rulesManagerLocal.create("CreationPhoto", 
-                                      20, 
-                                      applicationsManagerLocal.find(apiKey,apiSecret));
-            
-            rulesManagerLocal.associateBadge(rule, badgeRule);
-        }
+        Long rulePostPicture = rulesManagerLocal.create("post picture", 5, apiKey, apiSecret);
+        
+        Long ruleLikePicture = rulesManagerLocal.create("like picture", 1, apiKey, apiSecret);
+        
+        Long rulePostTheme = rulesManagerLocal.create("post theme", 5, apiKey, apiSecret);
         
         // Evénements
         
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-        long time = date.getTime();
-        /*
-         //Long event = eventsManagerLocal.create(playersManagerLocal.find(julien), 
-                    "1234", "1234", 
-                    "Poster concours", 
-                    new Timestamp(time));
-            
+        Long time = date.getTime();
 
-        Long event2 = eventsManagerLocal.create(playersManagerLocal.find(rene), 
-                "1234", "1234", 
-                "Poster concours", 
-                new Timestamp(time));
+        
+        Long event = eventsManagerLocal.create(1L, "1234", "1234", "post theme", new Timestamp(time));
 
-
-        Long event3 = eventsManagerLocal.create(playersManagerLocal.find(fabien), 
-                "1234", "1234", 
-                "Poster concours", 
-                new Timestamp(time));
-
-        Long event4 = eventsManagerLocal.create(playersManagerLocal.find(jonas),
-                "1234", "1234", 
-                "Poster concours", 
-                new Timestamp(time));
-
-*/
     }
     
 }
