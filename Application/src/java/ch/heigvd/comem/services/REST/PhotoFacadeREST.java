@@ -40,9 +40,8 @@ public class PhotoFacadeREST {
     }
     
     @POST
-    @Consumes({"application/xml", "application/json", "multipart/form-data"})
-    public void create(Photo entity) {
-
+    @Consumes({"application/xml", "application/json"})
+    public void create(Photo entity) throws ExceptionIdUtilisateur {
         photosManager.create(entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme());
     }
 
