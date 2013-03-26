@@ -8,6 +8,7 @@ import ch.heigvd.comem.dto.PhotoDTO;
 import ch.heigvd.comem.dto.TagDTO;
 import ch.heigvd.comem.dto.ThemeDTO;
 import ch.heigvd.comem.exceptions.ExceptionIdTheme;
+import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
@@ -42,8 +43,9 @@ public class ThemeFacadeREST {
 
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Theme entity) {
-        themesManager.create(entity.getTitre(), entity.getUtilisateur());
+    public String create(Theme entity) throws ExceptionIdUtilisateur {
+        themesManager.create(entity.getTitre(), entity.getUtilisateur().getId());
+        return "aslksalkfja";
     }
 
     @PUT
@@ -85,6 +87,7 @@ public class ThemeFacadeREST {
                 for(Photo photo : photos){
 
                     PhotoDTO photoDto = new PhotoDTO();
+                    photoDto.setId(photo.getId());
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
 
@@ -104,6 +107,7 @@ public class ThemeFacadeREST {
                 for(Tag tag : tags){
 
                     TagDTO tagDTO = new TagDTO();
+                    tagDTO.setId(tag.getId());
                     tagDTO.setTitre(tag.getTitre());
 
                     tagDTOS.add(tagDTO);

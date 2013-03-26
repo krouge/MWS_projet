@@ -5,10 +5,12 @@
 package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.exceptions.ExceptionIdTheme;
+import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,10 +25,16 @@ public class ThemesManager implements ThemesManagerLocal {
 
     @PersistenceContext
     private EntityManager em;
-
     
-    public Long create(String titreTheme, Utilisateur utilisateur){
+    @EJB
+    private UtilisateursManagerLocal utilisateurManagerLocal;
+    
+    
+    @Override
+    public Long create(String titreTheme, Long utilisateurId) throws ExceptionIdUtilisateur{
         Theme theme = new Theme();
+        
+        Utilisateur utilisateur = utilisateurManagerLocal.find(utilisateurId);
         
         Query query = em.createQuery("SELECT t FROM Theme t WHERE t.titre LIKE :titre");
         query.setParameter("titre", titreTheme);
@@ -34,10 +42,12 @@ public class ThemesManager implements ThemesManagerLocal {
         if (query.getResultList().isEmpty()) {
              theme.setTitre(titreTheme);
              theme.setUtilisateur(utilisateur);
-             utilisateur.addTheme(theme);
+             
              em.persist(theme);
              em.flush();
-            
+             
+             utilisateur.addTheme(theme);
+             
             return theme.getId();
         }else{
             Theme themeExistant = (Theme) query.getSingleResult();

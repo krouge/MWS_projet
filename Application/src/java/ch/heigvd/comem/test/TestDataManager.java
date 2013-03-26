@@ -96,10 +96,10 @@ public class TestDataManager implements TestDataManagerLocal {
             try {
                 
 
-                idTheme = themeManager.create("Neige",utilisateur);
-                idTheme2 = themeManager.create("Chien",utilisateur3);
+                idTheme = themeManager.create("Neige",utilisateur.getId());
+                idTheme2 = themeManager.create("Chien",utilisateur3.getId());
                 //idTheme3 = themeManager.create("Chien",utilisateur);
-                idTheme4 = themeManager.create("Montagne",utilisateur);
+                idTheme4 = themeManager.create("Montagne",utilisateur.getId());
                 
                 theme = themeManager.find(idTheme);
                 theme2 = themeManager.find(idTheme2);
