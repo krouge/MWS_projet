@@ -31,6 +31,8 @@ public class EventsManager implements EventsManagerLocal{
     @EJB
     PlayersManagerLocal playersManagerLocal;
     
+    @EJB GameManagerLocal gameManagerLocal;
+    
     @Override
     public Long create(Long playerId, String apiKey, String apiSecret, String eventType, Timestamp eventTime) {
         
@@ -44,6 +46,8 @@ public class EventsManager implements EventsManagerLocal{
         player.addEvent(event);
         em.persist(event); em.flush();
         
+        gameManagerLocal.notifyEvent(playerId, event.getEventId());
+
         return event.getEventId();
     }
     

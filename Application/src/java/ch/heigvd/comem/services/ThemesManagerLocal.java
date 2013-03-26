@@ -19,7 +19,7 @@ import javax.ejb.Local;
 @Local
 public interface ThemesManagerLocal {
     
-    public Long create(String titre,Long utilisateurId)  throws ExceptionIdUtilisateur;
+    public Long create(String titreTheme, Long utilisateurId) throws ExceptionIdUtilisateur;  
     public void delete(Long id) throws ExceptionIdTheme;
     public Theme find(Long id) throws ExceptionIdTheme; 
     public Theme update(Long id, String titre) throws ExceptionIdTheme;  

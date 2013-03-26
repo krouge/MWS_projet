@@ -83,8 +83,9 @@ public class UtilisateurFacadeREST{
             List<Theme> themes = utilisateur.getThemes();
 
             for(Theme theme : themes){
-
+                    
                 ThemeDTO themeDTO = new ThemeDTO();
+                themeDTO.setId(theme.getId());
                 themeDTO.setTitre(theme.getTitre());
 
                 themeDTOS.add(themeDTO);

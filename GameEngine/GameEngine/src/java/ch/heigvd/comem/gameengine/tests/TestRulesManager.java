@@ -26,7 +26,7 @@ public class TestRulesManager implements TestRulesManagerLocal {
             
             rulesManagerLocal.create("EventType Test "+1, 
                                       20, 
-                                      applicationsManagerLocal.find(app));
+                                      "1234", "1234");
         }
     }
 }

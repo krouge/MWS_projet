@@ -17,8 +17,6 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,13 +36,14 @@ public class ThemesManager implements ThemesManagerLocal {
     private EntityManager em;
     
     @EJB
-    private UtilisateursManagerLocal utilisateursManager;
-
+    private UtilisateursManagerLocal utilisateurManagerLocal;
     
+    
+    @Override
     public Long create(String titreTheme, Long utilisateurId) throws ExceptionIdUtilisateur{
         Theme theme = new Theme();
         
-        Utilisateur utilisateur = utilisateursManager.find(utilisateurId);
+        Utilisateur utilisateur = utilisateurManagerLocal.find(utilisateurId);
         
         Query query = em.createQuery("SELECT t FROM Theme t WHERE t.titre LIKE :titre");
         query.setParameter("titre", titreTheme);
@@ -52,17 +51,12 @@ public class ThemesManager implements ThemesManagerLocal {
         if (query.getResultList().isEmpty()) {
              theme.setTitre(titreTheme);
              theme.setUtilisateur(utilisateur);
-             utilisateur.addTheme(theme);
+             
              em.persist(theme);
              em.flush();
              
-             String json = null;
-        try {
-            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"CreationEvent", new Date());
-        } catch (JSONException ex) {
-            Logger.getLogger(PhotosManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
+             utilisateur.addTheme(theme);
+             
             return theme.getId();
         }else{
             Theme themeExistant = (Theme) query.getSingleResult();

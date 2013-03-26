@@ -132,7 +132,7 @@ public class Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "ch.heigvd.comem.model.Utiliasateur[ id=" + id + " ]";
+        return "ch.heigvd.comem.model.Utilisateur[ id=" + id + " ]";
     }
     
     public void addPhoto(Photo photo){
