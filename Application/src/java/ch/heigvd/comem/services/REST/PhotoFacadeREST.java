@@ -7,13 +7,12 @@ package ch.heigvd.comem.services.REST;
 import ch.heigvd.comem.dto.PhotoDTO;
 import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
 import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.services.ApplicationManagerLocal;
 import ch.heigvd.comem.services.PhotosManagerLocal;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,17 +30,20 @@ import javax.ws.rs.QueryParam;
 @Stateless
 @Path("photos")
 public class PhotoFacadeREST {
-    
+
     @EJB
-    PhotosManagerLocal photosManager;
+    private PhotosManagerLocal photosManager;
 
     public PhotoFacadeREST() {
         
     }
-
+    
     @POST
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({"application/xml", "application/json", "multipart/form-data"})
     public void create(Photo entity) {
+        
+        
+        
         photosManager.create(entity.getPoints(), entity.getSource(), entity.getUtilisateur(), entity.getTheme());
     }
 
