@@ -30,5 +30,6 @@ public interface UtilisateursManagerLocal {
     public void associatePhotoLike(Long id, Long idPhoto);
 
     public Utilisateur login(String pseudoUser, String mdpUser);
+    public Utilisateur findByIdPlayer(Long idPlayer);
     
 }
