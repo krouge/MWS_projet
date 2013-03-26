@@ -102,6 +102,7 @@ public class UtilisateurFacadeREST{
             for(Photo photo : photos){
                 
                 PhotoDTO photoDto = new PhotoDTO();
+                photoDto.setId(photo.getId());
                 photoDto.setPoints(photo.getPoints());
                 photoDto.setSource(photo.getSource());
                 
@@ -157,6 +158,7 @@ public class UtilisateurFacadeREST{
                 for(Theme theme : themes){
 
                     ThemeDTO themeDTO = new ThemeDTO();
+                    themeDTO.setId(theme.getId());
                     themeDTO.setTitre(theme.getTitre());
 
                     themeDTOS.add(themeDTO);
@@ -174,6 +176,7 @@ public class UtilisateurFacadeREST{
                 for(Photo photo : photos){
 
                     PhotoDTO photoDto = new PhotoDTO();
+                    photoDto.setId(photo.getId());
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
 
