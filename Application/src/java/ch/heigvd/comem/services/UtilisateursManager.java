@@ -158,6 +158,23 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         }
                   
      }
+     
+     public Utilisateur findByIdPlayer(Long idPlayer){
+         
+         Query query = em.createQuery("SELECT u FROM Utilisateur u WHERE u.idPlayer = :idPlayer");
+         query.setParameter("idPlayer", idPlayer);
+         
+         if (query.getSingleResult() == null) {
+
+            return null;
+        }else{
+            Utilisateur result = (Utilisateur) query.getSingleResult();
+       
+            return result;
+        }
+         
+         
+     }
     
 
 }

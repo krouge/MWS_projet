@@ -3,6 +3,7 @@ package ch.heigvd.comem.gameengine.services;
 import ch.heigvd.comem.gameengine.model.Badge;
 import ch.heigvd.comem.gameengine.model.Player;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
@@ -20,6 +21,9 @@ public class PlayersManager implements PlayersManagerLocal {
     @PersistenceContext
     EntityManager em;
 
+    @EJB
+    BadgesManagerLocal badgesManagerLocal;
+    
     @Override
     public Long create(int points) {
         
@@ -87,8 +91,20 @@ public class PlayersManager implements PlayersManagerLocal {
         
         
         return listPlayer;
-        
     }
-    
-    
+
+    @Override
+    public boolean associationExists(long playerId, long badgeId) {
+        
+        Player player = find(playerId);
+        Badge badge = badgesManagerLocal.find(badgeId);
+        
+        List<Badge> badges = player.getBadges();
+        
+        if(badges.contains(badge)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

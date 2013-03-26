@@ -57,7 +57,9 @@ public class GameManager implements GameManagerLocal {
         }
         
         if(rule != null) {
-            playersManagerLocal.associateBadge(player.getPlayerId(), rule.getBadge().getBadgeId());
+            if(playersManagerLocal.associationExists(player.getPlayerId(), rule.getBadge().getBadgeId())) {
+                playersManagerLocal.associateBadge(player.getPlayerId(), rule.getBadge().getBadgeId());
+            }
         }
     }
     
