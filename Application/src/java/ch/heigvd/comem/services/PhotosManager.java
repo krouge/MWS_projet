@@ -60,7 +60,7 @@ public class PhotosManager implements PhotosManagerLocal {
         
         String json = null;
         try {
-            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"CreationPhoto", new Date());
+            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"post picture", new Date());
         } catch (JSONException ex) {
             Logger.getLogger(PhotosManager.class.getName()).log(Level.SEVERE, null, ex);
         }

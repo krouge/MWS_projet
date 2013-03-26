@@ -34,7 +34,8 @@ public class ThemesManager implements ThemesManagerLocal {
     public Long create(String titreTheme, Long utilisateurId) throws ExceptionIdUtilisateur{
         Theme theme = new Theme();
         
-        Utilisateur utilisateur = utilisateurManagerLocal.find(utilisateurId);
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur = utilisateurManagerLocal.find(utilisateurId);
         
         Query query = em.createQuery("SELECT t FROM Theme t WHERE t.titre LIKE :titre");
         query.setParameter("titre", titreTheme);
