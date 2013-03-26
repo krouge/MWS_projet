@@ -6,6 +6,7 @@ package ch.heigvd.comem.services.REST;
 
 import ch.heigvd.comem.dto.PhotoDTO;
 import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
+import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.services.ApplicationManagerLocal;
 import ch.heigvd.comem.services.PhotosManagerLocal;
@@ -41,10 +42,8 @@ public class PhotoFacadeREST {
     @POST
     @Consumes({"application/xml", "application/json", "multipart/form-data"})
     public void create(Photo entity) {
-        
-        
-        
-        photosManager.create(entity.getPoints(), entity.getSource(), entity.getUtilisateur(), entity.getTheme());
+
+        photosManager.create(entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme());
     }
 
     @PUT

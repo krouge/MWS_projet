@@ -96,10 +96,10 @@ public class TestDataManager implements TestDataManagerLocal {
             try {
                 
 
-                idTheme = themeManager.create("Neige",utilisateur);
-                idTheme2 = themeManager.create("Chien",utilisateur3);
+                idTheme = themeManager.create("Neige",utilisateur.getId());
+                idTheme2 = themeManager.create("Chien",utilisateur3.getId());
                 //idTheme3 = themeManager.create("Chien",utilisateur);
-                idTheme4 = themeManager.create("Montagne",utilisateur);
+                idTheme4 = themeManager.create("Montagne",utilisateur.getId());
                 
                 theme = themeManager.find(idTheme);
                 theme2 = themeManager.find(idTheme2);
@@ -114,12 +114,23 @@ public class TestDataManager implements TestDataManagerLocal {
         }catch(Exception e){
         }
         
-        Long idPhoto = photoManager.create(10, "s", utilisateur, theme);
-        Long idPhoto2 = photoManager.create(2, "http://comem.ch/new.jpg", utilisateur2, theme2);
-        Long idPhoto3 = photoManager.create(12, "http://comem.ch/xxx.jpg", utilisateur2, theme2);
-        Long idPhoto4 = photoManager.create(100, "http://comem.ch/new1.jpg", utilisateur3, theme);
-        Long idPhoto5 = photoManager.create(78, "http://comem.ch/new2.jpg", utilisateur3, theme4);
-        Long idPhoto6 = photoManager.create(69, "http://comem.ch/new3.jpg", utilisateur, theme);
+        Long idPhoto=0L;
+        Long idPhoto2=0L;
+        Long idPhoto3=0L;
+        Long idPhoto4=0L;
+        Long idPhoto5=0L;
+        Long idPhoto6=0L;
+        
+        try{
+        idPhoto = photoManager.create(10, "s", utilisateur.getId(), theme);
+        idPhoto2 = photoManager.create(2, "http://comem.ch/new.jpg", utilisateur2.getId(), theme2);
+        idPhoto3 = photoManager.create(12, "http://comem.ch/xxx.jpg", utilisateur2.getId(), theme2);
+        idPhoto4 = photoManager.create(100, "http://comem.ch/new1.jpg", utilisateur3.getId(), theme);
+        idPhoto5 = photoManager.create(78, "http://comem.ch/new2.jpg", utilisateur3.getId(), theme4);
+        idPhoto6 = photoManager.create(69, "http://comem.ch/new3.jpg", utilisateur.getId(), theme);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         photoManager.associateTag(idPhoto, idTag2);
         photoManager.associateTag(idPhoto, idTag3);

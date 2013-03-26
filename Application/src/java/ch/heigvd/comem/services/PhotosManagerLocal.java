@@ -5,6 +5,7 @@
 package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
+import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
@@ -18,7 +19,7 @@ import javax.ejb.Local;
 @Local
 public interface PhotosManagerLocal {
     
-    public Long create(int points, String source, Utilisateur ustilisateur, Theme theme);
+    public Long create(int points, String source, Long utilisateurId, Theme theme) throws ExceptionIdUtilisateur;
     public void delete(Long idPhoto) throws ExceptionIdPhoto;
     public Photo find(Long idPhoto) throws ExceptionIdPhoto;  
     public void associateTag(Long idPhoto, Long idTag);

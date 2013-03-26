@@ -6,6 +6,7 @@ package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.config.GestionnaireGameEngine;
 import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
+import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
@@ -15,13 +16,11 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
@@ -40,11 +39,15 @@ import org.codehaus.jettison.json.JSONObject;
 public class PhotosManager implements PhotosManagerLocal {
     
     @PersistenceContext
-    EntityManager em; 
+    EntityManager em;
+    
+    @EJB
+    UtilisateursManagerLocal utilisateursManager;
     
     @Override
-    public Long create(int points, String source, Utilisateur utilisateur,Theme theme){
+    public Long create(int points, String source, Long utilisateurId,Theme theme) throws ExceptionIdUtilisateur{
 
+        Utilisateur utilisateur = utilisateursManager.find(utilisateurId);
         Photo photo = new Photo();
         photo.setPoints(points);
         photo.setSource(source);
@@ -60,11 +63,10 @@ public class PhotosManager implements PhotosManagerLocal {
         
         String json = null;
         try {
-            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"CreationPhoto", new Date());
+            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"post picture", new Date());
         } catch (JSONException ex) {
             Logger.getLogger(PhotosManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        photo.setSource(json);
         
         return photo.getId();
     }  
@@ -73,7 +75,7 @@ public class PhotosManager implements PhotosManagerLocal {
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
 
-        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/events");
+        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/events");
         
         JSONObject jsonPrincipal = new JSONObject();
         
@@ -102,7 +104,7 @@ public class PhotosManager implements PhotosManagerLocal {
         return photo;        
     }
     
-    public Photo update (Long idPhoto,int points, String source, Utilisateur utilisateur,Theme theme )throws ExceptionIdPhoto{
+    public Photo update (Long idPhoto,int points, String source, Utilisateur utilisateur,Theme theme)throws ExceptionIdPhoto{
         Photo photo = em.find(Photo.class, idPhoto);
         if (photo == null) {
             throw new ExceptionIdPhoto();
