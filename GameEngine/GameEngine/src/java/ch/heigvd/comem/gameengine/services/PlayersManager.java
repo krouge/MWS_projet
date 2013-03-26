@@ -87,8 +87,19 @@ public class PlayersManager implements PlayersManagerLocal {
         
         
         return listPlayer;
-        
     }
-    
-    
+
+    @Override
+    public boolean associationExists(long playerId, long badgeId) {
+        
+        Query query = em.createQuery("SELECT a FROM PLAYER_BADGE AS a WHERE a.players_playerId = :playerId AND a.badges_badgeId = :badgeId");
+        query.setParameter("playerId", playerId);
+        query.setParameter("badgeId", badgeId);
+        
+        if(query.getResultList().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
