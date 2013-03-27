@@ -107,6 +107,7 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
         Photo photo = em.find(Photo.class, idPhoto);
         utilisateur.addPhotoLike(photo);
         photo.addUtilisateurLike(utilisateur);
+        photo.setPoints(photo.getPoints()+1);
         em.flush();
         
         String json = null;
