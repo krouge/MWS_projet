@@ -209,7 +209,11 @@ public class UtilisateurFacadeREST{
         return utilisateursDTO;
     }
 
-    
+    /**
+     * 
+     * @return
+     * @throws JSONException 
+     */
     @GET
     @Path("leaderboard")
     @Consumes({"application/json"})
@@ -219,14 +223,11 @@ public class UtilisateurFacadeREST{
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
         WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players/leaderboard");
-        //Utilisateur request = r.accept(MediaType.APPLICATION_JSON_TYPE,MediaType.APPLICATION_XML_TYPE).type(MediaType.APPLICATION_JSON_TYPE).post(Utilisateur.class, jsonObject);        
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
         
         
         JSONObject json = new JSONObject(response.getEntity(String.class));
-        //String playerId = json.getString("playerId");
         JSONArray playerArray = json.getJSONArray("player");
-        //json = json.getJSONArray("player");
         JSONArray jsonPrincipal = new JSONArray();
         
         for (int i = 0; i < playerArray.length(); i++) {
@@ -248,44 +249,6 @@ public class UtilisateurFacadeREST{
         }
        
         return jsonPrincipal.toString();
-        
-        
-        //System.out.println(jsonPlayer.getJSONArray("player"));
-        
-        /*
-        InputStreamReader isr = new InputStreamReader(response.getEntityInputStream()); 
-        StringBuilder builder = new StringBuilder();
-        
-        
-        
-        BufferedReader in = new BufferedReader(isr); 
-        try 
-        { 
-            JSONArray json = new JSONArray();
-            
-        for(String line = null; (line=in.readLine()) !=null;){
-            
-            JSONObject jsonPlayer = new JSONObject(line);
-            json.put(jsonPlayer);
-            System.out.println(jsonPlayer.get("player"));
-        }
-        
-        
-        
-        //JSONObject json = new JSONObject(builder.toString());
-        //String nom = in.readLine(); 
-        
-        
-        } 
-        catch(IOException ioe) 
-        { 
-        //..... 
-        //..... 
-        } 
-        */
-        
-        
-        //return response.getEntityInputStream().toString();
        
     }
     
@@ -299,66 +262,44 @@ public class UtilisateurFacadeREST{
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
         WebResource r = c.resource("http://localhost:8080/GameEngine/resources/players/"+id);
-        //Utilisateur request = r.accept(MediaType.APPLICATION_JSON_TYPE,MediaType.APPLICATION_XML_TYPE).type(MediaType.APPLICATION_JSON_TYPE).post(Utilisateur.class, jsonObject);        
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
-        
         
         JSONObject json = new JSONObject(response.getEntity(String.class));
         
         JSONObject jsonPrincipal = new JSONObject();
+        Object badges = json.get("badges");
         
-        //player
-        JSONObject badgesArray = json.getJSONObject("badges");
+        if (badges instanceof JSONObject) {
+            
+            JSONObject badgesObject = json.getJSONObject("badges");
+
+            jsonPrincipal.put("badges", badgesObject);
+            
+        }
         
-        jsonPrincipal.put("badges", badgesArray);
+        if (badges instanceof JSONArray) {
+            
+            JSONArray badgesArray = json.getJSONArray("badges");
+
+            jsonPrincipal.put("badges", badgesArray);
+            
+        }
         
-        
-        //utilisateurs
         Utilisateur utilisateur = utilisateurManager.find(id);
-        
         JSONArray photoArray = new JSONArray();
         
         for(Photo photo : utilisateur.getPhotos()){
             
             JSONObject photoJSON = new JSONObject();
             photoJSON.put("source", photo.getSource());
-            
             photoArray.put(photoJSON);
         }
-        
         jsonPrincipal.put("photos", photoArray);
         
-        //infos
         jsonPrincipal.put("pseudo", utilisateur.getPseudo());
         jsonPrincipal.put("email", utilisateur.getEmail());
-
-        
-        /*
-        JSONArray playerArray = json.getJSONArray("player");
-        //json = json.getJSONArray("player");
-        JSONArray jsonPrincipal = new JSONArray();
-        
-        for (int i = 0; i < playerArray.length(); i++) {
-            
-            JSONObject player = playerArray.getJSONObject(i);
-            
-            Long idPlayer =Long.parseLong(player.getString("playerId"));
-            int points = Integer.parseInt(player.getString("points"));
-            
-            Utilisateur utilisateur = utilisateurManager.findByIdPlayer(idPlayer);
-            
-            JSONObject jsonPlayer = new JSONObject();
-            jsonPlayer.put("points", points);
-            jsonPlayer.put("pseudo", utilisateur.getPseudo());
-            
-            jsonPrincipal.put(jsonPlayer);
-            
-            
-        }
-       */
+       
         return jsonPrincipal.toString();
        
     }
-    
-    
 }

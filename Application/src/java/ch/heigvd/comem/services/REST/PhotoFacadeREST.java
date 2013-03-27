@@ -66,6 +66,7 @@ public class PhotoFacadeREST {
         Photo photo = photosManager.find(id);
         
         PhotoDTO photoDTO = new PhotoDTO();
+        photoDTO.setId(photo.getId());
         photoDTO.setPoints(photo.getPoints());
         photoDTO.setSource(photo.getSource());
         
@@ -94,6 +95,7 @@ public class PhotoFacadeREST {
          
          for(Photo photo : listePhoto){
              PhotoDTO photoDTO = new PhotoDTO();
+             photoDTO.setId(photo.getId());
              photoDTO.setPoints(photo.getPoints());
              photoDTO.setSource(photo.getSource());
              
