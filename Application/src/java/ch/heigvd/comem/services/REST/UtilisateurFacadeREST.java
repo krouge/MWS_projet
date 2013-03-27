@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.services.REST;
 
+import ch.heigvd.comem.config.GestionnaireGameEngine;
 import ch.heigvd.comem.dto.PhotoDTO;
 import ch.heigvd.comem.dto.ThemeDTO;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
@@ -17,9 +18,6 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -222,7 +220,7 @@ public class UtilisateurFacadeREST{
         
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
-        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players/leaderboard");
+        WebResource r = c.resource("http://localhost:"+GestionnaireGameEngine.PORT+"/GameEngine/resources/players/leaderboard");
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
         
         
@@ -261,7 +259,7 @@ public class UtilisateurFacadeREST{
         
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
-        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players/"+id);
+        WebResource r = c.resource("http://localhost:"+GestionnaireGameEngine.PORT+"/GameEngine/resources/players/"+id);
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
         
         JSONObject json = new JSONObject(response.getEntity(String.class));

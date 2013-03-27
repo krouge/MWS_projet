@@ -12,6 +12,7 @@ public class GestionnaireGameEngine {
     
     public static final String API_SECRET = "1234";
     public static final String API_KEY = "1234";
+    public static final int PORT = 8081;
     
     
 }

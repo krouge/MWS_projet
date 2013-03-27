@@ -80,7 +80,7 @@ public class PhotosManager implements PhotosManagerLocal {
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
 
-        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/events");
+        WebResource r = c.resource("http://localhost:"+GestionnaireGameEngine.PORT+"/GameEngine/resources/events");
         
         JSONObject jsonPrincipal = new JSONObject();
         
