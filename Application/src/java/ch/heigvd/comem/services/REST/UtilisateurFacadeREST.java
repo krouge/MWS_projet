@@ -15,6 +15,7 @@ import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.services.UtilisateursManagerLocal;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -74,7 +75,7 @@ public class UtilisateurFacadeREST{
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public UtilisateurDTO find(@PathParam("id") Long id, @QueryParam("themes") Long withThemes, @QueryParam("photos") Long withPhotos, @QueryParam("like") Long withLike) throws ExceptionIdUtilisateur {
+    public UtilisateurDTO find(@PathParam("id") Long id, @QueryParam("themes") Long withThemes, @QueryParam("photos") Long withPhotos) throws ExceptionIdUtilisateur {
 
         Utilisateur utilisateur = utilisateurManager.find(id);
         
@@ -125,12 +126,6 @@ public class UtilisateurFacadeREST{
             
         }
         
-        /*
-        if(withLike == null && withLike == 1){
-            utilisateurDTO.setPhotos_like(utilisateur.getPhotos_like());
-        }
-        */
-        
         return utilisateurDTO;
     }
     
@@ -148,7 +143,7 @@ public class UtilisateurFacadeREST{
     
     @GET
     @Produces({"application/xml", "application/json"})
-    public List<UtilisateurDTO> findAll(@QueryParam("themes") Long withThemes, @QueryParam("photos") Long withPhotos, @QueryParam("like") Long withLike) {
+    public List<UtilisateurDTO> findAll(@QueryParam("themes") Long withThemes, @QueryParam("photos") Long withPhotos) {
         
         List<Utilisateur> utilisateurs = utilisateurManager.findAll();
         List<UtilisateurDTO> utilisateursDTO = new LinkedList<UtilisateurDTO>();
@@ -197,13 +192,7 @@ public class UtilisateurFacadeREST{
 
                 utilisateurDTO.setPhotos(photoDTOS);
                 }
-            
-            /*
-            if(withLike == null && withLike == 1){
-                utilisateurDTO.setPhotos_like(utilisateur.getPhotos_like());
-            }s
-            
-            */
+
             utilisateursDTO.add(utilisateurDTO);
         }
        
@@ -266,19 +255,18 @@ public class UtilisateurFacadeREST{
         WebResource r = c.resource("http://localhost:8080/GameEngine/resources/players/"+id);
         
         ClientResponse response;
-        response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
-        
-        /*
-        if (response.getStatus()!= 200) {
+        JSONObject json;
+
+        try {
             
-            String erreur = GestionnaireGameEngine.getErrors(response);
+            response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
+            json = new JSONObject(response.getEntity(String.class));
             
+        } catch (UniformInterfaceException e) {
+            
+            String erreur = GestionnaireGameEngine.getErrors(e.getResponse());
             return erreur;
         }
-        */
-       
-        
-        JSONObject json = new JSONObject(response.getEntity(String.class));
         
         JSONObject jsonPrincipal = new JSONObject();
 

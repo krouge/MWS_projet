@@ -32,6 +32,11 @@ public class GestionnaireGameEngine {
             case 404:
                 error = "Error 404 Not Found";
                 break;
+                
+            case 204:
+                error = "Erreur 204 No Content: Requête traitée avec succès mais pas d’information à renvoyer";
+                break;
+                
             default:
                 throw new AssertionError();
                 
