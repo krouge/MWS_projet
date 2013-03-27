@@ -38,7 +38,6 @@ public class TestDataManager implements TestDataManagerLocal {
         
         // Création des applications
         
-        
         String apiKey ="1234";
         String apiSecret = "1234";
         
@@ -54,13 +53,13 @@ public class TestDataManager implements TestDataManagerLocal {
                                         "9dsdsdsadsagggdfdsc");
         
         // Création des joueurs
-        Long julien = playersManagerLocal.create(0);
-            
-        Long rene = playersManagerLocal.create(0);
-
-        Long fabien = playersManagerLocal.create(0);
-            
-        Long jonas = playersManagerLocal.create(0);
+//        Long julien = playersManagerLocal.create(0);
+//            
+//        Long rene = playersManagerLocal.create(0);
+//
+//        Long fabien = playersManagerLocal.create(0);
+//            
+//        Long jonas = playersManagerLocal.create(0);
         
         // Création des badges
         
@@ -72,7 +71,7 @@ public class TestDataManager implements TestDataManagerLocal {
         Long badge2 = badgesManagerLocal.create("Badge 10p", 
                                       "Player's points > 10", 
                                       "http://julien.com/img.jpg");
-        playersManagerLocal.associateBadge(fabien, badge2);
+        //playersManagerLocal.associateBadge(fabien, badge2);
             
         //Création des badges
         
@@ -93,8 +92,8 @@ public class TestDataManager implements TestDataManagerLocal {
         Long time = date.getTime();
 
         
-        Long event = eventsManagerLocal.create(1L, "1234", "1234", "post theme", new Timestamp(time));
-        Long event2 = eventsManagerLocal.create(1L, "1234", "1234", "post theme", new Timestamp(time));
+        //Long event = eventsManagerLocal.create(1L, "1234", "1234", "post theme", new Timestamp(time));
+        //Long event2 = eventsManagerLocal.create(1L, "1234", "1234", "post theme", new Timestamp(time));
 
     }
     
