@@ -1,14 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.heigvd.comem.config;
 
 import com.sun.jersey.api.client.ClientResponse;
-import java.util.Iterator;
-import java.util.StringTokenizer;
-import javax.net.ssl.SSLEngineResult.Status;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -18,7 +10,7 @@ public class GestionnaireGameEngine {
     
     public static final String API_SECRET = "1234";
     public static final String API_KEY = "1234";
-    public static final int PORT = 8081;
+    public static final int PORT = 8080;
     
     
     public static String getErrors(ClientResponse response){
