@@ -38,7 +38,6 @@ public class TestDataManager implements TestDataManagerLocal {
         
         // Création des applications
         
-        
         String apiKey ="1234";
         String apiSecret = "1234";
         

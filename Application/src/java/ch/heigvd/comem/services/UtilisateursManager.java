@@ -58,7 +58,7 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
     public void createPlayer(Long id) throws JSONException{
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
-        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players");
+        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/players");
         String jsonObject = "{\"points\":\"0\"}";
         //Utilisateur request = r.accept(MediaType.APPLICATION_JSON_TYPE,MediaType.APPLICATION_XML_TYPE).type(MediaType.APPLICATION_JSON_TYPE).post(Utilisateur.class, jsonObject);        
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(ClientResponse.class, jsonObject);
