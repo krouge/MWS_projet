@@ -95,8 +95,12 @@ public class PhotoFacadeREST {
     @POST
     @Path("{id}/like")
     @Produces({"application/xml", "application/json"})
-    public void like(@PathParam("id") Long id, Utilisateur entity){
-        utilisateursManager.associatePhotoLike(id, entity.getId());
+    public void like(@PathParam("id") Long id, Utilisateur entity) throws ExceptionIdPhoto, ExceptionIdUtilisateur{
+        Photo photo = photosManager.find(id);
+        Utilisateur utilisateur = utilisateursManager.find(entity.getId());
+        if(!photo.getUtilisateurs().contains(utilisateur)){
+            utilisateursManager.associatePhotoLike(entity.getId(), id);
+        }
     }
 
     @GET
