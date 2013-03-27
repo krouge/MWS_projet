@@ -252,8 +252,7 @@ public class UtilisateurFacadeREST{
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
         WebResource r = c.resource("http://localhost:"+GestionnaireGameEngine.PORT+"/GameEngine/resources/players/"+id);
-        //ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
-        
+
         ClientResponse response;
         JSONObject json;
 
