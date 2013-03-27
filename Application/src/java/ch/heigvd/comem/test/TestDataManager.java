@@ -122,7 +122,7 @@ public class TestDataManager implements TestDataManagerLocal {
         
         try{
         idPhoto = photoManager.create(0, "neige.jpg", utilisateur.getId(), idTheme);
-        idPhoto2 = photoManager.create(3, "chien.jpg", utilisateur2.getId(), idTheme2);
+        idPhoto2 = photoManager.create(0, "chien.jpg", utilisateur2.getId(), idTheme2);
         idPhoto3 = photoManager.create(0, "chien2.jpg", utilisateur3.getId(), idTheme2);
         idPhoto4 = photoManager.create(0, "montagne.jpg", utilisateur3.getId(), idTheme4);
         idPhoto5 = photoManager.create(0, "montagne2.jpg", utilisateur2.getId(), idTheme4);
