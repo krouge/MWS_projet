@@ -48,14 +48,14 @@ public class PhotoFacadeREST {
     @POST
     @Consumes({"application/xml", "application/json"})
     public void create(Photo entity) throws ExceptionIdUtilisateur, ExceptionIdTheme {
-        photosManager.create(entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme().getId());
+        photosManager.create(entity.getTitre(),entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme().getId());
     }
 
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
     public void edit(@PathParam("id") Long id,Photo entity) throws ExceptionIdPhoto, ExceptionIdUtilisateur, ExceptionIdTheme {
-        photosManager.update(entity.getId(),entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme().getId());
+        photosManager.update(entity.getId(),entity.getTitre(),entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme().getId());
     }
 
     @DELETE
@@ -73,6 +73,7 @@ public class PhotoFacadeREST {
         
         PhotoDTO photoDTO = new PhotoDTO();
         photoDTO.setId(photo.getId());
+        photoDTO.setTitre(photo.getTitre());
         photoDTO.setPoints(photo.getPoints());
         photoDTO.setSource(photo.getSource());
         
@@ -95,8 +96,12 @@ public class PhotoFacadeREST {
     @POST
     @Path("{id}/like")
     @Produces({"application/xml", "application/json"})
-    public void like(@PathParam("id") Long id, Utilisateur entity){
-        utilisateursManager.associatePhotoLike(id, entity.getId());
+    public void like(@PathParam("id") Long id, Utilisateur entity) throws ExceptionIdPhoto, ExceptionIdUtilisateur{
+        Photo photo = photosManager.find(id);
+        Utilisateur utilisateur = utilisateursManager.find(entity.getId());
+        if(!photo.getUtilisateurs().contains(utilisateur)){
+            utilisateursManager.associatePhotoLike(entity.getId(), id);
+        }
     }
 
     @GET
@@ -109,6 +114,8 @@ public class PhotoFacadeREST {
          for(Photo photo : listePhoto){
              PhotoDTO photoDTO = new PhotoDTO();
              photoDTO.setId(photo.getId());
+             photoDTO.setTitre(photo.getTitre());
+
              photoDTO.setPoints(photo.getPoints());
              photoDTO.setSource(photo.getSource());
              
