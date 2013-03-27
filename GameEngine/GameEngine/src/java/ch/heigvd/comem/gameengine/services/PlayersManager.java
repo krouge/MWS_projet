@@ -101,7 +101,7 @@ public class PlayersManager implements PlayersManagerLocal {
         Badge badge = badgesManagerLocal.find(badgeId);
         
         List<Badge> badges = player.getBadges();
-        
+
         if(badges.contains(badge)) {
             return true;
         } else {

@@ -52,6 +52,7 @@ public class TestDataManager implements TestDataManagerLocal {
                                         "sadadasdsadsadasd8s9d8aa",
                                         "9dsdsdsadsagggdfdsc");
         
+       
         // Création des joueurs
 //        Long julien = playersManagerLocal.create(0);
 //            
@@ -71,7 +72,7 @@ public class TestDataManager implements TestDataManagerLocal {
         Long badge2 = badgesManagerLocal.create("Badge 10p", 
                                       "Player's points > 10", 
                                       "http://julien.com/img.jpg");
-        //playersManagerLocal.associateBadge(fabien, badge2);
+//        playersManagerLocal.associateBadge(fabien, badge2);
             
         //Création des badges
         
