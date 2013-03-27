@@ -17,7 +17,7 @@ import javax.ejb.Local;
 @Local
 public interface UtilisateursManagerLocal {
     
-    public Long create(String pseudo, String email, String mdp);
+    public Long create(String nom, String prenom, String pseudo, String email, String mdp);
     
     public void delete(Long id) throws ExceptionIdUtilisateur;
     

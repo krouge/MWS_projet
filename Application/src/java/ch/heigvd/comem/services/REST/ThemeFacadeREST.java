@@ -64,7 +64,7 @@ public class ThemeFacadeREST {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public ThemeDTO find(@PathParam("id") Long id, @QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur) throws ExceptionIdTheme {
+    public ThemeDTO find(@PathParam("id") Long id, @QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur, @QueryParam("tagsPhotos") Long withTagsPhotos) throws ExceptionIdTheme {
         
         Theme theme = themesManager.find(id);
         ThemeDTO themeDTO = new ThemeDTO();
@@ -82,6 +82,10 @@ public class ThemeFacadeREST {
                     photoDto.setId(photo.getId());
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
+                    
+                    if(withTagsPhotos != null && withTagsPhotos == 1){
+                        photoDto.setTags(photo.getTags());
+                    }
 
                     photoDTOS.add(photoDto);
 
@@ -121,7 +125,7 @@ public class ThemeFacadeREST {
 
     @GET
     @Produces({"application/xml", "application/json"})
-    public List<ThemeDTO> findAll(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur) {
+    public List<ThemeDTO> findAll(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur, @QueryParam("tagsPhotos") Long withTagsPhotos) {
         
         List<Theme> themes = themesManager.findAll();
         List<ThemeDTO> themesDTO = new LinkedList<ThemeDTO>();
@@ -141,6 +145,9 @@ public class ThemeFacadeREST {
                     photoDto.setId(photo.getId());
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
+                    if(withTagsPhotos != null && withTagsPhotos == 1){
+                        photoDto.setTags(photo.getTags());
+                    }
 
                     photoDTOS.add(photoDto);
 
