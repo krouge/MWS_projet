@@ -131,11 +131,18 @@ public class TestDataManager implements TestDataManagerLocal {
             e.printStackTrace();
         }
         
-//        themeManager.associateTag(idTheme, idTag2);
-//        themeManager.associateTag(idTheme2, idTag3);
-//        themeManager.associateTag(idTheme, idTag3);
-//        themeManager.associateTag(idTheme4, idTag2);
-//        themeManager.associateTag(idTheme4, idTag);
+        themeManager.associateTag(idTheme, idTag2);
+        themeManager.associateTag(idTheme2, idTag3);
+        themeManager.associateTag(idTheme, idTag3);
+        themeManager.associateTag(idTheme4, idTag2);
+        themeManager.associateTag(idTheme4, idTag);
+        
+        photoManager.associateTag(idPhoto, idTag);
+        photoManager.associateTag(idPhoto, idTag2);
+        photoManager.associateTag(idPhoto, idTag3);
+        
+        photoManager.associateTag(idPhoto2, idTag);
+        photoManager.associateTag(idPhoto2, idTag3);
         
     }
 
