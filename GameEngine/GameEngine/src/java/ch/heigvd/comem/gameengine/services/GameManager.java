@@ -50,14 +50,15 @@ public class GameManager implements GameManagerLocal {
         
         int points = player.getPoints();
         Rule rule = null;
-        if(points >= 5) {
+        if(points >= 5 && points < 10) {
             rule = rulesManagerLocal.findByEventType("points>5");
         } else if (points >= 10) {
             rule = rulesManagerLocal.findByEventType("points>10");
         }
         
         if(rule != null) {
-            if(playersManagerLocal.associationExists(player.getPlayerId(), rule.getBadge().getBadgeId())) {
+            if(!playersManagerLocal.associationExists(player.getPlayerId(), rule.getBadge().getBadgeId())) {
+                System.out.println("LOL");
                 playersManagerLocal.associateBadge(player.getPlayerId(), rule.getBadge().getBadgeId());
             }
         }
