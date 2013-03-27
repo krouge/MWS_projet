@@ -15,5 +15,5 @@ import javax.ws.rs.core.Response;
  */
 @Local
 public interface FileManagerLocal {
-     public Response uploadFile(MultiPart mp) throws IOException;
+     public String uploadFile(MultiPart mp) throws IOException;
 }
