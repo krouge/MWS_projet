@@ -4,6 +4,7 @@
  */
 package ch.heigvd.comem.services.REST;
 
+import ch.heigvd.comem.config.GestionnaireGameEngine;
 import ch.heigvd.comem.dto.PhotoDTO;
 import ch.heigvd.comem.dto.ThemeDTO;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
@@ -225,6 +226,7 @@ public class UtilisateurFacadeREST{
         WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players/leaderboard");
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
         
+        //response.get
         
         JSONObject json = new JSONObject(response.getEntity(String.class));
         JSONArray playerArray = json.getJSONArray("player");
@@ -262,11 +264,24 @@ public class UtilisateurFacadeREST{
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
         WebResource r = c.resource("http://localhost:8080/GameEngine/resources/players/"+id);
-        ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        
+        ClientResponse response;
+        response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        
+        /*
+        if (response.getStatus()!= 200) {
+            
+            String erreur = GestionnaireGameEngine.getErrors(response);
+            
+            return erreur;
+        }
+        */
+       
         
         JSONObject json = new JSONObject(response.getEntity(String.class));
         
         JSONObject jsonPrincipal = new JSONObject();
+
         Object badges = json.get("badges");
         
         if (badges instanceof JSONObject) {
@@ -296,6 +311,8 @@ public class UtilisateurFacadeREST{
         }
         jsonPrincipal.put("photos", photoArray);
         
+        jsonPrincipal.put("nom", utilisateur.getNom());
+        jsonPrincipal.put("prenom", utilisateur.getPrenom());
         jsonPrincipal.put("pseudo", utilisateur.getPseudo());
         jsonPrincipal.put("email", utilisateur.getEmail());
        
