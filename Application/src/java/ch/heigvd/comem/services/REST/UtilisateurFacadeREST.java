@@ -222,7 +222,7 @@ public class UtilisateurFacadeREST{
         
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
-        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players/leaderboard");
+        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/players/leaderboard");
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
         
         
@@ -261,7 +261,7 @@ public class UtilisateurFacadeREST{
         
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
-        WebResource r = c.resource("http://localhost:8081/GameEngine/resources/players/"+id);
+        WebResource r = c.resource("http://localhost:8080/GameEngine/resources/players/"+id);
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
         
         JSONObject json = new JSONObject(response.getEntity(String.class));
