@@ -49,12 +49,13 @@ public class PhotosManager implements PhotosManagerLocal {
     ThemesManagerLocal themesManager;
     
     @Override
-    public Long create(int points, String source, Long utilisateurId,Long themeId) throws ExceptionIdUtilisateur, ExceptionIdTheme {
+    public Long create(String titre, int points, String source, Long utilisateurId,Long themeId) throws ExceptionIdUtilisateur, ExceptionIdTheme {
 
         Utilisateur utilisateur = utilisateursManager.find(utilisateurId);
         Theme theme = themesManager.find(themeId);
         
         Photo photo = new Photo();
+        photo.setTitre(titre);
         photo.setPoints(points);
         photo.setSource(source);
         photo.setUtilisateur(utilisateur);
@@ -109,7 +110,7 @@ public class PhotosManager implements PhotosManagerLocal {
         return photo;        
     }
     
-    public Photo update (Long idPhoto,int points, String source, Long utilisateurId,Long themeId)throws ExceptionIdPhoto, ExceptionIdUtilisateur, ExceptionIdTheme{
+    public Photo update (Long idPhoto,String titre,int points, String source, Long utilisateurId,Long themeId)throws ExceptionIdPhoto, ExceptionIdUtilisateur, ExceptionIdTheme{
         Photo photo = em.find(Photo.class, idPhoto);
         if (photo == null) {
             throw new ExceptionIdPhoto();
@@ -118,6 +119,7 @@ public class PhotosManager implements PhotosManagerLocal {
             Utilisateur utilisateur = utilisateursManager.find(utilisateurId);
             Theme theme = themesManager.find(themeId);
             
+            photo.setTitre(titre);
             photo.setPoints(points);
             photo.setSource(source);
             photo.setUtilisateur(utilisateur);

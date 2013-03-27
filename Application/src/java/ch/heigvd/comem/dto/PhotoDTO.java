@@ -21,6 +21,8 @@ public class PhotoDTO {
 
     private Long id;
     
+    private String titre;
+    
     private String source; 
     
     private int points;
@@ -33,12 +35,21 @@ public class PhotoDTO {
     
     private List<Utilisateur> utilisateurs = new LinkedList<Utilisateur>();
 
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public String getSource() {

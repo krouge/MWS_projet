@@ -121,12 +121,12 @@ public class TestDataManager implements TestDataManagerLocal {
         Long idPhoto6=0L;
         
         try{
-        idPhoto = photoManager.create(0, "neige.jpg", utilisateur.getId(), idTheme);
-        idPhoto2 = photoManager.create(0, "chien.jpg", utilisateur2.getId(), idTheme2);
-        idPhoto3 = photoManager.create(0, "chien2.jpg", utilisateur3.getId(), idTheme2);
-        idPhoto4 = photoManager.create(0, "montagne.jpg", utilisateur3.getId(), idTheme4);
-        idPhoto5 = photoManager.create(0, "montagne2.jpg", utilisateur2.getId(), idTheme4);
-        idPhoto6 = photoManager.create(0, "montagne3.jpg", utilisateur.getId(), idTheme4);
+        idPhoto = photoManager.create("Formatage de votre Disque dur -> 99%",0, "neige.jpg", utilisateur.getId(), idTheme);
+        idPhoto2 = photoManager.create("Julien naked",3, "chien.jpg", utilisateur2.getId(), idTheme2);
+        idPhoto3 = photoManager.create("Batman embrasse Catwoman",0, "chien2.jpg", utilisateur3.getId(), idTheme2);
+        idPhoto4 = photoManager.create("Ceci n est pas un titre",0, "montagne.jpg", utilisateur3.getId(), idTheme4);
+        idPhoto5 = photoManager.create("René à poil",0, "montagne2.jpg", utilisateur2.getId(), idTheme4);
+        idPhoto6 = photoManager.create("Internal Server Error",0, "montagne3.jpg", utilisateur.getId(), idTheme4);
         } catch (Exception e) {
             e.printStackTrace();
         }

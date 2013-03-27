@@ -49,7 +49,7 @@ public class FileREST {
         String userIdStr = bpUser.getEntityAs(String.class);
         String themeIdStr = bpTheme.getEntityAs(String.class);
         
-        photosManagerLocal.create(0, uploadedFileLocation, Long.valueOf(userIdStr), Long.valueOf(themeIdStr));
+        photosManagerLocal.create("Salut",0, uploadedFileLocation, Long.valueOf(userIdStr), Long.valueOf(themeIdStr));
         
         String output = "File uploaded via Jersey based RESTFul Webservice to: " + uploadedFileLocation;
         

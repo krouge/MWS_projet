@@ -111,6 +111,7 @@ public class UtilisateurFacadeREST{
             for(Photo photo : photos){
                 
                 PhotoDTO photoDto = new PhotoDTO();
+                photoDto.setTitre(photo.getTitre());
                 photoDto.setId(photo.getId());
                 photoDto.setPoints(photo.getPoints());
                 photoDto.setSource(photo.getSource());
@@ -180,6 +181,7 @@ public class UtilisateurFacadeREST{
 
                     PhotoDTO photoDto = new PhotoDTO();
                     photoDto.setId(photo.getId());
+                    photoDto.setTitre(photo.getTitre());
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
 
@@ -291,6 +293,7 @@ public class UtilisateurFacadeREST{
         for(Photo photo : utilisateur.getPhotos()){
             
             JSONObject photoJSON = new JSONObject();
+            photoJSON.put("titre", photo.getTitre());
             photoJSON.put("source", photo.getSource());
             photoArray.put(photoJSON);
         }
