@@ -28,6 +28,7 @@ public class Photo implements Serializable {
     private Long id;
     private String source;   
     private int points;
+    private String titre;
     
     @ManyToOne
     protected Utilisateur utilisateur;
@@ -40,7 +41,14 @@ public class Photo implements Serializable {
     
     @ManyToMany
     private List<Utilisateur> utilisateurs = new LinkedList<Utilisateur>();
-    
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
     
     public Theme getTheme() {
         return theme;
