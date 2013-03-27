@@ -26,22 +26,22 @@ public class FileManager implements FileManagerLocal{
 
     
     @Override
-    public Response uploadFile(MultiPart mp) throws IOException {
+    public String uploadFile(MultiPart mp) throws IOException {
             
         MediaType type = mp.getBodyParts().get(0).getMediaType();
         BodyPartEntity bpe = (BodyPartEntity) mp.getBodyParts().get(0).getEntity();
+
+        String themeIdStr = mp.getBodyParts().get(2).getEntityAs(String.class);
         
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
         String fileName = "IMG_"+timestamp+".jpg";
         InputStream uploadedInputStream = bpe.getInputStream();
 
-        String uploadedFileLocation = "C:/Users/Renouille/Desktop/" + fileName;
+        String uploadedFileLocation = "C:/Program Files/glassfish-3.1.2.2/glassfish/domains/domain1/docroot/img/"+fileName;
         saveToFile(uploadedInputStream, uploadedFileLocation);
-        String output = "File uploaded via Jersey based RESTFul Webservice to: " + uploadedFileLocation;
         
-        
-        return Response.status(200).entity(output).build();
+        return uploadedFileLocation;
     }
 
 

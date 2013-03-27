@@ -6,6 +6,7 @@ package ch.heigvd.comem.services;
 
 import ch.heigvd.comem.config.GestionnaireGameEngine;
 import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
+import ch.heigvd.comem.exceptions.ExceptionIdTheme;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
 import ch.heigvd.comem.model.Tag;
@@ -44,15 +45,19 @@ public class PhotosManager implements PhotosManagerLocal {
     @EJB
     UtilisateursManagerLocal utilisateursManager;
     
+    @EJB
+    ThemesManagerLocal themesManager;
+    
     @Override
-    public Long create(int points, String source, Long utilisateurId,Theme theme) throws ExceptionIdUtilisateur{
+    public Long create(int points, String source, Long utilisateurId,Long themeId) throws ExceptionIdUtilisateur, ExceptionIdTheme {
 
         Utilisateur utilisateur = utilisateursManager.find(utilisateurId);
+        Theme theme = themesManager.find(themeId);
+        
         Photo photo = new Photo();
         photo.setPoints(points);
         photo.setSource(source);
         photo.setUtilisateur(utilisateur);
-
         photo.setTheme(theme);
 
         em.persist(photo);
@@ -104,11 +109,15 @@ public class PhotosManager implements PhotosManagerLocal {
         return photo;        
     }
     
-    public Photo update (Long idPhoto,int points, String source, Utilisateur utilisateur,Theme theme)throws ExceptionIdPhoto{
+    public Photo update (Long idPhoto,int points, String source, Long utilisateurId,Long themeId)throws ExceptionIdPhoto, ExceptionIdUtilisateur, ExceptionIdTheme{
         Photo photo = em.find(Photo.class, idPhoto);
         if (photo == null) {
             throw new ExceptionIdPhoto();
         }else{
+            
+            Utilisateur utilisateur = utilisateursManager.find(utilisateurId);
+            Theme theme = themesManager.find(themeId);
+            
             photo.setPoints(points);
             photo.setSource(source);
             photo.setUtilisateur(utilisateur);
