@@ -38,7 +38,7 @@ public class FileManager implements FileManagerLocal{
         String fileName = "IMG_"+timestamp+".jpg";
         InputStream uploadedInputStream = bpe.getInputStream();
 
-        String uploadedFileLocation = "/reflex/img_uploads/"+themeIdStr+"/"+fileName;
+        String uploadedFileLocation = "C:/Program Files/glassfish-3.1.2.2/glassfish/domains/domain1/docroot/img/"+fileName;
         saveToFile(uploadedInputStream, uploadedFileLocation);
         
         return uploadedFileLocation;
