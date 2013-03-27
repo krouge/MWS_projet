@@ -9,7 +9,10 @@ import ch.heigvd.comem.exceptions.ExceptionIdPhoto;
 import ch.heigvd.comem.exceptions.ExceptionIdTheme;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.model.Photo;
+import ch.heigvd.comem.model.Utilisateur;
 import ch.heigvd.comem.services.PhotosManagerLocal;
+import ch.heigvd.comem.services.UtilisateursManagerLocal;
+import com.sun.jersey.multipart.MultiPart;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -34,6 +37,9 @@ public class PhotoFacadeREST {
 
     @EJB
     private PhotosManagerLocal photosManager;
+    
+    @EJB
+    private UtilisateursManagerLocal utilisateursManager;
 
     public PhotoFacadeREST() {
         
@@ -84,6 +90,13 @@ public class PhotoFacadeREST {
         }
         
         return photoDTO;
+    }
+    
+    @POST
+    @Path("{id}/like")
+    @Produces({"application/xml", "application/json"})
+    public void like(@PathParam("id") Long id, Utilisateur entity){
+        utilisateursManager.associatePhotoLike(id, entity.getId());
     }
 
     @GET
