@@ -8,17 +8,20 @@ import ch.heigvd.comem.exceptions.ExceptionIdTheme;
 import ch.heigvd.comem.exceptions.ExceptionIdUtilisateur;
 import ch.heigvd.comem.services.FileManagerLocal;
 import ch.heigvd.comem.services.PhotosManagerLocal;
+import ch.heigvd.comem.services.TagsManagerLocal;
 import com.sun.jersey.multipart.BodyPart;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import com.sun.jersey.multipart.MultiPart;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.codehaus.jettison.json.JSONObject;
 
 /**
  * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT pour la gestion de fichiers (photos)
@@ -31,7 +34,11 @@ public class FileREST {
     @EJB
     private FileManagerLocal fileManagerLocal;
     
-    @EJB private PhotosManagerLocal photosManagerLocal;
+    @EJB 
+    private PhotosManagerLocal photosManagerLocal;
+    
+    @EJB
+    private TagsManagerLocal tagsManagerLocal;
     
     public FileREST() {
     }
@@ -53,16 +60,25 @@ public class FileREST {
         
         BodyPart bpUser = mp.getBodyParts().get(1);
         BodyPart bpTheme = mp.getBodyParts().get(2);
+        BodyPart bpTitle = mp.getBodyParts().get(3);
         
         String userIdStr = bpUser.getEntityAs(String.class);
         String themeIdStr = bpTheme.getEntityAs(String.class);
+        String titleStr = bpTitle.getEntityAs(String.class);
         
-        photosManagerLocal.create(0, uploadedFileLocation, Long.valueOf(userIdStr), Long.valueOf(themeIdStr));
+        Long photoId = photosManagerLocal.create(titleStr, 0, uploadedFileLocation, Long.valueOf(userIdStr), Long.valueOf(themeIdStr));
+        
+        Pattern pattern = Pattern.compile("(?:\\s|\\A|^)[##]+([A-Za-z0-9-_]+)");
+        Matcher matcher = pattern.matcher(titleStr);
+        
+        Long tagId;
+        while(matcher.find()) {
+            tagId = tagsManagerLocal.create('#'+matcher.group(1));
+            photosManagerLocal.associateTag(photoId, tagId);
+        }
         
         String output = "File uploaded via Jersey based RESTFul Webservice to: " + uploadedFileLocation;
         
         return Response.status(200).entity(output).build();
     }
-    
-    
 }

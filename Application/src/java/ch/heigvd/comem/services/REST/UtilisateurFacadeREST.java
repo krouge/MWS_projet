@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -32,6 +33,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -52,8 +54,15 @@ public class UtilisateurFacadeREST{
 
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Utilisateur entity) {
-        utilisateurManager.create(entity.getNom(), entity.getPrenom(), entity.getPseudo(), entity.getEmail(), entity.getMdp());
+    public Response create(Utilisateur entity) {
+        
+        Long idUtilisateur = utilisateurManager.create(entity.getNom(), entity.getPrenom(), entity.getPseudo(), entity.getEmail(), entity.getMdp());
+        
+        if(idUtilisateur == null) {
+            return Response.status(HttpServletResponse.SC_FORBIDDEN).build();
+        } else {
+            return Response.status(HttpServletResponse.SC_OK).build();
+        }
     }
 
     @PUT
@@ -111,6 +120,7 @@ public class UtilisateurFacadeREST{
             for(Photo photo : photos){
                 
                 PhotoDTO photoDto = new PhotoDTO();
+                photoDto.setTitre(photo.getTitre());
                 photoDto.setId(photo.getId());
                 photoDto.setPoints(photo.getPoints());
                 photoDto.setSource(photo.getSource());
@@ -131,9 +141,16 @@ public class UtilisateurFacadeREST{
     @Path("login")
     @Consumes({"application/xml", "application/json"})
     @Produces("application/json")
-    public Utilisateur login(Utilisateur entity) {
+    public Response login(Utilisateur entity) {
 
-        return utilisateurManager.login(entity.getPseudo(),entity.getMdp());
+        Utilisateur utilisateur  = utilisateurManager.login(entity.getPseudo(),entity.getMdp());
+        
+        if(utilisateur == null) {
+            return Response.status(HttpServletResponse.SC_FORBIDDEN).build();
+        } else {
+            
+            return Response.status(HttpServletResponse.SC_OK).entity(utilisateur.getId()).build();
+        }
     }
     
     
@@ -180,6 +197,7 @@ public class UtilisateurFacadeREST{
 
                     PhotoDTO photoDto = new PhotoDTO();
                     photoDto.setId(photo.getId());
+                    photoDto.setTitre(photo.getTitre());
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
 
@@ -291,6 +309,7 @@ public class UtilisateurFacadeREST{
         for(Photo photo : utilisateur.getPhotos()){
             
             JSONObject photoJSON = new JSONObject();
+            photoJSON.put("titre", photo.getTitre());
             photoJSON.put("source", photo.getSource());
             photoArray.put(photoJSON);
         }

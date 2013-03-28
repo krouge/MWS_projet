@@ -38,10 +38,10 @@ public class FileManager implements FileManagerLocal{
         String fileName = "IMG_"+timestamp+".jpg";
         InputStream uploadedInputStream = bpe.getInputStream();
 
-        String uploadedFileLocation = "C:/Program Files/glassfish-3.1.2.2/glassfish/domains/domain1/docroot/img/"+fileName;
+        String uploadedFileLocation = "/Applications/NetBeans/glassfish-3.1.2.2/glassfish/domains/domain1/docroot/images/"+fileName;
         saveToFile(uploadedInputStream, uploadedFileLocation);
         
-        return uploadedFileLocation;
+        return fileName;
     }
 
 

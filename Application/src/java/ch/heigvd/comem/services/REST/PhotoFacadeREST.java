@@ -54,7 +54,7 @@ public class PhotoFacadeREST {
     @POST
     @Consumes({"application/xml", "application/json"})
     public void create(Photo entity) throws ExceptionIdUtilisateur, ExceptionIdTheme {
-        photosManager.create(entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme().getId());
+        photosManager.create(entity.getTitre(),entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme().getId());
     }
 
     /**
@@ -69,7 +69,7 @@ public class PhotoFacadeREST {
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
     public void edit(@PathParam("id") Long id,Photo entity) throws ExceptionIdPhoto, ExceptionIdUtilisateur, ExceptionIdTheme {
-        photosManager.update(entity.getId(),entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme().getId());
+        photosManager.update(entity.getId(),entity.getTitre(),entity.getPoints(), entity.getSource(), entity.getUtilisateur().getId(), entity.getTheme().getId());
     }
 
     /**
@@ -101,6 +101,7 @@ public class PhotoFacadeREST {
         
         PhotoDTO photoDTO = new PhotoDTO();
         photoDTO.setId(photo.getId());
+        photoDTO.setTitre(photo.getTitre());
         photoDTO.setPoints(photo.getPoints());
         photoDTO.setSource(photo.getSource());
         
@@ -155,6 +156,8 @@ public class PhotoFacadeREST {
          for(Photo photo : listePhoto){
              PhotoDTO photoDTO = new PhotoDTO();
              photoDTO.setId(photo.getId());
+             photoDTO.setTitre(photo.getTitre());
+
              photoDTO.setPoints(photo.getPoints());
              photoDTO.setSource(photo.getSource());
              

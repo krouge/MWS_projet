@@ -107,6 +107,8 @@ public class ThemeFacadeREST {
 
                     PhotoDTO photoDto = new PhotoDTO();
                     photoDto.setId(photo.getId());
+                    photoDto.setTitre(photo.getTitre());
+
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
                     
@@ -178,6 +180,7 @@ public class ThemeFacadeREST {
 
                     PhotoDTO photoDto = new PhotoDTO();
                     photoDto.setId(photo.getId());
+                    photoDto.setTitre(photo.getTitre());
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
                     if(withTagsPhotos != null && withTagsPhotos == 1){
@@ -250,6 +253,7 @@ public class ThemeFacadeREST {
                 for(Photo photo : photos){
 
                     PhotoDTO photoDto = new PhotoDTO();
+                    photoDto.setTitre(photo.getTitre());
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
 
@@ -317,8 +321,9 @@ public class ThemeFacadeREST {
                 List<Photo> photos = theme.getPhotos();
 
                 for(Photo photo : photos){
-
+                    
                     PhotoDTO photoDto = new PhotoDTO();
+                    photoDto.setTitre(photo.getTitre());
                     photoDto.setPoints(photo.getPoints());
                     photoDto.setSource(photo.getSource());
 
