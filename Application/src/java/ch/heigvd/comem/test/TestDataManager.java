@@ -57,7 +57,7 @@ public class TestDataManager implements TestDataManagerLocal {
         try {
             idTheme1 = themeManager.create("Bachelorette Party",utilisateur1.getId());
             idTheme2 = themeManager.create("Cupcakes",utilisateur3.getId());
-            idTheme3 = themeManager.create("Montagne",utilisateur1.getId());
+            idTheme3 = themeManager.create("Food",utilisateur1.getId());
             
             theme1 = themeManager.find(idTheme1);
             theme2 = themeManager.find(idTheme2);
@@ -96,6 +96,55 @@ public class TestDataManager implements TestDataManagerLocal {
         themeManager.associateTag(idTheme1, idTag1_1);
 
         
+        Long idPhoto3_1 = 0L;
+        Long idPhoto3_2 = 0L;
+        Long idPhoto3_3 = 0L;
+        Long idPhoto3_4 = 0L;
+        
+        try{
+            idPhoto3_1 = photoManager.create("Apserges #coquilleSaintJacques #Delicieux #Merci #ChezBidou",0, "food1.jpg", utilisateur2.getId(), idTheme3);
+            idPhoto3_2 = photoManager.create("Entrée #cafetariaHEIG #yverdon #midi #HEIG-VD",0, "food2.jpg", utilisateur1.getId(), idTheme3);
+            idPhoto3_3 = photoManager.create("Dessert #gâteau #Happybirthday #cadeau",0, "food3.jpg", utilisateur2.getId(), idTheme3);
+            idPhoto3_4 = photoManager.create("Tarte fraise #fraise #creme #LausanneRestaurant",0, "food4.jpg", utilisateur3.getId(), idTheme3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        Long idTag3_1 = tagManager.create("#coquilleSaintJacques");
+        Long idTag3_2 = tagManager.create("#Merci");
+        Long idTag3_3 = tagManager.create("#ChezBidou");
+        
+        Long idTag3_4 = tagManager.create("#cafetariaHEIG");
+        Long idTag3_5 = tagManager.create("#HEIG-VD");
+        
+        Long idTag3_6 = tagManager.create("#cadeau");
+        Long idTag3_7 = tagManager.create("#ChezBidou");
+        Long idTag3_8 = tagManager.create("#Happybirthday");
+        
+        Long idTag3_9 = tagManager.create("#fraise");
+        Long idTag3_10 = tagManager.create("#creme");
+        Long idTag3_11= tagManager.create("#LausanneRestaurant");
+        
+        photoManager.associateTag(idPhoto3_1, idTag3_1);
+        photoManager.associateTag(idPhoto3_1, idTag3_2);
+        photoManager.associateTag(idPhoto3_1, idTag3_3);
+        photoManager.associateTag(idPhoto3_1, idTag3_7);
+        
+        photoManager.associateTag(idPhoto3_2, idTag3_4);
+        photoManager.associateTag(idPhoto3_2, idTag3_5);
+        
+        photoManager.associateTag(idPhoto3_3, idTag3_6);
+        photoManager.associateTag(idPhoto3_3, idTag3_8);
+        
+        photoManager.associateTag(idPhoto3_4, idTag3_9);
+        photoManager.associateTag(idPhoto3_4, idTag3_10);
+        photoManager.associateTag(idPhoto3_4, idTag3_11);
+
+        
+        utilisateurManager.associatePhotoLike(idUser2, idPhoto3_2);
+        utilisateurManager.associatePhotoLike(idUser1, idPhoto3_1);
+                
     }
 
 }
