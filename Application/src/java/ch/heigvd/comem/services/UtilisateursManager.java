@@ -38,20 +38,30 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
 
     
     public Long create(String nom, String prenom, String pseudo, String email, String mdp){
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setNom(nom);
-        utilisateur.setPrenom(prenom);
-        utilisateur.setPseudo(pseudo);
-        utilisateur.setEmail(email);
-        utilisateur.setMdp(mdp);
-        em.persist(utilisateur);
-        em.flush();
-        try {
-            createPlayer(utilisateur.getId());
-        } catch (JSONException ex) {
-            Logger.getLogger(UtilisateursManager.class.getName()).log(Level.SEVERE, null, ex);
+        
+        Query query = em.createQuery("SELECT u FROM Utilisateur AS u WHERE u.pseudo = :pseudo");
+        query.setParameter("pseudo", pseudo);
+        
+        if(query.getResultList().isEmpty()) {
+            Utilisateur utilisateur = new Utilisateur();
+            utilisateur.setNom(nom);
+            utilisateur.setPrenom(prenom);
+            utilisateur.setPseudo(pseudo);
+            utilisateur.setEmail(email);
+            utilisateur.setMdp(mdp);
+            em.persist(utilisateur);
+            em.flush();
+            try {
+                createPlayer(utilisateur.getId());
+            } catch (JSONException ex) {
+                Logger.getLogger(UtilisateursManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return utilisateur.getId();
+        } else {
+            return null;
         }
-        return utilisateur.getId();
+        
+        
         
     }
     
@@ -152,11 +162,9 @@ public class UtilisateursManager implements UtilisateursManagerLocal {
          
          
          if (query.getResultList().isEmpty()) {
-
             return null;
         }else{
             Utilisateur utilisateurExistant = (Utilisateur) query.getSingleResult();
-       
             return utilisateurExistant;
         }
                   
