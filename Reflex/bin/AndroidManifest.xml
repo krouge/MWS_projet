@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ch.heigvd.comem.reflex"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="ch.heigvd.comem.reflex.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ch.heigvd.comem.reflex.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity
+            android:name="ch.heigvd.comem.fragments.ListeThemesActivity"
+            android:label="@string/title_activity_test_list_theme" >
+        </activity>
+        <activity android:name="ch.heigvd.comem.fragments.DetailThemeActivity" >
+        </activity>
+        <activity
+            android:name="ch.heigvd.comem.reflex.LeaderboardActivity"
+            android:label="@string/title_activity_leaderboard"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity
+            android:name="ch.heigvd.comem.reflex.ProfilActivity"
+            android:label="@string/title_activity_profil"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity
+            android:name="ch.heigvd.comem.reflex.CreateThemeActivity"
+            android:label="@string/title_activity_create_theme"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity
+            android:name="ch.heigvd.comem.reflex.AllThemesActivity"
+            android:label="@string/title_activity_all_themes"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity
+            android:name="ch.heigvd.comem.reflex.ThemeListPhotos"
+            android:label="@string/title_activity_theme_list_photos"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity
+            android:name="ch.heigvd.comem.reflex.PostPictureActivity"
+            android:label="@string/title_activity_cameraupload"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity
+            android:name="ch.heigvd.comem.reflex.SubscribeActivity"
+            android:label="@string/title_activity_subscribe" >
+        </activity>
+    </application>
+
+</manifest>

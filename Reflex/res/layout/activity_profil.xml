@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:id="@+id/profil_textPseudo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="20sp"/>
+    
+    <TextView
+        android:id="@+id/profil_textFirstname"
+        android:layout_below="@id/profil_textPseudo"
+        android:layout_alignParentLeft="true"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Firstname :"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="8dp"/>
+    
+   	<TextView
+        android:id="@+id/profil_firstname"
+        android:layout_toRightOf="@id/profil_textFirstname"
+        android:layout_below="@id/profil_textPseudo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="8dp"/>
+   	
+   	<TextView
+        android:id="@+id/profil_textLastname"
+        android:layout_below="@id/profil_textFirstname"
+        android:layout_alignParentLeft="true"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Lastname :"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="8dp"/>
+    
+   	<TextView
+        android:id="@+id/profil_lastname"
+        android:layout_toRightOf="@id/profil_textLastname"
+        android:layout_below="@id/profil_textFirstname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="8dp"/>
+   	
+   	<TextView
+        android:id="@+id/profil_textEmail"
+        android:layout_below="@id/profil_textLastname"
+        android:layout_alignParentLeft="true"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Email :"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="8dp"/>
+    
+   	<TextView
+        android:id="@+id/profil_email"
+        android:layout_toRightOf="@id/profil_textEmail"
+        android:layout_below="@id/profil_textLastname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="8dp"/>
+   	
+   	<HorizontalScrollView
+   	    android:id="@+id/list_badges"
+   	    android:layout_below="@id/profil_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <LinearLayout
+            android:id="@+id/badge_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            />
+    </HorizontalScrollView>
+
+   	<GridView android:id="@+id/gridview"
+   	    android:layout_below="@id/list_badges"
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:columnWidth="90dp"
+    	android:numColumns="auto_fit"
+    	android:verticalSpacing="5dp"
+    	android:horizontalSpacing="5dp"
+    	android:stretchMode="columnWidth"
+    	android:gravity="center" />
+   	
+</RelativeLayout>

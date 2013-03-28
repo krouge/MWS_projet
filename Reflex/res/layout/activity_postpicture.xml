@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+    
+    <EditText
+        android:id="@+id/etTitlePicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title of the picture"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="5dp"/>
+    
+    <TextView
+        android:id="@+id/tvNotePicture"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/postPicture_note"
+        android:layout_marginBottom="8dp"
+        android:textSize="12sp"/>
+    
+    <ImageView
+        android:id="@+id/img_picUploaded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/descr_img_up" />
+    
+    <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/uploadPictureButton"
+        android:id="@+id/button_uploadPic"
+        android:layout_marginTop="30dp"
+        android:onClick="uploadPicture" />
+
+</LinearLayout>

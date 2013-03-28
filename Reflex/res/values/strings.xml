@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Reflex</string>
+    <string name="action_settings">Settings</string>
+    <string name="etPseudo">Nickname</string>
+    <string name="hintPseudo">Nickname</string>
+    <string name="etPassword">Password</string>
+    <string name="hintPassword">Password</string>
+    <string name="btLogIn">Log in!</string>
+    <string name="title_activity_home">Home</string>
+    <string name="action_search">Search</string>
+    <string name="action_edit">New</string>
+    <string name="icd_logo">New</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="home_titre">Last themes</string>
+    <string name="title_activity_test_list_theme">TestListTheme</string>
+    <string name="title_all_themes">All themes</string>
+    <string name="title_activity_leaderboard">Leaderboard</string>
+    <string name="leaderboard_title">Top 10</string>
+    <string name="title_activity_profil">Your profil</string>
+    <string name="profil_title">bidou88</string>
+    <string name="title_activity_create_theme">Create new theme</string>
+    <string name="hintTheme">New theme&#8230;</string>
+    <string name="btCreateNewTheme">Create new theme!</string>
+    <string name="title_activity_all_themes">All themes</string>
+    <string name="title_activity_theme_list_photos">Theme</string>
+    
+    <string name="title_activity_cameraupload">Upload your picture</string>
+    
+    <string name="uploadPictureButton">Post your picture</string>
+    <string name="descr_img_up">Picture uploaded</string>
+    <string name="postPicture_note">Hint : Tag your pictures with #!</string>
+    
+    <string name="btnSubscribe">No account? Join us!</string>
+    
+    <string name="title_activity_subscribe">Subscribe</string>
+    <string name="join">Be cool, join Reflex!</string>
+    <string name="hintNewNickName">Simply choose a nickname&#8230;</string>
+    <string name="hintNewPwd">A password&#8230;</string>
+    <string name="hintPwdConfirm">And confirm it!</string>
+    <string name="btnJoin">I wanna be cool!</string>
+
+
+</resources>
