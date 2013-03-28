@@ -132,7 +132,7 @@ public class TestDataManager implements TestDataManagerLocal {
         
         photoManager.associateTag(idPhoto3_1, idTag3_1);
         photoManager.associateTag(idPhoto3_1, idTag3_2);
-        photoManager.associateTag(idPhoto3_1, idTag3_3);
+        //photoManager.associateTag(idPhoto3_1, idTag3_3);
         photoManager.associateTag(idPhoto3_1, idTag3_7);
         
         photoManager.associateTag(idPhoto3_2, idTag3_4);
