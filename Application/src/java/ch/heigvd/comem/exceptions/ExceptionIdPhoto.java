@@ -10,8 +10,12 @@ package ch.heigvd.comem.exceptions;
  */
 public class ExceptionIdPhoto extends Exception {
     
+    private static String message = "Exception Id: l'id entré n existe pas dans la BDD";
+    
+    
+    
     public ExceptionIdPhoto(){
-        super();
+        super(message);
     }
     
 }

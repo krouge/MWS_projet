@@ -79,8 +79,6 @@ public class Theme implements Serializable {
         this.titre = titre;
     }
     
-    
-
     public Long getId() {
         return id;
     }

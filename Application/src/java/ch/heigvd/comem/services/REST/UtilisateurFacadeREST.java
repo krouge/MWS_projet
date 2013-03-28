@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ch.heigvd.comem.services.REST;
 
 import ch.heigvd.comem.config.GestionnaireGameEngine;
@@ -39,7 +36,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 /**
- *
+ * Service REST permettant le actions POST / PUT / DELETE /GET sur un utilisateur
  * @author Jonas
  */
 @Stateless
@@ -51,7 +48,11 @@ public class UtilisateurFacadeREST{
 
     public UtilisateurFacadeREST() {
     }
-
+    
+    /**
+     * Permet de créer une nouvelle entité utilisateur
+     * @param entity l' entité utilisateur a créer
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     public Response create(Utilisateur entity) {
@@ -64,20 +65,39 @@ public class UtilisateurFacadeREST{
             return Response.status(HttpServletResponse.SC_OK).build();
         }
     }
-
+    
+    /**
+     * Permet de modifier une entité utilisateur
+     * @param id id de l'entité utilisateur a modifié
+     * @param entity l'entité utilisateur a modifié
+     * @throws ExceptionIdUtilisateur si l'id de l'utilisateur n'existe pas
+     */
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
     public void edit(@PathParam("id") Long id, Utilisateur entity) throws ExceptionIdUtilisateur {
             utilisateurManager.update(entity.getId(),entity.getPseudo(), entity.getEmail(), entity.getMdp());
     }
-
+    
+    /**
+     * Permet de supprimer une entité utilisateur
+     * @param id l'id de l'entité utilisateur a supprimé
+     * @throws ExceptionIdUtilisateur si l'id de l'utilisateur n'existe pas
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) throws ExceptionIdUtilisateur { 
         utilisateurManager.delete(id);
     }
-
+    
+    /**
+     * Permet de récupérer l'entité utilisateur correspondant à l'id passé en paramètre avec ses thèmes et ou ses photos.
+     * @param id id de l'entité utilisateur a récupérer
+     * @param withThemes si withThemes = 1 alors retourne les thèmes liés à l'entité utilisateur
+     * @param withPhotos si withPhotos = 1 alors retourne les thèmes liés à l'entité utilisateur
+     * @return UtilisateurDTO une entité utilisateur personalisée (voir classe UtilisateurDTO)
+     * @throws ExceptionIdUtilisateur si l'id de l'utilisateur n'existe pas 
+     */
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -94,7 +114,6 @@ public class UtilisateurFacadeREST{
         utilisateurDTO.setPseudo(utilisateur.getPseudo());
         utilisateurDTO.setIdPlayer(utilisateur.getIdPlayer());
         
-       
         if(withThemes != null && withThemes == 1){
             List<ThemeDTO> themeDTOS = new LinkedList<ThemeDTO>();
             List<Theme> themes = utilisateur.getThemes();
@@ -104,11 +123,9 @@ public class UtilisateurFacadeREST{
                 ThemeDTO themeDTO = new ThemeDTO();
                 themeDTO.setId(theme.getId());
                 themeDTO.setTitre(theme.getTitre());
-
+                
                 themeDTOS.add(themeDTO);
-
             }
-
             utilisateurDTO.setThemes(themeDTOS);
         }
         
@@ -136,7 +153,11 @@ public class UtilisateurFacadeREST{
         return utilisateurDTO;
     }
     
-    
+    /**
+     * Permet de logguer un utilisateur dans l'application
+     * @param entity une entité utilisateur avec un mot de passe et un pseudo
+     * @return Response si l'utilisateur est null retourne une Erreur 403 sinon retourne l'entité utilisateur
+     */
     @POST
     @Path("login")
     @Consumes({"application/xml", "application/json"})
@@ -153,8 +174,12 @@ public class UtilisateurFacadeREST{
         }
     }
     
-    
-    
+    /**
+     * Permet de récupérer toutes les entités utilisateurs avec leurs thèmes et/ou leurs photos
+     * @param withThemes si withThemes = 1 alors retourne les thèmes liés à une entité utilisateur
+     * @param withPhotos si withPhotos = 1 alors retourne les thèmes liés à une entité utilisateur
+     * @return List<UtilisateurDTO> la liste de toutes les entités utilisateur personalisée en UtilisateurDTO (voir classe UtilisateurDTO)
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<UtilisateurDTO> findAll(@QueryParam("themes") Long withThemes, @QueryParam("photos") Long withPhotos) {
@@ -215,8 +240,8 @@ public class UtilisateurFacadeREST{
     }
 
     /**
-     * 
-     * @return
+     * Permet de récupérer le classement de l'application avec ses players 
+     * @return String un json comprenant le classement
      * @throws JSONException 
      */
     @GET
@@ -229,8 +254,6 @@ public class UtilisateurFacadeREST{
         Client c = Client.create(cc);
         WebResource r = c.resource("http://localhost:"+GestionnaireGameEngine.PORT+"/GameEngine/resources/players/leaderboard");
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
-        
-        //response.get
         
         JSONObject json = new JSONObject(response.getEntity(String.class));
         JSONArray playerArray = json.getJSONArray("player");
@@ -258,7 +281,13 @@ public class UtilisateurFacadeREST{
        
     }
     
-    
+    /**
+     * Permet de récupérer le profil d'un utilisateur avec ses informations liées du côté GameEngine (sa liste de badges)
+     * @param id id de l'entité utilisateur demandé
+     * @return String un objet json comprenant le profil ou une erreur personnalisée si l'id demandé n existe pas (voir méthode getErrors dans la classe GestionnaireGameEngine)    
+     * @throws JSONException
+     * @throws ExceptionIdUtilisateur si l'id de l'utilisateur n'existe pas 
+     */
     @GET
     @Path("{id}/profil")
     @Consumes({"application/json"})

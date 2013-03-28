@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.heigvd.comem.test;
 
-import ch.heigvd.comem.model.Tag;
 import ch.heigvd.comem.model.Theme;
 import ch.heigvd.comem.model.Utilisateur;
 import ch.heigvd.comem.services.PhotosManagerLocal;
@@ -34,122 +29,169 @@ public class TestDataManager implements TestDataManagerLocal {
     private TagsManagerLocal tagManager;
     
     public void generateTestData(){
-        /*
-        Utilisateur utilisateur = null;
-        Theme theme = null;
-        Tag tag = null;
-        
-        Long id = utilisateurManager.create("theplayer777", "jonas@jonas.ch", "1234");
-        
-        
-        Long idTag = tagManager.create("paysage");
-        
-       
-        Long idTheme = 0L;
-        Long idTheme2 = 0L;
-        
-        try{
-            utilisateur = utilisateurManager.find(id);
-            try {
-                idTheme = themeManager.create("Theme",utilisateur);
-                idTheme2 = themeManager.create("Themes",utilisateur);
-                theme = themeManager.find(idTheme);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
-        }catch(Exception e){
-        }
-        Long idPhoto = photoManager.create(10, "http://comem.ch", utilisateur, theme);
-        
-        photoManager.associateTag(idPhoto, idTag);
-        themeManager.associateTag(idTheme, idTag);
-        utilisateurManager.associatePhotoLike(id, idPhoto);
-        */
-        Utilisateur utilisateur = null;
+        Utilisateur utilisateur1 = null;
         Utilisateur utilisateur2 = null;
         Utilisateur utilisateur3 = null;
         
-        Theme theme = null;
+        Long idUser1 = utilisateurManager.create("Nicole","Jonas","theplayer777", "jonasnicole@yahoo.fr", "1234");
+        Long idUser2 = utilisateurManager.create("Grossmann", "René", "renouille","rene@lucasart.com", "qwertz");
+        Long idUser3 = utilisateurManager.create("Biedermann", "Julien", "bidou", "julien.biedermann@gmail.com", "asdf");
+        
+        try{
+            utilisateur1 = utilisateurManager.find(idUser1);
+            utilisateur2 = utilisateurManager.find(idUser2);
+            utilisateur3 = utilisateurManager.find(idUser3);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        Theme theme1 = null;
         Theme theme2 = null;
         Theme theme3 = null;
         Theme theme4 = null;
         
-        Long idUser = utilisateurManager.create("Nicole","Jonas","theplayer777", "jonas@jonas.ch", "1234");
-        Long idUser2 = utilisateurManager.create("Norris", "Chuck", "WalkerTexasRanger","chuck@norris.king", "*****");
-        Long idUser3 = utilisateurManager.create("Wayne", "Bruce", "Batman", "batman@gothamCity.com", "asdf");
+        Long idTheme1 = 0L;
+        Long idTheme2 = 0L;
+        Long idTheme3 = 0L;
+        Long idTheme4 = 0L;
         
-        Long idTag = tagManager.create("beau");
-        Long idTag2 = tagManager.create("taPhotoEstNul");
-        Long idTag2Bis = tagManager.create("taPhotoEstNul");
-        Long idTag3 = tagManager.create("chat");
-        
-        Long idTheme=0L;
-        Long idTheme2=0L;
-        //Long idTheme3=0L;
-        Long idTheme4=0L;
-        
-        try{
-            utilisateur = utilisateurManager.find(idUser);
-            utilisateur2 = utilisateurManager.find(idUser2);
-            utilisateur3 = utilisateurManager.find(idUser3);
-            try {
-                
-
-                idTheme = themeManager.create("Neige",utilisateur.getId());
-                idTheme2 = themeManager.create("Chien",utilisateur3.getId());
-                idTheme4 = themeManager.create("Montagne",utilisateur.getId());
-                
-                theme = themeManager.find(idTheme);
-                theme2 = themeManager.find(idTheme2);
-                //theme3 = themeManager.find(idTheme3);
-                theme4 = themeManager.find(idTheme4);
-                
-                
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+        try {
+            idTheme1 = themeManager.create("Bachelorette Party",utilisateur1.getId());
+            idTheme2 = themeManager.create("Cupcakes",utilisateur3.getId());
+            idTheme3 = themeManager.create("Food",utilisateur1.getId());
+            idTheme4 = themeManager.create("Comem",utilisateur1.getId());
+            
+            theme1 = themeManager.find(idTheme1);
+            theme2 = themeManager.find(idTheme2);
+            theme3 = themeManager.find(idTheme2);
+            theme4 = themeManager.find(idTheme4);
         }catch(Exception e){
+            e.printStackTrace();
         }
         
-        Long idPhoto=0L;
-        Long idPhoto2=0L;
-        Long idPhoto3=0L;
-        Long idPhoto4=0L;
-        Long idPhoto5=0L;
-        Long idPhoto6=0L;
+        Long idPhoto1_1 = 0L;
+        Long idPhoto1_2 = 0L;
+        Long idPhoto1_3 = 0L;
+        Long idPhoto1_4 = 0L;
         
         try{
-        idPhoto = photoManager.create("Formatage de votre Disque dur -> 99%",0, "neige.jpg", utilisateur.getId(), idTheme);
-        idPhoto2 = photoManager.create("Julien naked",3, "chien.jpg", utilisateur2.getId(), idTheme2);
-        idPhoto3 = photoManager.create("Batman embrasse Catwoman",0, "chien2.jpg", utilisateur3.getId(), idTheme2);
-        idPhoto4 = photoManager.create("Ceci n est pas un titre",0, "montagne.jpg", utilisateur3.getId(), idTheme4);
-        idPhoto5 = photoManager.create("René à poil",0, "montagne2.jpg", utilisateur2.getId(), idTheme4);
-        idPhoto6 = photoManager.create("Internal Server Error",0, "montagne3.jpg", utilisateur.getId(), idTheme4);
+            idPhoto1_1 = photoManager.create("Bachelorette Party #HEC #Bachelor #BF #Limo #Lausanne #Champagne #Party",0, "bachelorette-party.jpg", utilisateur1.getId(), idTheme1);
+            idPhoto1_2 = photoManager.create("Karen's Party #Diploma #Graduation #Pub #Beer #Tequila #London",0, "party1.jpg", utilisateur2.getId(), idTheme1);
+            idPhoto1_3 = photoManager.create("Disco Party #Queen #Longdrink #Troll #Disco #HappyHour",0, "party2.jpg", utilisateur3.getId(), idTheme1);
+            idPhoto1_4 = photoManager.create("Soirée Pinky #Friends #Party #Night #Stockholm #Sweden #Dream",0, "party3.jpg", utilisateur3.getId(), idTheme1);
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        photoManager.associateTag(idPhoto, idTag2);
-        photoManager.associateTag(idPhoto, idTag3);
-        photoManager.associateTag(idPhoto3, idTag);
-        photoManager.associateTag(idPhoto4, idTag2);
+        
+        Long idTag1_1 = tagManager.create("#HEC");
+        Long idTag1_2 = tagManager.create("#Bachelor");
+        Long idTag1_3 = tagManager.create("#Queen");
+        Long idTag1_4 = tagManager.create("#Stockholm");
+        
+        photoManager.associateTag(idPhoto1_1, idTag1_1);
+        photoManager.associateTag(idPhoto1_1, idTag1_2);
+        photoManager.associateTag(idPhoto1_3, idTag1_3);
+        photoManager.associateTag(idPhoto1_4, idTag1_4);
+        
+        utilisateurManager.associatePhotoLike(idUser3, idPhoto1_1);
+        
+        themeManager.associateTag(idTheme1, idTag1_1);
+
+        
+        Long idPhoto3_1 = 0L;
+        Long idPhoto3_2 = 0L;
+        Long idPhoto3_3 = 0L;
+        Long idPhoto3_4 = 0L;
+        
+        try{
+            idPhoto3_1 = photoManager.create("Apserges #coquilleSaintJacques #Delicieux #Merci #ChezBidou",0, "food1.jpg", utilisateur2.getId(), idTheme3);
+            idPhoto3_2 = photoManager.create("Entrée #cafetariaHEIG #yverdon #midi #HEIG-VD",0, "food2.jpg", utilisateur1.getId(), idTheme3);
+            idPhoto3_3 = photoManager.create("Dessert #gâteau #Happybirthday #cadeau",0, "food3.jpg", utilisateur2.getId(), idTheme3);
+            idPhoto3_4 = photoManager.create("Tarte fraise #fraise #creme #LausanneRestaurant",0, "food4.jpg", utilisateur3.getId(), idTheme3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         
-        utilisateurManager.associatePhotoLike(idUser3, idPhoto);
-        utilisateurManager.associatePhotoLike(idUser2, idPhoto4);
-        utilisateurManager.associatePhotoLike(idUser, idPhoto4);
-        utilisateurManager.associatePhotoLike(idUser3, idPhoto4);
-        utilisateurManager.associatePhotoLike(idUser, idPhoto5);
-        utilisateurManager.associatePhotoLike(idUser3, idPhoto6);
+        Long idTag3_1 = tagManager.create("#coquilleSaintJacques");
+        Long idTag3_2 = tagManager.create("#Merci");
+        Long idTag3_3 = tagManager.create("#ChezBidou");
         
-        themeManager.associateTag(idTheme, idTag2);
-        themeManager.associateTag(idTheme2, idTag3);
-        themeManager.associateTag(idTheme, idTag3);
-        themeManager.associateTag(idTheme4, idTag2);
-        themeManager.associateTag(idTheme4, idTag);
+        Long idTag3_4 = tagManager.create("#cafetariaHEIG");
+        Long idTag3_5 = tagManager.create("#HEIG-VD");
         
+        Long idTag3_6 = tagManager.create("#cadeau");
+        Long idTag3_7 = tagManager.create("#ChezBidou");
+        Long idTag3_8 = tagManager.create("#Happybirthday");
+        
+        Long idTag3_9 = tagManager.create("#fraise");
+        Long idTag3_10 = tagManager.create("#creme");
+        Long idTag3_11= tagManager.create("#LausanneRestaurant");
+        
+        photoManager.associateTag(idPhoto3_1, idTag3_1);
+        photoManager.associateTag(idPhoto3_1, idTag3_2);
+        photoManager.associateTag(idPhoto3_1, idTag3_3);
+        photoManager.associateTag(idPhoto3_1, idTag3_7);
+        
+        photoManager.associateTag(idPhoto3_2, idTag3_4);
+        photoManager.associateTag(idPhoto3_2, idTag3_5);
+        
+        photoManager.associateTag(idPhoto3_3, idTag3_6);
+        photoManager.associateTag(idPhoto3_3, idTag3_8);
+        
+        photoManager.associateTag(idPhoto3_4, idTag3_9);
+        photoManager.associateTag(idPhoto3_4, idTag3_10);
+        photoManager.associateTag(idPhoto3_4, idTag3_11);
+
+        
+        utilisateurManager.associatePhotoLike(idUser2, idPhoto3_2);
+        utilisateurManager.associatePhotoLike(idUser1, idPhoto3_1);
+        
+        
+        
+        Long idPhoto4_1 = 0L;
+        Long idPhoto4_2 = 0L;
+        Long idPhoto4_3 = 0L;
+        Long idPhoto4_4 = 0L;
+        
+        try{
+            idPhoto4_1 = photoManager.create("Ambiance de classe #HEIG-VD #Bachelor #Comem #Ingenieur #Yverdon-les-Bains",0, "comem1.jpg", utilisateur1.getId(), idTheme4);
+            idPhoto4_2 = photoManager.create("Le groupe de travail #Java #Groupe #Bidou #Rene #Fabien #Jonas",0, "comem2.jpg", utilisateur2.getId(), idTheme4);
+            idPhoto4_3 = photoManager.create("L etage des chefs #St-rock #Comem",0, "comem3.jpg", utilisateur3.getId(), idTheme4);
+            idPhoto4_4 = photoManager.create("T155 POWAAAA! #Porte #Salle #Classe #T255",0, "comem4.jpg", utilisateur3.getId(), idTheme4);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        Long idTag4_1 = tagManager.create("#HEIG-VD");
+        Long idTag4_2 = tagManager.create("#Bachelor");
+        Long idTag4_3 = tagManager.create("#Comem");
+        Long idTag4_4 = tagManager.create("#Ingenieur");
+        Long idTag4_5 = tagManager.create("#Yverdon-les-Bains");
+        Long idTag4_6 = tagManager.create("#Java");
+        Long idTag4_7 = tagManager.create("#T155");
+        
+        
+        photoManager.associateTag(idPhoto4_1, idTag4_1);
+        photoManager.associateTag(idPhoto4_1, idTag4_2);
+        photoManager.associateTag(idPhoto4_1, idTag4_3);
+        photoManager.associateTag(idPhoto4_1, idTag4_4);
+        photoManager.associateTag(idPhoto4_1, idTag4_5);
+        
+        photoManager.associateTag(idPhoto4_2, idTag4_6);
+        
+        photoManager.associateTag(idPhoto4_3, idTag4_3);
+        
+        photoManager.associateTag(idPhoto4_4, idTag4_7);
+        
+        utilisateurManager.associatePhotoLike(idUser3, idPhoto4_1);
+        
+        themeManager.associateTag(idTheme4, idTag4_1);
+        themeManager.associateTag(idTheme4, idTag4_3);
+                
     }
 
 }

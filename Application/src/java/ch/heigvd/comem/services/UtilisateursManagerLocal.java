@@ -17,18 +17,12 @@ import javax.ejb.Local;
 @Local
 public interface UtilisateursManagerLocal {
     
-    public Long create(String nom, String prenom, String pseudo, String email, String mdp);
-    
+    public Long create(String nom, String prenom, String pseudo, String email, String mdp); 
     public void delete(Long id) throws ExceptionIdUtilisateur;
-    
     public Utilisateur find(Long id) throws ExceptionIdUtilisateur;
-    
     public List<Utilisateur> findAll();
-  
     public Utilisateur update(Long id, String pseudo, String email, String mdp) throws ExceptionIdUtilisateur;
-    
     public void associatePhotoLike(Long id, Long idPhoto);
-
     public Utilisateur login(String pseudoUser, String mdpUser);
     public Utilisateur findByIdPlayer(Long idPlayer);
     

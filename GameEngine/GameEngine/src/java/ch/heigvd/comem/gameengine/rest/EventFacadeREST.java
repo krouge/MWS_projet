@@ -18,7 +18,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- *
+ * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT sur un événement
  * @author Renouille
  */
 @Stateless
@@ -28,6 +28,11 @@ public class EventFacadeREST {
     @EJB
     private EventsManagerLocal eventManagerLocal;
     
+    /**
+     * Permet de créer une nouvelle entité événement
+     * @param entity l'entité événement à créer
+     * @return l'entité événement créée
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     @Produces({"application/xml", "application/json"})
@@ -42,12 +47,21 @@ public class EventFacadeREST {
         return eventManagerLocal.find(eventId);
     }
 
+    /**
+     * Permet de supprimer une entité événement
+     * @param id l'id de l'entité événement à supprimer
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
         eventManagerLocal.remove(id);
     }
 
+    /**
+     * Permet de récupérer une entité événement
+     * @param id l'id de l'entité événement à récupérer
+     * @return l'entité événement à récupérer
+     */
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -55,23 +69,13 @@ public class EventFacadeREST {
         return eventManagerLocal.find(id);
     }
 
+    /**
+     * Permet de récupérer toutes les entités événements
+     * @return une liste d'entités événements
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<Event> findAll() {
         return eventManagerLocal.findAll();
     }
-
-//    @GET
-//    @Path("{from}/{to}")
-//    @Produces({"application/xml", "application/json"})
-//    public List<Event> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-//        return super.findRange(new int[]{from, to});
-//    }
-
-//    @GET
-//    @Path("count")
-//    @Produces("text/plain")
-//    public String countREST() {
-//        return String.valueOf(super.count());
-//    }
 }

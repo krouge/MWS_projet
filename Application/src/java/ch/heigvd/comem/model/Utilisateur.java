@@ -172,9 +172,5 @@ public class Utilisateur implements Serializable {
 
     public void setIdPlayer(Long idPlayer) {
         this.idPlayer = idPlayer;
-    }
-    
-    
-    
-    
+    } 
 }

@@ -1,14 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.heigvd.comem.config;
 
 import com.sun.jersey.api.client.ClientResponse;
-import java.util.Iterator;
-import java.util.StringTokenizer;
-import javax.net.ssl.SSLEngineResult.Status;
-import javax.ws.rs.core.Response;
 
 /**
  *

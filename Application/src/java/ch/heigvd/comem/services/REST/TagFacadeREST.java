@@ -21,7 +21,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- *
+ * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT pour la gestion des tags
  * @author Jonas
  */
 @Stateless
@@ -34,12 +34,22 @@ public class TagFacadeREST {
     public TagFacadeREST() {
     }
 
+    /**
+     * Permet de générer une nouvelle entité tag
+     * @param entity l'entité tag à créer
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     public void create(Tag entity) {
         tagsManager.create(entity.getTitre());
     }
 
+    /**
+     * Permet de modifier une entité tag existante
+     * @param id l'id de l'entité à modifier
+     * @param entity l'entité à modifier
+     * @throws ExceptionIdTag l'exception lancée si le tag n'existe pas
+     */
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
@@ -47,12 +57,23 @@ public class TagFacadeREST {
         tagsManager.update(entity.getId(), entity.getTitre());
     }
 
+    /**
+     * Permet de supprimer une entité tag existante
+     * @param id l'id du tag à supprimer
+     * @throws ExceptionIdTag l'exception lancée si le tag n'existe pas
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) throws ExceptionIdTag {
         tagsManager.delete(id);
     }
 
+    /**
+     * Permet de récupérer une entité tag
+     * @param id l'id de l'entité tag à récupérer
+     * @return le tag correspondant
+     * @throws ExceptionIdTag l'exeption lancée si le tag n'existe pas
+     */
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -60,26 +81,13 @@ public class TagFacadeREST {
         return tagsManager.find(id);
     }
 
+    /**
+     * Permet de récupérer toutes les entités tags
+     * @return une liste des entités tags
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<Tag> findAll() {
         return tagsManager.findAll();
     }
-    /*
-    @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Tag> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-    */
-    
-    /*
-    @GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-    */  
 }
