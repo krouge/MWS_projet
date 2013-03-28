@@ -58,7 +58,7 @@ public class FileREST {
         String themeIdStr = bpTheme.getEntityAs(String.class);
         String titleStr = bpTitle.getEntityAs(String.class);
         
-        Long photoId = photosManagerLocal.create(0, uploadedFileLocation, Long.valueOf(userIdStr), Long.valueOf(themeIdStr));
+        Long photoId = photosManagerLocal.create(titleStr, 0, uploadedFileLocation, Long.valueOf(userIdStr), Long.valueOf(themeIdStr));
         
         Pattern pattern = Pattern.compile("(?:\\s|\\A|^)[##]+([A-Za-z0-9-_]+)");
         Matcher matcher = pattern.matcher(titleStr);
