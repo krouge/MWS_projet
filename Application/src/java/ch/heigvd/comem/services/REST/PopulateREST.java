@@ -13,7 +13,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 /**
- *
+ * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT pour la gestion des données de test
  * @author fabiencornaz
  */
 @Stateless
@@ -26,6 +26,10 @@ public class PopulateREST {
     public PopulateREST() {
     }
     
+    /**
+     * Permet de générer des données de test
+     * @return 
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     public String create() {
