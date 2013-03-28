@@ -98,9 +98,8 @@ public class TestDataManager implements TestDataManagerLocal {
         utilisateurManager.associatePhotoLike(idUser3, idPhoto1_1);
         
         themeManager.associateTag(idTheme1, idTag1_1);
-
         
-        Long idPhoto3_1 = 0L;
+                Long idPhoto3_1 = 0L;
         Long idPhoto3_2 = 0L;
         Long idPhoto3_3 = 0L;
         Long idPhoto3_4 = 0L;
@@ -117,7 +116,7 @@ public class TestDataManager implements TestDataManagerLocal {
         
         Long idTag3_1 = tagManager.create("#coquilleSaintJacques");
         Long idTag3_2 = tagManager.create("#Merci");
-        Long idTag3_3 = tagManager.create("#ChezBidou");
+        Long idTag3_3 = tagManager.create("#ChezBidou1");
         
         Long idTag3_4 = tagManager.create("#cafetariaHEIG");
         Long idTag3_5 = tagManager.create("#HEIG-VD");
@@ -132,7 +131,7 @@ public class TestDataManager implements TestDataManagerLocal {
         
         photoManager.associateTag(idPhoto3_1, idTag3_1);
         photoManager.associateTag(idPhoto3_1, idTag3_2);
-        photoManager.associateTag(idPhoto3_1, idTag3_3);
+        //photoManager.associateTag(idPhoto3_1, idTag3_3);
         photoManager.associateTag(idPhoto3_1, idTag3_7);
         
         photoManager.associateTag(idPhoto3_2, idTag3_4);
@@ -150,7 +149,6 @@ public class TestDataManager implements TestDataManagerLocal {
         utilisateurManager.associatePhotoLike(idUser1, idPhoto3_1);
         
         
-        
         Long idPhoto4_1 = 0L;
         Long idPhoto4_2 = 0L;
         Long idPhoto4_3 = 0L;
@@ -159,15 +157,15 @@ public class TestDataManager implements TestDataManagerLocal {
         try{
             idPhoto4_1 = photoManager.create("Ambiance de classe #HEIG-VD #Bachelor #Comem #Ingenieur #Yverdon-les-Bains",0, "comem1.jpg", utilisateur1.getId(), idTheme4);
             idPhoto4_2 = photoManager.create("Le groupe de travail #Java #Groupe #Bidou #Rene #Fabien #Jonas",0, "comem2.jpg", utilisateur2.getId(), idTheme4);
-            idPhoto4_3 = photoManager.create("L etage des chefs #St-rock #Comem",0, "comem3.jpg", utilisateur3.getId(), idTheme4);
+            idPhoto4_3 = photoManager.create("L'etage des chefs #St-rock #Comem",0, "comem3.jpg", utilisateur3.getId(), idTheme4);
             idPhoto4_4 = photoManager.create("T155 POWAAAA! #Porte #Salle #Classe #T255",0, "comem4.jpg", utilisateur3.getId(), idTheme4);
         } catch (Exception e) {
             e.printStackTrace();
         }
         
         
-        Long idTag4_1 = tagManager.create("#HEIG-VD");
-        Long idTag4_2 = tagManager.create("#Bachelor");
+        Long idTag4_1 = tagManager.create("#HEIG-VD1");
+        Long idTag4_2 = tagManager.create("#Bachelor1");
         Long idTag4_3 = tagManager.create("#Comem");
         Long idTag4_4 = tagManager.create("#Ingenieur");
         Long idTag4_5 = tagManager.create("#Yverdon-les-Bains");

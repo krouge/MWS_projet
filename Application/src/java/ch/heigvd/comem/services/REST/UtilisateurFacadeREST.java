@@ -170,7 +170,7 @@ public class UtilisateurFacadeREST{
             return Response.status(HttpServletResponse.SC_FORBIDDEN).build();
         } else {
             
-            return Response.status(HttpServletResponse.SC_OK).entity(utilisateur.getId().toString()).build();
+            return Response.status(HttpServletResponse.SC_OK).header("userID", utilisateur.getId().toString()).build();
         }
     }
     
@@ -314,23 +314,24 @@ public class UtilisateurFacadeREST{
         
         JSONObject jsonPrincipal = new JSONObject();
 
-        Object badges = json.get("badges");
-        
-        if (badges instanceof JSONObject) {
-            
-            JSONObject badgesObject = json.getJSONObject("badges");
+        if(json.has("badges")) {
+            Object badges = json.get("badges");
+            if (badges instanceof JSONObject) {
 
-            jsonPrincipal.put("badges", badgesObject);
-            
-        }
-        
-        if (badges instanceof JSONArray) {
-            
-            JSONArray badgesArray = json.getJSONArray("badges");
+                JSONObject badgesObject = json.getJSONObject("badges");
 
-            jsonPrincipal.put("badges", badgesArray);
-            
-        }
+                jsonPrincipal.put("badges", badgesObject);
+
+            }
+
+            if (badges instanceof JSONArray) {
+
+                JSONArray badgesArray = json.getJSONArray("badges");
+
+                jsonPrincipal.put("badges", badgesArray);
+
+            }
+        } 
         
         Utilisateur utilisateur = utilisateurManager.find(id);
         JSONArray photoArray = new JSONArray();
