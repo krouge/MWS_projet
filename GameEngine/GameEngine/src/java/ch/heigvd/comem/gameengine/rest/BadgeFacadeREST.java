@@ -17,7 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- *
+ * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT sur un badge
  * @author Julien Biedermann
  */
 @Stateless
@@ -26,7 +26,12 @@ public class BadgeFacadeREST {
 
     @EJB
     private BadgesManagerLocal badgesManagerLocal;
-
+    
+    /**
+     * Permet de créer une nouvelle entité badge
+     * @param entity l'entité badge à créer
+     * @return le badge créé
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     @Produces({"application/xml", "application/json"})
@@ -35,19 +40,32 @@ public class BadgeFacadeREST {
         
         return badgesManagerLocal.find(badgeId);
     }
-
+    
+    /**
+     * Permet de modifier une entité badge
+     * @param entity l'entité badge à modifier
+     */
     @PUT
     @Consumes({"application/xml", "application/json"})
     public void edit(Badge entity) {
         badgesManagerLocal.update(entity.getBadgeId(), entity.getName(), entity.getDescription(), entity.getSource());
     }
 
+    /**
+     * Permet de supprimer une entité badge
+     * @param id l'id de l'entité badge à supprimer
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
         badgesManagerLocal.remove(badgesManagerLocal.find(id).getBadgeId());
     }
 
+    /**
+     * Permet de récupérer une entité badge
+     * @param id l'id de l'entité badge à récupérer
+     * @return l'entité badge voulue
+     */
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -55,24 +73,13 @@ public class BadgeFacadeREST {
         return badgesManagerLocal.find(id);
     }
 
+    /**
+     * Permet de récupérer toutes les entités badges
+     * @return une liste des entités badges
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<Badge> findAll() {
         return badgesManagerLocal.findAll();
     }
-
-//    @GET
-//    @Path("{from}/{to}")
-//    @Produces({"application/xml", "application/json"})
-//    public List<Badge> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-//        return super.findRange(new int[]{from, to});
-//    }
-
-//    @GET
-//    @Path("count")
-//    @Produces("text/plain")
-//    public String countREST() {
-//        return String.valueOf(super.count());
-//    }
-    
 }

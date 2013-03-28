@@ -15,7 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- *
+ * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT sur une application
  * @author Renouille
  */
 @Stateless
@@ -25,6 +25,11 @@ public class ApplicationFacadeREST {
     @EJB
     private ApplicationsManagerLocal appManagerLocal;
     
+    /**
+     * Permet de créer une nouvelle entité application
+     * @param entity l'entité Application
+     * @return l'application créée
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     @Produces({"application/xml", "application/json"})
@@ -33,43 +38,46 @@ public class ApplicationFacadeREST {
         
         return appManagerLocal.find(appId);
     }
-
+    
+    /**
+     * Permet de modifier une entité application
+     * @param entity l'entité à modifier
+     */
     @PUT
     @Consumes({"application/xml", "application/json"})
     public void edit(Application entity) {
         appManagerLocal.update(entity.getApplicationId(), entity.getName(), entity.getDescription(), entity.getApiKey(), entity.getApiSecret());
     }
-
+    
+    /**
+     * Permet de supprimer une entité
+     * @param id l'id de l'entité application à supprimer
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
         appManagerLocal.remove(id);
     }
-
+    
+    /**
+     * Permet de récupérer une entité application
+     * @param id l'id de l'entité application à récupérer
+     * @return l'entité application voulue
+     */
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
     public Application find(@PathParam("id") Long id) {
         return appManagerLocal.find(id);
     }
-
+    
+    /**
+     * Permet de récupérer toutes les entités application
+     * @return une liste d'entités application
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<Application> findAll() {
         return appManagerLocal.findAll();
     }
-
-//    @GET
-//    @Path("{from}/{to}")
-//    @Produces({"application/xml", "application/json"})
-//    public List<Application> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-//        return super.findRange(new int[]{from, to});
-//    }
-//
-//    @GET
-//    @Path("count")
-//    @Produces("text/plain")
-//    public String countREST() {
-//        return String.valueOf(super.count());
-//    }
 }
