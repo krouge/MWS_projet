@@ -67,9 +67,8 @@ public class PhotosManager implements PhotosManagerLocal {
 
         theme.addPhoto(photo);
         
-        String json = null;
         try {
-            json = createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"post picture", new Date());
+            createEvent(utilisateur,GestionnaireGameEngine.API_KEY,GestionnaireGameEngine.API_SECRET,"post picture", new Date());
         } catch (JSONException ex) {
             Logger.getLogger(PhotosManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,7 +76,7 @@ public class PhotosManager implements PhotosManagerLocal {
         return photo.getId();
     }  
     
-    private String createEvent(Utilisateur utilisateur, String API_KEY, String API_SECRET, String creationPhoto, Date date) throws JSONException {
+    private void createEvent(Utilisateur utilisateur, String API_KEY, String API_SECRET, String creationPhoto, Date date) throws JSONException {
         ClientConfig cc = new DefaultClientConfig();
         Client c = Client.create(cc);
 
@@ -97,8 +96,6 @@ public class PhotosManager implements PhotosManagerLocal {
         jsonPrincipal.put("eventType", creationPhoto);        
         
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(ClientResponse.class, jsonPrincipal);
-
-        return jsonPrincipal.toString();
     }
     
     

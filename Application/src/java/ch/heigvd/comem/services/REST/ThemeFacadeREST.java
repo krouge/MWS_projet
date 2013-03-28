@@ -96,7 +96,6 @@ public class ThemeFacadeREST {
                 themeDTO.setPhotos(photoDTOS);
             }
             
-            
             if(withTags != null && withTags == 1){
                 
                 List<TagDTO> tagDTOS = new LinkedList<TagDTO>();
@@ -111,17 +110,13 @@ public class ThemeFacadeREST {
                     tagDTOS.add(tagDTO);
 
                 }
-
-                themeDTO.setTags(tagDTOS);
-                
+                themeDTO.setTags(tagDTOS);  
             }
             
             if(withUtilisateur != null && withUtilisateur == 1){
                 themeDTO.setUtilisateur(theme.getUtilisateur());
             }
             
-        
-        
         return themeDTO;
     }
 
@@ -187,7 +182,6 @@ public class ThemeFacadeREST {
             
         }
         
-        
         return themesDTO;
     }
     
@@ -222,7 +216,6 @@ public class ThemeFacadeREST {
                 themeDTO.setPhotos(photoDTOS);
             }
             
-            
             if(withTags != null && withTags == 1){
                 
                 List<TagDTO> tagDTOS = new LinkedList<TagDTO>();
@@ -236,9 +229,7 @@ public class ThemeFacadeREST {
                     tagDTOS.add(tagDTO);
 
                 }
-
                 themeDTO.setTags(tagDTOS);
-                
             }
             
             if(withUtilisateur != null && withUtilisateur == 1){
@@ -249,10 +240,8 @@ public class ThemeFacadeREST {
             
         }
         
-        
         return themesDTO;
     }
-    
     
     @GET
     @Path("search")
@@ -284,8 +273,7 @@ public class ThemeFacadeREST {
 
                 themeDTO.setPhotos(photoDTOS);
             }
-            
-            
+                
             if(withTags != null && withTags == 1){
                 
                 List<TagDTO> tagDTOS = new LinkedList<TagDTO>();
@@ -315,26 +303,4 @@ public class ThemeFacadeREST {
         
         return themesDTO;
     }
-    
-    /*
-    @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Theme> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-    */
-    
 }
