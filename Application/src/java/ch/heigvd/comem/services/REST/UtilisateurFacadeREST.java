@@ -170,7 +170,7 @@ public class UtilisateurFacadeREST{
             return Response.status(HttpServletResponse.SC_FORBIDDEN).build();
         } else {
             
-            return Response.status(HttpServletResponse.SC_OK).entity(utilisateur.getId()).build();
+            return Response.status(HttpServletResponse.SC_OK).entity(utilisateur.getId().toString()).build();
         }
     }
     
