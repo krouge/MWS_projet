@@ -28,7 +28,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 /**
- *
+ * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT pour la gestion de themes
  * @author Jonas
  */
 @Stateless
@@ -41,6 +41,12 @@ public class ThemeFacadeREST {
     public ThemeFacadeREST() {
     }
 
+    /**
+     * Permet de créer une nouvelle entité thème
+     * @param entity l'entité thème à créer
+     * @return l'entité thème créée
+     * @throws ExceptionIdUtilisateur l'exception lancée si l'utilisateur n'existe pas
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     public String create(Theme entity) throws ExceptionIdUtilisateur {
@@ -48,6 +54,12 @@ public class ThemeFacadeREST {
         return "aslksalkfja";
     }
 
+    /**
+     * Permet de modifier une entité thème existante
+     * @param id l'id de l'entité thème à modifier
+     * @param entity l'entità thème à modifier
+     * @throws ExceptionIdTheme l'exception lancée si le thème n'existe pas
+     */
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
@@ -55,12 +67,27 @@ public class ThemeFacadeREST {
         themesManager.update(entity.getId(), entity.getTitre());
     }
 
+    /**
+     * Permet de supprimer une entité thème
+     * @param id l'id de l'entité à supprimer
+     * @throws ExceptionIdTheme l'exception lancée si le thème n'existe pas
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) throws ExceptionIdTheme {
         themesManager.delete(id);
     }
 
+    /**
+     * Permet de récupérer une entité thème avec ses paramètres (photos, tags, utilisateur et les tags des photos du thème)
+     * @param id l'id de l'entité à récupérer
+     * @param withPhotos égal 1 si l'on souhaite récupérer les photos liées au thème
+     * @param withTags égal 1 si l'on souhaite récupérer les tags liés au thème
+     * @param withUtilisateur égal 1 si l'on souhaite récupérer l'utilisateur qui a créé le thème
+     * @param withTagsPhotos égal 1 si l'on souhaite récupérer les tags des photos liées au thème
+     * @return ThemeDTO, une entité Theme personnalisée. voir classe ThemeDTO
+     * @throws ExceptionIdTheme l'exception lancée si le thème n'existe pas
+     */
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -120,6 +147,14 @@ public class ThemeFacadeREST {
         return themeDTO;
     }
 
+    /**
+     * Permet de récupérer toutes les entités thèmes avec leurs paramètres (photos, tags, utilisateur et les tags des photos du thème)
+     * @param withPhotos égal 1 si l'on souhaite récupérer les photos liées aux thèmes
+     * @param withTags égal 1 si l'on souhaite récupérer les tags liés aux thèmes
+     * @param withUtilisateur égal 1 si l'on souhaite récupérer les utilisateurs qui ont créé les thèmes
+     * @param withTagsPhotos égal 1 si l'on souhaite récupérer les tags des photos liées aux thèmes
+     * @return une liste de ThemeDTO, des entités Theme personnalisées. voir classe ThemeDTO
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<ThemeDTO> findAll(@QueryParam("photos") Long withPhotos, @QueryParam("tags") Long withTags, @QueryParam("utilisateur") Long withUtilisateur, @QueryParam("tagsPhotos") Long withTagsPhotos) {
@@ -184,7 +219,14 @@ public class ThemeFacadeREST {
         
         return themesDTO;
     }
-    
+
+    /**
+     * Permet de récupérer les 20 dernières entités thèmes créées avec leurs paramètres (photos, tags et utilisateurs)
+     * @param withPhotos égal 1 si l'on souhaite récupérer les photos liées aux thèmes
+     * @param withTags égal 1 si l'on souhaite récupérer les tags liés aux thèmes
+     * @param withUtilisateur égal 1 si l'on souhaite récupérer les utilisateurs qui ont créé les thèmes
+     * @return une liste de ThemeDTO, des entités Theme personnalisées. voir classe ThemeDTO
+     */
     @GET
     @Path("last20")
     @Produces({"application/xml", "application/json"})
@@ -243,6 +285,14 @@ public class ThemeFacadeREST {
         return themesDTO;
     }
     
+    /**
+     * Permet de rechercher des thpmes par leurs titres avec leurs paramètres (photos, tags et utilisateur)
+     * @param withPhotos égal 1 si l'on souhaite récupérer les photos liées aux thèmes
+     * @param withTags égal 1 si l'on souhaite récupérer les tags liés aux thèmes
+     * @param withUtilisateur égal 1 si l'on souhaite récupérer les utilisateurs qui ont créé les thèmes
+     * @param search la recherche effectuée
+     * @return une liste de ThemeDTO, des entités Theme personnalisées. voir classe ThemeDTO
+     */
     @GET
     @Path("search")
     @Produces({"application/xml", "application/json"})

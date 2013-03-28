@@ -24,7 +24,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- *
+ * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT pour la gestion de fichiers (photos)
  * @author fabiencornaz
  */
 @Stateless
@@ -43,6 +43,14 @@ public class FileREST {
     public FileREST() {
     }
     
+    /**
+     * Permet de créer un nouveau fichier photo
+     * @param mp un objet multipart ;-)
+     * @return la reponse de l'upload
+     * @throws IOException l'exception liéee à la réponse
+     * @throws ExceptionIdUtilisateur l'exception si l'utilisateur lié à la photo n'existe pas
+     * @throws ExceptionIdTheme l'exception si le theme lié à la photo n'existe pas
+     */
     @POST
     @Path("upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)

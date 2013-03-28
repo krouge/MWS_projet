@@ -15,7 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- *
+ * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT sur un player
  * @author Renouille
  */
 @Stateless
@@ -25,6 +25,11 @@ public class PlayerFacadeREST {
     @EJB
     private PlayersManagerLocal playersManagerLocal;
 
+    /**
+     * Permet de créer une nouvelle entité player
+     * @param entity l'entité player à créer
+     * @return l'entité player créée
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     @Produces("application/json")
@@ -34,18 +39,31 @@ public class PlayerFacadeREST {
         return playersManagerLocal.find(playerId);
     }
 
+    /**
+     * Permet de modifier une entité player existante
+     * @param entity l'entité player à modifier
+     */
     @PUT
     @Consumes({"application/xml", "application/json"})
     public void edit(Player entity) {
         playersManagerLocal.update(entity.getPlayerId(), entity.getPoints());
     }
 
+    /**
+     * Permet de supprimer une entité player
+     * @param id l'id de l'entité player à supprimer
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
         playersManagerLocal.remove(id);
     }
 
+    /**
+     * Permet de récupérer une entité player
+     * @param id l'id de l'entité player à récupérer
+     * @return l'entité player voulue
+     */
     @GET
     @Path("{id}")
     @Produces("application/json")
@@ -53,24 +71,20 @@ public class PlayerFacadeREST {
         return playersManagerLocal.find(id);
     }
 
+    /**
+     * Permet de récupérer toutes les entités player
+     * @return une liste des entités player
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<Player> findAll() {
         return playersManagerLocal.findAll();
     }
     
-    /*
-    @GET
-    @Path("{id}/badges")
-    @Produces({"application/xml", "application/json"})
-    public List<Badge> getAllBadges(@PathParam("id") Long id) {
-        Player player = em.find(Player.class, id);
-        
-        return player.getBadges();
-    }
-    
-    */
-    
+    /**
+     * Permet de récupérer le leaderboard (classement) des players
+     * @return le leaderboard
+     */
     @GET
     @Path("leaderboard")
     @Produces("application/json")
@@ -78,11 +92,4 @@ public class PlayerFacadeREST {
         
         return playersManagerLocal.getLeaderboard();
     }
-
-//    @GET
-//    @Path("count")
-//    @Produces({"application/xml", "application/json"})
-//    public String countREST() {
-//        return String.valueOf(super.count());
-//    }
 }

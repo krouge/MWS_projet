@@ -15,7 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- *
+ * Service REST permettant de gérer les actions @POST, @GET, @DELETE et @PUT sur une règle
  * @author Renouille
  */
 @Stateless
@@ -25,6 +25,11 @@ public class RuleFacadeREST {
     @EJB
     private RulesManagerLocal rulesManagerLocal;
 
+    /**
+     * Permet de créer une entité règle
+     * @param entity l'entité règle à créer
+     * @return l'entité règle créée
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     @Produces({"application/xml", "application/json"})
@@ -34,18 +39,30 @@ public class RuleFacadeREST {
         return rulesManagerLocal.find(ruleId);
     }
 
+    /**
+     * Permet de modifier une entité règle existante
+     * @param entity l'entité à modifier
+     */
     @PUT
     @Consumes({"application/xml", "application/json"})
     public void edit(Rule entity) {
         rulesManagerLocal.update(entity.getRuleId(), entity.getEventType(), entity.getNumberOfPoints(), entity.getApplication().getApiKey(), entity.getApplication().getApiSecret());
     }
-
+    /**
+     * Permet de supprimer une entité règle
+     * @param id l'id de l'entité règle à supprimer
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
         rulesManagerLocal.remove(id);
     }
 
+    /**
+     * Permet de récupérer une entité règle
+     * @param id l'id de l'entité règle à récupérer
+     * @return 
+     */
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -53,24 +70,13 @@ public class RuleFacadeREST {
         return rulesManagerLocal.find(id);
     }
 
+    /**
+     * Permet de récupérer toutes les entités règle
+     * @return une liste des entités règle
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<Rule> findAll() {
         return rulesManagerLocal.findAll();
     }
-
-//    @GET
-//    @Path("{from}/{to}")
-//    @Produces({"application/xml", "application/json"})
-//    public List<Rule> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-//        return super.findRange(new int[]{from, to});
-//    }
-//
-//    @GET
-//    @Path("count")
-//    @Produces("text/plain")
-//    public String countREST() {
-//        return String.valueOf(super.count());
-//    }
-    
 }
