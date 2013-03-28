@@ -156,7 +156,7 @@ public class UtilisateurFacadeREST{
     /**
      * Permet de logguer un utilisateur dans l'application
      * @param entity une entité utilisateur avec un mot de passe et un pseudo
-     * @return 
+     * @return Response si l'utilisateur est null retourne une Erreur 403 sinon retourne l'entité utilisateur
      */
     @POST
     @Path("login")
@@ -174,6 +174,12 @@ public class UtilisateurFacadeREST{
         }
     }
     
+    /**
+     * Permet de récupérer toutes les entités utilisateurs avec leurs thèmes et/ou leurs photos
+     * @param withThemes si withThemes = 1 alors retourne les thèmes liés à une entité utilisateur
+     * @param withPhotos si withPhotos = 1 alors retourne les thèmes liés à une entité utilisateur
+     * @return List<UtilisateurDTO> la liste de toutes les entités utilisateur personalisée en UtilisateurDTO (voir classe UtilisateurDTO)
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<UtilisateurDTO> findAll(@QueryParam("themes") Long withThemes, @QueryParam("photos") Long withPhotos) {
@@ -234,8 +240,8 @@ public class UtilisateurFacadeREST{
     }
 
     /**
-     * 
-     * @return
+     * Permet de récupérer le classement de l'application avec ses players 
+     * @return String un json comprenant le classement
      * @throws JSONException 
      */
     @GET
@@ -248,8 +254,6 @@ public class UtilisateurFacadeREST{
         Client c = Client.create(cc);
         WebResource r = c.resource("http://localhost:"+GestionnaireGameEngine.PORT+"/GameEngine/resources/players/leaderboard");
         ClientResponse response = r.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
-        
-        //response.get
         
         JSONObject json = new JSONObject(response.getEntity(String.class));
         JSONArray playerArray = json.getJSONArray("player");
@@ -277,7 +281,13 @@ public class UtilisateurFacadeREST{
        
     }
     
-    
+    /**
+     * Permet de récupérer le profil d'un utilisateur avec ses informations liées du côté GameEngine (sa liste de badges)
+     * @param id id de l'entité utilisateur demandé
+     * @return String un objet json comprenant le profil ou une erreur personnalisée si l'id demandé n existe pas (voir méthode getErrors dans la classe GestionnaireGameEngine)    
+     * @throws JSONException
+     * @throws ExceptionIdUtilisateur si l'id de l'utilisateur n'existe pas 
+     */
     @GET
     @Path("{id}/profil")
     @Consumes({"application/json"})
